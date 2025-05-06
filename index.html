@@ -64,12 +64,21 @@
   <button onclick="addStudent()">新增學生</button>
 
   <button onclick="calculate()">計算分攤金額</button>
+  <button onclick="showSettlement()">顯示結算</button>
 
   <div class="total" id="result"></div>
+  <div class="total" id="settlement"></div>
 
   <script>
     const studentsDiv = document.getElementById("students");
     let studentCount = 0;
+
+    // 儲存已計算的紀錄
+    function saveRecord(date, coachRate, students) {
+      let records = JSON.parse(localStorage.getItem("records")) || [];
+      records.push({ date, coachRate, students });
+      localStorage.setItem("records", JSON.stringify(records));
+    }
 
     function addStudent(name = "", hours = "") {
       const div = document.createElement("div");
@@ -85,6 +94,7 @@
     function calculate() {
       const coachSel = document.getElementById("coach");
       const rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
+      const date = document.getElementById("date").value;
 
       const entries = [...document.querySelectorAll(".student-entry")];
       const students = entries.map(e => {
@@ -107,6 +117,31 @@
       output += `</table><div class="total">總費用：$${rate}</div>`;
 
       document.getElementById("result").innerHTML = output;
+
+      // 儲存紀錄
+      saveRecord(date, rate, students);
+    }
+
+    function showSettlement() {
+      const records = JSON.parse(localStorage.getItem("records")) || [];
+      const settlement = {};
+
+      records.forEach(record => {
+        record.students.forEach(student => {
+          if (!settlement[student.name]) {
+            settlement[student.name] = 0;
+          }
+          settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.coachRate;
+        });
+      });
+
+      let output = `<table><tr><th>學生</th><th>累積費用</th></tr>`;
+      for (const [name, total] of Object.entries(settlement)) {
+        output += `<tr><td>${name}</td><td>$${total.toFixed(0)}</td></tr>`;
+      }
+      output += `</table>`;
+
+      document.getElementById("settlement").innerHTML = output;
     }
 
     // 預設新增兩位學生輸入欄位
