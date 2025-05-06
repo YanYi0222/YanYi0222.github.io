@@ -103,6 +103,12 @@
     .button-group button {
       flex: 1;
     }
+    .button-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 每排顯示兩個按鈕 */
+  gap: 0.5rem; /* 按鈕之間的間距 */
+  margin-top: 1rem;
+}
   </style>
 </head>
 <body>
