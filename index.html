@@ -3,49 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>練球費用分攤</title>
+  <title>教練費用計算</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Arial', sans-serif;
       padding: 1rem;
       max-width: 600px;
       margin: auto;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      color: #444;
     }
     label {
       display: block;
       margin-top: 1rem;
+      font-weight: bold;
     }
     input, select, button {
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.8rem;
       margin-top: 0.5rem;
       font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
     }
-    /* 修正背景與字體顏色 */
-    input, select {
-      color: #000; /* 深色字體 */
-      font-size: 1rem;    
-      
-      background-color: #ffffff; /* 白色背景 */
-      border: 1px solid #ccc; /* 淺灰色邊框 */
-      box-sizing: border-box; /* 確保 padding 不影響寬度 */
+    input:focus, select:focus, button:focus {
+      outline: none;
+      border-color: #007BFF;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
-    input[type="number"] {
-      text-align: center; /* 讓數字也居中顯示 */
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
-    table {
-      width: 100%;
-      margin-top: 2rem;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 0.5rem;
-      border-bottom: 1px solid #ccc;
-      text-align: center;
-    }
-    .total {
-      margin-top: 1rem;
-      font-weight: bold;
+    button:hover {
+      background-color: #0056b3;
     }
     .student-entry {
       display: flex;
@@ -56,17 +55,58 @@
       flex: 1;
     }
     .student-entry button {
-  width: auto; /* 自動調整寬度 */
-  padding: 0.2rem 0.5rem; /* 減少內邊距 */
-  font-size: 0.8rem; /* 縮小字體大小 */
-  background-color: #f5f5f5; /* 可選：設定背景色 */
-  border: 1px solid #ccc; /* 可選：設定邊框 */
-  cursor: pointer; /* 滑鼠指標變為手型 */
-}
+      width: auto;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .student-entry button:hover {
+      background-color: #a71d2a;
+    }
+    table {
+      width: 100%;
+      margin-top: 2rem;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 0.8rem;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .total {
+      margin-top: 1rem;
+      font-weight: bold;
+      text-align: center;
+      color: #007BFF;
+    }
+    .button-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .button-group button {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
-  <h1>練球費用分攤</h1>
+  <h1>教練費用計算</h1>
 
   <label>日期
     <input type="date" id="date" />
@@ -74,30 +114,44 @@
 
   <label>教練
     <select id="coach">
-      <option value="A" data-rate="1000">教練A（$1000）</option>
-      <option value="B" data-rate="1200">教練B（$1200）</option>
+      <option value="A" data-rate="1100">許教練（$1100）</option>
+      <option value="B" data-rate="1400">皮皮教練（$1400）</option>
     </select>
   </label>
 
   <h3>學生練習時數</h3>
   <div id="students"></div>
-  <button onclick="addStudent()">新增學生</button>
-
-  <button onclick="calculate()">計算分攤金額</button>
-  <button onclick="showSettlement()">顯示結算</button>
+  <div class="button-group">
+    <button onclick="addStudent()">新增學生</button>
+    <button onclick="calculate()">計算分攤金額</button>
+    <button onclick="showSettlement()">顯示結算</button>
+    <button onclick="resetAll()">歸零</button>
+    <button onclick="downloadRecords()">下載記錄</button>
+    <button onclick="clearRecords()">清除記錄</button>
+  </div>
 
   <div class="total" id="result"></div>
   <div class="total" id="settlement"></div>
 
   <script>
     const studentsDiv = document.getElementById("students");
-    let studentCount = 0;
 
-    // 儲存已計算的紀錄
-    function saveRecord(date, coachRate, students) {
-      let records = JSON.parse(localStorage.getItem("records")) || [];
-      records.push({ date, coachRate, students });
-      localStorage.setItem("records", JSON.stringify(records));
+    // 設置 Cookie
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+    }
+
+    // 獲取 Cookie
+    function getCookie(name) {
+      const cookies = document.cookie.split("; ");
+      for (const cookie of cookies) {
+        const [key, value] = cookie.split("=");
+        if (key === name) {
+          return decodeURIComponent(value);
+        }
+      }
+      return null;
     }
 
     // 新增學生欄位
@@ -105,11 +159,34 @@
       const div = document.createElement("div");
       div.className = "student-entry";
       div.innerHTML = `
-        <input type="text" placeholder="學生姓名" value="${name}" />
+        <input type="text" placeholder="學生姓名" value="${name}" oninput="saveStudentNames()" />
         <input type="number" placeholder="時數" value="${hours}" min="0" step="0.1" />
-        <button onclick="this.parentElement.remove()">刪除</button>
+        <button onclick="this.parentElement.remove(); saveStudentNames()">刪除</button>
       `;
       studentsDiv.appendChild(div);
+      saveStudentNames();
+    }
+
+    // 保存學生名字到 Cookie
+    function saveStudentNames() {
+      const names = [...document.querySelectorAll(".student-entry input[type=text]")]
+        .map(input => input.value)
+        .filter(name => name.trim() !== "");
+      setCookie("studentNames", JSON.stringify(names), 7);
+    }
+
+    // 從 Cookie 加載學生名字
+    function loadStudentNames() {
+      const names = JSON.parse(getCookie("studentNames") || "[]");
+      names.forEach(name => addStudent(name));
+    }
+
+    // 頁面初始化
+    if (getCookie("studentNames")) {
+      loadStudentNames();
+    } else {
+      addStudent();
+      addStudent();
     }
 
     // 計算分攤金額
@@ -139,9 +216,6 @@
       output += `</table><div class="total">總費用：$${rate}</div>`;
 
       document.getElementById("result").innerHTML = output;
-
-      // 儲存紀錄
-      saveRecord(date, rate, students);
     }
 
     // 顯示結算
@@ -149,7 +223,6 @@
       const records = JSON.parse(localStorage.getItem("records")) || [];
       const settlement = {};
 
-      // 計算所有紀錄的總金額
       records.forEach(record => {
         record.students.forEach(student => {
           if (!settlement[student.name]) {
@@ -168,7 +241,89 @@
       document.getElementById("settlement").innerHTML = output;
     }
 
-    // 預設新增兩位學生輸入欄位
+    // 歸零
+    function resetAll() {
+      studentsDiv.innerHTML = "";
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("settlement").innerHTML = "";
+      localStorage.removeItem("records");
+      addStudent();
+      addStudent();
+    }
+    function calculate() {
+  const coachSel = document.getElementById("coach");
+  const rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
+  const date = document.getElementById("date").value;
+
+  const entries = [...document.querySelectorAll(".student-entry")];
+  const students = entries.map(e => {
+    const name = e.querySelector("input[type=text]").value;
+    const hrs = parseFloat(e.querySelector("input[type=number]").value);
+    return { name, hrs };
+  }).filter(s => s.name && s.hrs > 0);
+
+  const totalHours = students.reduce((sum, s) => sum + s.hrs, 0);
+  if (totalHours === 0) {
+    alert("請輸入有效的學生與時數。");
+    return;
+  }
+
+  let output = `<table><tr><th>學生</th><th>時數</th><th>應繳費用</th></tr>`;
+  students.forEach(s => {
+    const share = ((s.hrs / totalHours) * rate).toFixed(0);
+    output += `<tr><td>${s.name}</td><td>${s.hrs}</td><td>$${share}</td></tr>`;
+  });
+  output += `</table><div class="total">總費用：$${rate}</div>`;
+
+  document.getElementById("result").innerHTML = output;
+
+  // 保存資料到 LocalStorage
+  const records = JSON.parse(localStorage.getItem("records")) || [];
+  records.push({ date, coach: coachSel.options[coachSel.selectedIndex].text, rate, students });
+  localStorage.setItem("records", JSON.stringify(records));
+}
+
+function showSettlement() {
+  const records = JSON.parse(localStorage.getItem("records")) || [];
+  const settlement = {};
+
+  records.forEach(record => {
+    record.students.forEach(student => {
+      if (!settlement[student.name]) {
+        settlement[student.name] = 0;
+      }
+      settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.rate;
+    });
+  });
+
+  let output = `<table><tr><th>學生</th><th>累積費用</th></tr>`;
+  for (const [name, total] of Object.entries(settlement)) {
+    output += `<tr><td>${name}</td><td>$${total.toFixed(0)}</td></tr>`;
+  }
+  output += `</table>`;
+
+  document.getElementById("settlement").innerHTML = output;
+}
+function downloadRecords() {
+  const records = JSON.parse(localStorage.getItem("records")) || [];
+  const content = records.map(record => {
+    return `日期: ${record.date}, 教練: ${record.coach}, 費用: ${record.rate}, 學生: ${record.students.map(s => `${s.name}(${s.hrs}小時)`).join(", ")}`;
+  }).join("\n");
+
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "records.txt";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+function clearRecords() {
+  localStorage.removeItem("records");
+  alert("所有記錄已清除！");
+}
     addStudent();
     addStudent();
   </script>
