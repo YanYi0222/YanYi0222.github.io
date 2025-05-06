@@ -21,9 +21,11 @@
       margin-top: 0.5rem;
       font-size: 1rem;
     }
-    /* 修正字顏色問題 */
+    /* 修正背景與字體顏色 */
     input, select {
-      color: #333; /* 更深的字體顏色 */
+      color: #333; /* 深色字體 */
+      background-color: #f9f9f9; /* 淺色背景 */
+      border: 1px solid #ccc; /* 淺灰色邊框 */
     }
     table {
       width: 100%;
@@ -133,28 +135,4 @@
       const records = JSON.parse(localStorage.getItem("records")) || [];
       const settlement = {};
 
-      // 計算所有紀錄的總金額
-      records.forEach(record => {
-        record.students.forEach(student => {
-          if (!settlement[student.name]) {
-            settlement[student.name] = 0;
-          }
-          settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.coachRate;
-        });
-      });
-
-      let output = `<table><tr><th>學生</th><th>累積費用</th></tr>`;
-      for (const [name, total] of Object.entries(settlement)) {
-        output += `<tr><td>${name}</td><td>$${total.toFixed(0)}</td></tr>`;
-      }
-      output += `</table>`;
-
-      document.getElementById("settlement").innerHTML = output;
-    }
-
-    // 預設新增兩位學生輸入欄位
-    addStudent();
-    addStudent();
-  </script>
-</body>
-</html>
+      // 計算所有紀錄的
