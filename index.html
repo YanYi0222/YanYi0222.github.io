@@ -21,6 +21,10 @@
       margin-top: 0.5rem;
       font-size: 1rem;
     }
+    /* 修正字顏色問題 */
+    input, select {
+      color: #333; /* 更深的字體顏色 */
+    }
     table {
       width: 100%;
       margin-top: 2rem;
@@ -80,6 +84,7 @@
       localStorage.setItem("records", JSON.stringify(records));
     }
 
+    // 新增學生欄位
     function addStudent(name = "", hours = "") {
       const div = document.createElement("div");
       div.className = "student-entry";
@@ -91,6 +96,7 @@
       studentsDiv.appendChild(div);
     }
 
+    // 計算分攤金額
     function calculate() {
       const coachSel = document.getElementById("coach");
       const rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
@@ -122,10 +128,12 @@
       saveRecord(date, rate, students);
     }
 
+    // 顯示結算
     function showSettlement() {
       const records = JSON.parse(localStorage.getItem("records")) || [];
       const settlement = {};
 
+      // 計算所有紀錄的總金額
       records.forEach(record => {
         record.students.forEach(student => {
           if (!settlement[student.name]) {
