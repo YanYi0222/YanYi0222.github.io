@@ -119,11 +119,17 @@
   </label>
 
   <label>教練
-    <select id="coach">
+    <select id="coach" onchange="handleCoachChange()">
       <option value="A" data-rate="1100">許教練（$1100）</option>
       <option value="B" data-rate="1400">皮皮教練（$1400）</option>
+      <option value="custom">自訂金額</option>
     </select>
   </label>
+  <div id="custom-rate-container" style="display: none; margin-top: 0.5rem;">
+    <label>自訂金額
+      <input type="number" id="custom-rate" placeholder="輸入自訂金額" min="0" />
+    </label>
+  </div>
 
   <h3>學生練習時數</h3>
   <div id="students"></div>
@@ -195,12 +201,33 @@
       addStudent();
     }
 
+    function handleCoachChange() {
+  const coachSelect = document.getElementById("coach");
+  const customRateContainer = document.getElementById("custom-rate-container");
+
+  if (coachSelect.value === "custom") {
+    customRateContainer.style.display = "block";
+  } else {
+    customRateContainer.style.display = "none";
+  }
+}
+
     // 計算分攤金額
     function calculate() {
       const coachSel = document.getElementById("coach");
-      const rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
-      const date = document.getElementById("date").value;
+      let rate;
 
+      if (coachSel.value === "custom") {
+        rate = parseFloat(document.getElementById("custom-rate").value);
+        if (isNaN(rate) || rate <= 0) {
+          alert("請輸入有效的自訂金額。");
+          return;
+        }
+      } else {
+        rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
+      }
+
+      const date = document.getElementById("date").value;
       const entries = [...document.querySelectorAll(".student-entry")];
       const students = entries.map(e => {
         const name = e.querySelector("input[type=text]").value;
@@ -222,6 +249,11 @@
       output += `</table><div class="total">總費用：$${rate}</div>`;
 
       document.getElementById("result").innerHTML = output;
+
+      // 保存資料到 LocalStorage
+      const records = JSON.parse(localStorage.getItem("records")) || [];
+      records.push({ date, coach: coachSel.options[coachSel.selectedIndex].text, rate, students });
+      localStorage.setItem("records", JSON.stringify(records));
     }
 
     // 顯示結算
@@ -234,7 +266,7 @@
           if (!settlement[student.name]) {
             settlement[student.name] = 0;
           }
-          settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.coachRate;
+          settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.rate;
         });
       });
 
