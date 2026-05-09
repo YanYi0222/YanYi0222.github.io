@@ -1,0 +1,199 @@
+/* --- 頂級品牌質感配色 --- */
+:root {
+    --bg-color: #f5f5f7; /* 經典大廠極淺灰背景 */
+    --card-bg: #ffffff; /* 純白卡片 */
+    --text-main: #1d1d1f; /* 深空灰文字，非純黑 */
+    --text-muted: #86868b; /* 次要文字顏色 */
+    --accent-blue: #0066cc; /* 經典大廠科技藍 */
+    --accent-green: #34c759; /* 柔和科技綠 */
+    --shadow-soft: 2px 4px 12px rgba(0,0,0,0.04); /* 極度輕柔的陰影 */
+    --shadow-hover: 4px 8px 24px rgba(0,0,0,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* 讓字體更平滑 */
+}
+
+h1, h2, h3, h4, .logo {
+    font-weight: 600;
+    letter-spacing: -0.015em; /* 微微縮減字距，看起來更緊湊專業 */
+}
+
+/* --- 導覽列 (Saturate 毛玻璃特效) --- */
+.navbar {
+    position: fixed; top: 0; width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 50px;
+    background: rgba(255, 255, 255, 0.72);
+    /* 高階毛玻璃特效：增加飽和度與模糊 */
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 1000; box-sizing: border-box;
+}
+.logo { font-size: 1.4rem; color: var(--text-main); }
+.nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+.nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.95rem; opacity: 0.8; transition: 0.3s; }
+.nav-links a:hover { opacity: 1; color: var(--accent-blue); }
+
+/* --- 通用區塊設定 --- */
+section {
+    min-height: 100vh; padding: 120px 20px 60px;
+    display: flex; flex-direction: column; align-items: center;
+}
+.section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+
+/* --- 1. 首頁：懸浮卡片雙拼 --- */
+/* --- 1. 首頁：旗艦級滿版雙拼 --- */
+#hero.full-bleed-hero { 
+    padding: 0; /* 移除內距，讓畫面完全貼齊邊緣 */
+    display: flex; 
+    flex-direction: row; 
+    width: 100vw; 
+    height: 100vh; /* 高度佔滿整個螢幕 */
+    max-width: 100%;
+    position: relative;
+    overflow: hidden; /* 隱藏擴張時超出的部分 */
+}
+
+.hero-half {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover; 
+    background-position: center;
+    /* 極度滑順的寬度變化動畫 */
+    transition: width 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 預設底色 (放入真實圖片後可覆蓋) */
+.beitun-half { background-color: #5b86e5; }
+.zhudong-half { background-color: #36d1dc; }
+
+/* 互動：滑鼠懸停時優雅地擴張畫面 */
+.hero-half:hover { width: 60%; }
+
+/* 讓圖片稍微變暗，確保純白文字清晰可見 */
+.hero-overlay { 
+    position: absolute; inset: 0; 
+    background: rgba(0,0,0,0.35); 
+    transition: background 0.5s ease; 
+}
+.hero-half:hover .hero-overlay { background: rgba(0,0,0,0.15); } /* 滑過時變亮 */
+
+/* 文字內容排版 */
+.hero-content {
+    position: relative; 
+    z-index: 2; 
+    color: white; 
+    text-align: center;
+    padding: 0 20px;
+}
+.hero-content h2 { 
+    font-size: 3.5rem; 
+    margin: 0 0 10px; 
+    text-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+    letter-spacing: 2px;
+}
+.hero-content p { 
+    font-size: 1.3rem; 
+    opacity: 0.95; 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4); 
+}
+.img-hint-text { 
+    margin-top: 25px; 
+    font-size: 0.85rem; 
+    color: #333; 
+    background: rgba(255,255,255,0.85); 
+    backdrop-filter: blur(5px);
+    padding: 6px 15px; 
+    border-radius: 20px; 
+    display: inline-block;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 向下探索指標 */
+.scroll-down { 
+    position: absolute; 
+    bottom: 30px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    font-size: 0.9rem; 
+    color: white; 
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    z-index: 10;
+    animation: bounce 2s infinite; 
+    letter-spacing: 1px;
+}
+@keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 
+    40% { transform: translateY(-12px) translateX(-50%); } 
+}
+
+/* --- 大品牌無邊框卡片風格 --- */
+.premium-card {
+    background: var(--card-bg);
+    border-radius: 18px; /* 經典大圓角 */
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+.premium-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* --- 2. 圖表區 --- */
+.chart-wrapper { width: 85%; max-width: 900px; padding: 40px; }
+
+/* --- 3 & 4. 卡片排版 --- */
+.cards-wrapper { display: flex; gap: 30px; width: 85%; max-width: 1000px; }
+.premium-card { flex: 1; }
+.card-img {
+    width: 100%; height: 220px; background-color: #f0f0f5;
+    display: flex; align-items: center; justify-content: center; color: var(--text-muted);
+    background-size: cover; background-position: center;
+}
+.mini-img { height: 160px; }
+.card-content { padding: 25px 30px; }
+.card-content h3, .card-content h4 { margin-top: 0; color: var(--text-main); font-size: 1.4rem; }
+.card-content h4 { font-size: 1.2rem; margin-bottom: 5px; }
+.card-content ul { line-height: 2; padding-left: 20px; color: #555; }
+.card-content p { color: var(--text-muted); margin: 0; font-size: 0.95rem; }
+
+/* 美食網格 */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; width: 85%; max-width: 1100px; }
+
+/* 乾淨的膠囊按鈕 */
+.filter-buttons { margin-bottom: 40px; display: flex; gap: 10px; background: #e3e3e8; padding: 5px; border-radius: 30px; }
+.filter-btn {
+    padding: 10px 25px; border: none; background: transparent; border-radius: 25px;
+    cursor: pointer; font-size: 1rem; color: var(--text-muted); font-weight: 500; transition: 0.3s;
+}
+.filter-btn.active, .filter-btn:hover { background: var(--card-bg); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+/* --- 5. 乾淨版時間軸 --- */
+.timeline { width: 80%; max-width: 700px; position: relative; padding-left: 40px; border-left: 2px solid #e5e5ea; }
+.timeline-item { margin-bottom: 30px; padding: 25px; position: relative; }
+.timeline-dot {
+    position: absolute; left: -47px; top: 30px; width: 12px; height: 12px;
+    border-radius: 50%; border: 4px solid var(--bg-color);
+}
+.blue-dot { background: var(--accent-blue); }
+.green-dot { background: var(--accent-green); }
+
+#backToTop {
+    position: fixed; bottom: 30px; right: 30px; display: none;
+    background: rgba(255,255,255,0.9); color: var(--text-main);
+    border: 1px solid #d1d1d6; border-radius: 50%; width: 50px; height: 50px;
+    font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px); z-index: 1000; transition: 0.3s;
+}
+#backToTop:hover { background: var(--text-main); color: white; }

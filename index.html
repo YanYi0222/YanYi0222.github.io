@@ -1,342 +1,163 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>教練費用計算</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      padding: 1rem;
-      max-width: 600px;
-      margin: auto;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
-    h1 {
-      text-align: center;
-      color: #444;
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 0.8rem;
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-    input:focus, select:focus, button:focus {
-      outline: none;
-      border-color: #007BFF;
-      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-    button {
-      background-color: #007BFF;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .student-entry {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .student-entry input {
-      flex: 1;
-    }
-    .student-entry button {
-      width: auto;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      background-color: #dc3545;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .student-entry button:hover {
-      background-color: #a71d2a;
-    }
-    table {
-      width: 100%;
-      margin-top: 2rem;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 5px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    th, td {
-      padding: 0.8rem;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-    }
-    th {
-      background-color: #007BFF;
-      color: #fff;
-    }
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-    .total {
-      margin-top: 1rem;
-      font-weight: bold;
-      text-align: center;
-      color: #007BFF;
-    }
-    .button-group {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .button-group button {
-      flex: 1;
-    }
-    .button-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 每排顯示兩個按鈕 */
-  gap: 0.5rem; /* 按鈕之間的間距 */
-  margin-top: 1rem;
-}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故鄉 PK：北屯都會感 VS 竹東鄉情味</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>教練費用計算</h1>
 
-  <label>日期
-    <input type="date" id="date" />
-  </label>
+    <!-- 華麗版毛玻璃導覽列 -->
+    <nav class="navbar">
+        <div class="logo">✨ 故鄉 PK 決戰</div>
+        <ul class="nav-links">
+            <li><a href="#hero">首頁導覽</a></li>
+            <li><a href="#data">基本數據</a></li>
+            <li><a href="#transport">交通對決</a></li>
+            <li><a href="#food-place">美食地點</a></li>
+            <li><a href="#history">歷史心得</a></li>
+        </ul>
+    </nav>
 
-  <label>教練
-    <select id="coach">
-      <option value="A" data-rate="1100">許教練（$1100）</option>
-      <option value="B" data-rate="1400">皮皮教練（$1400）</option>
-      <option value="C" data-rate="550">自選（$550）</option>
-    </select>
-  </label>
+    <!-- 1. 首頁滿版雙拼區塊 (帶圖片預留) -->
+    <section id="hero">
+        <!-- 北屯區塊：請在 CSS 中替換背景圖片 -->
+        <div class="split-pane beitun-bg">
+            <div class="overlay"></div>
+            <div class="content" data-aos="zoom-out-right" data-aos-duration="1500">
+                <h2>臺中市北屯區</h2>
+                <p>捷運與重劃區交織的現代都會感</p>
+                <div class="img-hint-text">↑ 這裡的背景請替換為北屯風景照</div>
+            </div>
+        </div>
+        <!-- 竹東區塊：請在 CSS 中替換背景圖片 -->
+        <div class="split-pane zhudong-bg">
+            <div class="overlay"></div>
+            <div class="content" data-aos="zoom-out-left" data-aos-duration="1500">
+                <h2>新竹縣竹東鎮</h2>
+                <p>科技園區旁蘊藏的濃厚客家鄉情</p>
+                <div class="img-hint-text">↑ 這裡的背景請替換為竹東風景照</div>
+            </div>
+        </div>
+        <div class="scroll-down">向下探索<br>↓</div>
+    </section>
 
-  <h3>學生練習時數</h3>
-  <div id="students"></div>
-  <div class="button-group">
-    <button onclick="addStudent()">新增學生</button>
-    <button onclick="calculate()">計算分攤金額</button>
-    <button onclick="showSettlement()">顯示結算</button>
-    <button onclick="resetAll()">歸零</button>
-    <button onclick="downloadRecords()">下載記錄</button>
-    <button onclick="clearRecords()">清除記錄</button>
-  </div>
+    <!-- 2. 基本數據 PK -->
+    <section id="data" class="container bg-gradient-light">
+        <h2 class="section-title" data-aos="fade-up">📊 基本數據對決</h2>
+        <div class="glass-container chart-wrapper" data-aos="zoom-in" data-aos-delay="200">
+            <canvas id="pkChart"></canvas>
+        </div>
+    </section>
 
-  <div class="total" id="result"></div>
-  <div class="total" id="settlement"></div>
+    <!-- 3. 交通對決 (加入圖片欄位) -->
+    <section id="transport" class="container">
+        <h2 class="section-title" data-aos="fade-up">🚦 交通機能大比拼</h2>
+        <div class="cards-wrapper">
+            <!-- 北屯卡片 -->
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-img" style="background-image: url('');">
+                    <span>[北屯交通圖片預留區]</span>
+                </div>
+                <div class="card-content">
+                    <h3>北屯交通</h3>
+                    <ul>
+                        <li>🚉 台中捷運綠線 (多站點)</li>
+                        <li>🚆 台鐵太原、松竹站</li>
+                        <li>🛣️ 台74線快速道路</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 竹東卡片 -->
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-img" style="background-image: url('');">
+                    <span>[竹東交通圖片預留區]</span>
+                </div>
+                <div class="card-content">
+                    <h3>竹東交通</h3>
+                    <ul>
+                        <li>🚆 台鐵內灣線 (竹東站)</li>
+                        <li>🚌 新竹客運轉運站</li>
+                        <li>🛣️ 台68線快速道路</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    const studentsDiv = document.getElementById("students");
+    <!-- 4. 美食與地點 (圖文網格) -->
+    <section id="food-place" class="container bg-gradient-light">
+        <h2 class="section-title" data-aos="fade-up">🍽️ 美食與特色景點</h2>
+        <div class="filter-buttons" data-aos="fade-up">
+            <button class="filter-btn active" onclick="filterSelection('all')">全部</button>
+            <button class="filter-btn" onclick="filterSelection('beitun')">北屯推薦</button>
+            <button class="filter-btn" onclick="filterSelection('zhudong')">竹東推薦</button>
+        </div>
+        <div class="grid-container" data-aos="fade-up">
+            <!-- 景點項目 1 -->
+            <div class="glass-card grid-item beitun">
+                <div class="card-img mini-img" style="background-image: url('');">
+                    <span>[大坑圖片]</span>
+                </div>
+                <h4>北屯：大坑步道</h4>
+                <p>公園/自然景點</p>
+            </div>
+            <!-- 景點項目 2 -->
+            <div class="glass-card grid-item zhudong">
+                <div class="card-img mini-img" style="background-image: url('');">
+                    <span>[客家美食圖片]</span>
+                </div>
+                <h4>竹東：中央市場</h4>
+                <p>客家傳統美食</p>
+            </div>
+            <!-- 景點項目 3 -->
+            <div class="glass-card grid-item beitun">
+                <div class="card-img mini-img" style="background-image: url('');">
+                    <span>[洲際棒球場圖片]</span>
+                </div>
+                <h4>北屯：洲際棒球場</h4>
+                <p>大型地標/設施</p>
+            </div>
+            <!-- 景點項目 4 -->
+            <div class="glass-card grid-item zhudong">
+                <div class="card-img mini-img" style="background-image: url('');">
+                    <span>[蕭如松園區圖片]</span>
+                </div>
+                <h4>竹東：蕭如松園區</h4>
+                <p>歷史藝術園區</p>
+            </div>
+        </div>
+    </section>
 
-    // 設置 Cookie
-    function setCookie(name, value, days) {
-      const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
-      document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
-    }
+    <!-- 5. 歷史大事件與心得 (發光時間軸) -->
+    <section id="history" class="container">
+        <h2 class="section-title" data-aos="fade-up">⏳ 歷史發展與心得總結</h2>
+        <div class="timeline">
+            <div class="timeline-item glass-card" data-aos="fade-right">
+                <div class="timeline-dot"></div>
+                <h4>北屯發展</h4>
+                <p>從農業區轉型為重劃區，隨著捷運通車成為人口移入熱區。</p>
+            </div>
+            <div class="timeline-item glass-card" data-aos="fade-left">
+                <div class="timeline-dot"></div>
+                <h4>竹東發展</h4>
+                <p>昔日林業與水泥重鎮，現受惠於竹科外溢效應，房市與人口結構改變。</p>
+            </div>
+            <div class="timeline-item glass-card" data-aos="fade-up">
+                <div class="timeline-dot special-dot"></div>
+                <h4>團隊心得總結</h4>
+                <p>兩個看似平行的區域，卻在台灣的都市發展軌跡中，展現出截然不同卻同樣迷人的魅力。</p>
+            </div>
+        </div>
+    </section>
 
-    // 獲取 Cookie
-    function getCookie(name) {
-      const cookies = document.cookie.split("; ");
-      for (const cookie of cookies) {
-        const [key, value] = cookie.split("=");
-        if (key === name) {
-          return decodeURIComponent(value);
-        }
-      }
-      return null;
-    }
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
 
-    // 新增學生欄位
-    function addStudent(name = "", hours = "") {
-      const div = document.createElement("div");
-      div.className = "student-entry";
-      div.innerHTML = `
-        <input type="text" placeholder="學生姓名" value="${name}" oninput="saveStudentNames()" />
-        <input type="number" placeholder="時數" value="${hours}" min="0" step="0.1" />
-        <button onclick="this.parentElement.remove(); saveStudentNames()">刪除</button>
-      `;
-      studentsDiv.appendChild(div);
-      saveStudentNames();
-    }
-
-    // 保存學生名字到 Cookie
-    function saveStudentNames() {
-      const names = [...document.querySelectorAll(".student-entry input[type=text]")]
-        .map(input => input.value)
-        .filter(name => name.trim() !== "");
-      setCookie("studentNames", JSON.stringify(names), 7);
-    }
-
-    // 從 Cookie 加載學生名字
-    function loadStudentNames() {
-      const names = JSON.parse(getCookie("studentNames") || "[]");
-      names.forEach(name => addStudent(name));
-    }
-
-    // 頁面初始化
-    if (getCookie("studentNames")) {
-      loadStudentNames();
-    } else {
-      addStudent();
-      addStudent();
-    }
-
-    // 計算分攤金額
-    function calculate() {
-      const coachSel = document.getElementById("coach");
-      const rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
-      const date = document.getElementById("date").value;
-
-      const entries = [...document.querySelectorAll(".student-entry")];
-      const students = entries.map(e => {
-        const name = e.querySelector("input[type=text]").value;
-        const hrs = parseFloat(e.querySelector("input[type=number]").value);
-        return { name, hrs };
-      }).filter(s => s.name && s.hrs > 0);
-
-      const totalHours = students.reduce((sum, s) => sum + s.hrs, 0);
-      if (totalHours === 0) {
-        alert("請輸入有效的學生與時數。");
-        return;
-      }
-
-      let output = `<table><tr><th>學生</th><th>時數</th><th>應繳費用</th></tr>`;
-      students.forEach(s => {
-        const share = ((s.hrs / totalHours) * rate).toFixed(0);
-        output += `<tr><td>${s.name}</td><td>${s.hrs}</td><td>$${share}</td></tr>`;
-      });
-      output += `</table><div class="total">總費用：$${rate}</div>`;
-
-      document.getElementById("result").innerHTML = output;
-
-      // 保存資料到 LocalStorage
-      const records = JSON.parse(localStorage.getItem("records")) || [];
-      records.push({ date, coach: coachSel.options[coachSel.selectedIndex].text, rate, students });
-      localStorage.setItem("records", JSON.stringify(records));
-    }
-
-    // 顯示結算
-    function showSettlement() {
-      const records = JSON.parse(localStorage.getItem("records")) || [];
-      const settlement = {};
-
-      records.forEach(record => {
-        record.students.forEach(student => {
-          if (!settlement[student.name]) {
-            settlement[student.name] = 0;
-          }
-          settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.rate;
-        });
-      });
-
-      let output = `<table><tr><th>學生</th><th>累積費用</th></tr>`;
-      for (const [name, total] of Object.entries(settlement)) {
-        output += `<tr><td>${name}</td><td>$${total.toFixed(0)}</td></tr>`;
-      }
-      output += `</table>`;
-
-      document.getElementById("settlement").innerHTML = output;
-    }
-
-    // 歸零
-    function resetAll() {
-      studentsDiv.innerHTML = "";
-      document.getElementById("result").innerHTML = "";
-      document.getElementById("settlement").innerHTML = "";
-      localStorage.removeItem("records");
-      addStudent();
-      addStudent();
-    }
-    function calculate() {
-  const coachSel = document.getElementById("coach");
-  const rate = +coachSel.options[coachSel.selectedIndex].dataset.rate;
-  const date = document.getElementById("date").value;
-
-  const entries = [...document.querySelectorAll(".student-entry")];
-  const students = entries.map(e => {
-    const name = e.querySelector("input[type=text]").value;
-    const hrs = parseFloat(e.querySelector("input[type=number]").value);
-    return { name, hrs };
-  }).filter(s => s.name && s.hrs > 0);
-
-  const totalHours = students.reduce((sum, s) => sum + s.hrs, 0);
-  if (totalHours === 0) {
-    alert("請輸入有效的學生與時數。");
-    return;
-  }
-
-  let output = `<table><tr><th>學生</th><th>時數</th><th>應繳費用</th></tr>`;
-  students.forEach(s => {
-    const share = ((s.hrs / totalHours) * rate).toFixed(0);
-    output += `<tr><td>${s.name}</td><td>${s.hrs}</td><td>$${share}</td></tr>`;
-  });
-  output += `</table><div class="total">總費用：$${rate}</div>`;
-
-  document.getElementById("result").innerHTML = output;
-
-  // 保存資料到 LocalStorage
-  const records = JSON.parse(localStorage.getItem("records")) || [];
-  records.push({ date, coach: coachSel.options[coachSel.selectedIndex].text, rate, students });
-  localStorage.setItem("records", JSON.stringify(records));
-}
-
-function showSettlement() {
-  const records = JSON.parse(localStorage.getItem("records")) || [];
-  const settlement = {};
-
-  records.forEach(record => {
-    record.students.forEach(student => {
-      if (!settlement[student.name]) {
-        settlement[student.name] = 0;
-      }
-      settlement[student.name] += (student.hrs / record.students.reduce((sum, s) => sum + s.hrs, 0)) * record.rate;
-    });
-  });
-
-  let output = `<table><tr><th>學生</th><th>累積費用</th></tr>`;
-  for (const [name, total] of Object.entries(settlement)) {
-    output += `<tr><td>${name}</td><td>$${total.toFixed(0)}</td></tr>`;
-  }
-  output += `</table>`;
-
-  document.getElementById("settlement").innerHTML = output;
-}
-function downloadRecords() {
-  const records = JSON.parse(localStorage.getItem("records")) || [];
-  const content = records.map(record => {
-    return `日期: ${record.date}, 教練: ${record.coach}, 費用: ${record.rate}, 學生: ${record.students.map(s => `${s.name}(${s.hrs}小時)`).join(", ")}`;
-  }).join("\n");
-
-  const blob = new Blob([content], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "records.txt";
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
-function clearRecords() {
-  localStorage.removeItem("records");
-  alert("所有記錄已清除！");
-}
-
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

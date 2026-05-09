@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故鄉 PK：北屯都會感 VS 竹東鄉情味</title>
+    <!-- 統一使用乾淨現代的無襯線黑體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 頂尖品牌質感的毛玻璃導覽列 -->
+    <nav class="navbar">
+        <div class="logo">故鄉 PK</div>
+        <ul class="nav-links">
+            <li><a href="#hero">首頁</a></li>
+            <li><a href="#data">數據</a></li>
+            <li><a href="#transport">交通</a></li>
+            <li><a href="#food-place">美食景點</a></li>
+            <li><a href="#history">歷史心得</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. 首頁：頂級懸浮卡片雙拼 -->
+    <!-- 1. 首頁：旗艦級滿版雙拼 -->
+    <section id="hero" class="full-bleed-hero">
+        <!-- 北屯滿版區塊 -->
+        <div class="hero-half beitun-half" data-aos="fade-in" data-aos-duration="1500">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>臺中市北屯區</h2>
+                <p>捷運與重劃交織的現代都會</p>
+                <div class="img-hint-text">↑ 北屯滿版風景照預留區</div>
+            </div>
+        </div>
+        <!-- 竹東滿版區塊 -->
+        <div class="hero-half zhudong-half" data-aos="fade-in" data-aos-duration="1500" data-aos-delay="200">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>新竹縣竹東鎮</h2>
+                <p>科技園區旁蘊藏的濃厚客家情</p>
+                <div class="img-hint-text">↑ 竹東滿版風景照預留區</div>
+            </div>
+        </div>
+        <div class="scroll-down">往下探索 ↓</div>
+    </section>
+
+    <!-- 2. 基本數據 PK -->
+    <section id="data" class="container">
+        <h2 class="section-title" data-aos="fade-up">基本數據對決</h2>
+        <div class="premium-card chart-wrapper" data-aos="zoom-in" data-aos-delay="100">
+            <canvas id="pkChart"></canvas>
+        </div>
+    </section>
+
+    <!-- 3. 交通對決 -->
+    <section id="transport" class="container">
+        <h2 class="section-title" data-aos="fade-up">交通機能大比拼</h2>
+        <div class="cards-wrapper">
+            <div class="premium-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-img" style="background-image: url('');">
+                    <span>[北屯交通圖片預留區]</span>
+                </div>
+                <div class="card-content">
+                    <h3>北屯交通</h3>
+                    <ul>
+                        <li>台中捷運綠線 (多站點)</li>
+                        <li>台鐵太原、松竹站</li>
+                        <li>台74線快速道路</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="premium-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-img" style="background-image: url('');">
+                    <span>[竹東交通圖片預留區]</span>
+                </div>
+                <div class="card-content">
+                    <h3>竹東交通</h3>
+                    <ul>
+                        <li>台鐵內灣線 (竹東站)</li>
+                        <li>新竹客運轉運站</li>
+                        <li>台68線快速道路</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 美食與地點 -->
+    <section id="food-place" class="container">
+        <h2 class="section-title" data-aos="fade-up">美食與特色景點</h2>
+        <div class="filter-buttons" data-aos="fade-up">
+            <button class="filter-btn active" onclick="filterSelection('all')">全部</button>
+            <button class="filter-btn" onclick="filterSelection('beitun')">北屯推薦</button>
+            <button class="filter-btn" onclick="filterSelection('zhudong')">竹東推薦</button>
+        </div>
+        <div class="grid-container" data-aos="fade-up">
+            <div class="premium-card grid-item beitun">
+                <div class="card-img mini-img"><span>[大坑圖片]</span></div>
+                <div class="card-content">
+                    <h4>大坑風景區</h4>
+                    <p>公園 / 自然景點</p>
+                </div>
+            </div>
+            <div class="premium-card grid-item zhudong">
+                <div class="card-img mini-img"><span>[市場美食圖片]</span></div>
+                <div class="card-content">
+                    <h4>中央市場</h4>
+                    <p>客家傳統美食</p>
+                </div>
+            </div>
+            <div class="premium-card grid-item beitun">
+                <div class="card-img mini-img"><span>[洲際棒球場圖片]</span></div>
+                <div class="card-content">
+                    <h4>洲際棒球場</h4>
+                    <p>大型地標</p>
+                </div>
+            </div>
+            <div class="premium-card grid-item zhudong">
+                <div class="card-img mini-img"><span>[蕭如松圖片]</span></div>
+                <div class="card-content">
+                    <h4>蕭如松藝術園區</h4>
+                    <p>歷史藝術園區</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 歷史大事件與心得 -->
+    <section id="history" class="container">
+        <h2 class="section-title" data-aos="fade-up">歷史發展與心得</h2>
+        <div class="timeline">
+            <div class="timeline-item premium-card" data-aos="fade-up">
+                <div class="timeline-dot blue-dot"></div>
+                <h4>北屯發展</h4>
+                <p>從農業區轉型為重劃區，隨著捷運通車成為人口移入熱區。</p>
+            </div>
+            <div class="timeline-item premium-card" data-aos="fade-up">
+                <div class="timeline-dot green-dot"></div>
+                <h4>竹東發展</h4>
+                <p>昔日林業與水泥重鎮，現受惠於竹科外溢效應，房市與人口結構改變。</p>
+            </div>
+        </div>
+    </section>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
