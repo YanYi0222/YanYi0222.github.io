@@ -1,8 +1,8 @@
 AOS.init({ once: true, offset: 100 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('pkChart').getContext('2d');
-    
+
     const pkChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [
                 {
                     label: '北屯區',
-                    data: [30.5, 45, 88], 
+                    data: [30.5, 45, 88],
                     backgroundColor: '#0066cc', // 經典大廠藍
                     borderRadius: 6,
                     borderSkipped: false
                 },
                 {
                     label: '竹東鎮',
-                    data: [9.7, 30, 82],  
+                    data: [9.7, 30, 82],
                     backgroundColor: '#34c759', // 經典大廠綠
                     borderRadius: 6,
                     borderSkipped: false
@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 legend: { labels: { color: '#1d1d1f', font: { size: 13, family: "'Noto Sans TC', sans-serif" } } }
             },
             scales: {
-                y: { 
-                    beginAtZero: true, 
-                    grid: { color: '#e5e5ea' }, 
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#e5e5ea' },
                     ticks: { color: '#86868b' },
                     border: { display: false } // 隱藏軸線，更顯乾淨
                 },
-                x: { 
+                x: {
                     grid: { display: false },
                     ticks: { color: '#86868b' },
                     border: { display: false }
@@ -68,7 +68,7 @@ style.innerHTML = `@keyframes fadeIn { from { opacity: 0; transform: translateY(
 document.head.appendChild(style);
 
 const topBtn = document.getElementById("backToTop");
-window.onscroll = function() {
+window.onscroll = function () {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         topBtn.style.display = "block";
     } else {
