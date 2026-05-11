@@ -535,3 +535,96 @@ section {
     z-index: -1;
     border-radius: 50%;
 }
+
+/* --- 手機端最佳化 (Responsive Design for Mobile) --- */
+@media (max-width: 768px) {
+    /* 1. 導覽列：縮小內距並改為多行或緊湊排列 */
+    .navbar {
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+
+    /* 2. 區塊間距與標題大小 */
+    section {
+        padding: 100px 15px 40px;
+    }
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 35px;
+    }
+
+    /* 3. 首頁：改為上下堆疊，不使用左右切割 */
+    #hero.full-bleed-hero {
+        flex-direction: column;
+    }
+    .hero-half {
+        width: 100% !important; /* 強制覆蓋 hover 的寬度變化 */
+        height: 50%;
+    }
+    .hero-half:hover {
+        width: 100% !important; 
+    }
+    .hero-content h2 {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* 4. 圖表區塊與卡片：滿版寬度並改為垂直堆疊 */
+    .chart-wrapper {
+        width: 100%;
+        padding: 20px 10px;
+    }
+    .cards-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    /* 5. 美食景點：按鈕換行，網格自動適應 */
+    .filter-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .grid-container {
+        grid-template-columns: 1fr; /* 手機上一行一個卡片最好看 */
+    }
+
+    /* 6. 時間軸：縮小左側邊距，對齊光點 */
+    .timeline {
+        width: 100%;
+        padding-left: 25px;
+    }
+    .timeline::before {
+        left: 0px;
+    }
+    .timeline-dot {
+        left: -31px; /* 根據新的 padding 調整點的位置 */
+        width: 12px;
+        height: 12px;
+    }
+    .timeline-item {
+        padding: 15px 15px 15px 20px;
+    }
+
+    /* 7. 隱藏過大的背景光斑避免橫向捲軸 */
+    #data::before, #food-place::after {
+        display: none;
+    }
+    
+    /* 修正向下探索按鈕 */
+    .scroll-down {
+        bottom: 15px;
+        font-size: 0.8rem;
+    }
+}
