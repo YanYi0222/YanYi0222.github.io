@@ -10,13 +10,14 @@
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
 
     <!-- 頂尖品牌質感的毛玻璃導覽列 -->
     <nav class="navbar">
-        <div class="logo">北屯vs竹東</div>
+        <div class="logo">中市北屯區vs竹縣竹東鎮</div>
         <ul class="nav-links">
             <li><a href="#hero">首頁</a></li>
             <li><a href="#data">數據</a></li>
@@ -60,8 +61,221 @@
     <!-- 2. 基本數據 PK -->
     <section id="data" class="container">
         <h2 class="section-title" data-aos="fade-up">基本數據對決</h2>
-        <div class="premium-card chart-wrapper" data-aos="zoom-in" data-aos-delay="100">
-            <canvas id="pkChart"></canvas>
+
+        <div class="charts-grid">
+            <div class="premium-card chart-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="chart-container"><canvas id="populationChart"></canvas></div>
+            </div>
+            <div class="premium-card chart-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="chart-container"><canvas id="villagesChart"></canvas></div>
+            </div>
+            <div class="premium-card chart-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="chart-container"><canvas id="priceChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="premium-card table-wrapper" data-aos="fade-up" data-aos-delay="400">
+            <h3 class="table-title">詳細基本數據對決</h3>
+            <table class="vs-table">
+                <thead>
+                    <tr>
+                        <th class="align-right">新竹縣 竹東鎮</th>
+                        <th class="align-center">評估項目</th>
+                        <th class="align-left">臺中市 北屯區</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 數值比較 (老人人口) -->
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-data right">
+                                <div class="vs-desc-col right-text">
+                                    <div class="vs-value">約 1.7 萬</div>
+                                </div>
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 28%; right: 0; background: linear-gradient(-90deg, #66d985, var(--accent-green));">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">人口數(老人)</span></td>
+                        <td class="align-left">
+                            <div class="vs-data left">
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 92%; left: 0; background: linear-gradient(90deg, #4da6ff, var(--accent-blue));">
+                                    </div>
+                                </div>
+                                <div class="vs-desc-col left-text">
+                                    <div class="vs-value">約 5.5 萬</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- 數值比較 (小孩人口) -->
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-data right">
+                                <div class="vs-desc-col right-text">
+                                    <div class="vs-value">約 8 千</div>
+                                </div>
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 20%; right: 0; background: linear-gradient(-90deg, #66d985, var(--accent-green));">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">人口數(小孩)</span></td>
+                        <td class="align-left">
+                            <div class="vs-data left">
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 75%; left: 0; background: linear-gradient(90deg, #4da6ff, var(--accent-blue));">
+                                    </div>
+                                </div>
+                                <div class="vs-desc-col left-text">
+                                    <div class="vs-value">約 3 萬</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- 數值比較 (里數) -->
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-data right">
+                                <div class="vs-desc-col right-text">
+                                    <div class="vs-value">25 里</div>
+                                </div>
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 50%; right: 0; background: linear-gradient(-90deg, #66d985, var(--accent-green));">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">行政里數</span></td>
+                        <td class="align-left">
+                            <div class="vs-data left">
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 84%; left: 0; background: linear-gradient(90deg, #4da6ff, var(--accent-blue));">
+                                    </div>
+                                </div>
+                                <div class="vs-desc-col left-text">
+                                    <div class="vs-value">42 里</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- 數值比較 (房價) -->
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-data right">
+                                <div class="vs-desc-col right-text">
+                                    <div class="vs-value">30 萬/坪</div>
+                                    <div class="vs-desc">相對平價</div>
+                                </div>
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 60%; right: 0; background: linear-gradient(-90deg, #66d985, var(--accent-green));">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">平均房價</span></td>
+                        <td class="align-left">
+                            <div class="vs-data left">
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 90%; left: 0; background: linear-gradient(90deg, #4da6ff, var(--accent-blue));">
+                                    </div>
+                                </div>
+                                <div class="vs-desc-col left-text">
+                                    <div class="vs-value">45 萬/坪</div>
+                                    <div class="vs-desc">台中高價區</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- 數值比較 (升學率) -->
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-data right">
+                                <div class="vs-desc-col right-text">
+                                    <div class="vs-value">82%</div>
+                                    <div class="vs-desc">穩定成長</div>
+                                </div>
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 82%; right: 0; background: linear-gradient(-90deg, #66d985, var(--accent-green));">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">高中升學率</span></td>
+                        <td class="align-left">
+                            <div class="vs-data left">
+                                <div class="vs-bar-track">
+                                    <div class="vs-bar-fill"
+                                        style="width: 88%; left: 0; background: linear-gradient(90deg, #4da6ff, var(--accent-blue));">
+                                    </div>
+                                </div>
+                                <div class="vs-desc-col left-text">
+                                    <div class="vs-value">88%</div>
+                                    <div class="vs-desc">競爭較高</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- 文字比較 (產業) -->
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-desc-col right-text">
+                                <div class="vs-value" style="font-size: 0.95rem; font-weight: 500;">農業人口較多</div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">一級產業</span></td>
+                        <td class="align-left">
+                            <div class="vs-desc-col left-text">
+                                <div class="vs-value" style="font-size: 0.95rem; font-weight: 500;">比例較低</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-desc-col right-text">
+                                <div class="vs-value" style="font-size: 0.95rem; font-weight: 500;">傳統工業發展</div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">二級產業</span></td>
+                        <td class="align-left">
+                            <div class="vs-desc-col left-text">
+                                <div class="vs-value" style="font-size: 0.95rem; font-weight: 500;">科技與建設增加</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align-right">
+                            <div class="vs-desc-col right-text">
+                                <div class="vs-value" style="font-size: 0.95rem; font-weight: 500;">服務業逐漸提升</div>
+                            </div>
+                        </td>
+                        <td class="align-center"><span class="item-name">三級產業</span></td>
+                        <td class="align-left">
+                            <div class="vs-desc-col left-text">
+                                <div class="vs-value" style="font-size: 0.95rem; font-weight: 500;">商業與服務為主</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -99,67 +313,143 @@
     </section>
 
     <!-- 4. 美食與地點 -->
-    <section id="food-place" class="container">
-        <h2 class="section-title" data-aos="fade-up">美食與特色景點</h2>
-        <div class="filter-buttons" data-aos="fade-up">
-            <button class="filter-btn active" onclick="filterSelection('all')">全部</button>
-            <button class="filter-btn" onclick="filterSelection('beitun')">北屯推薦</button>
-            <button class="filter-btn" onclick="filterSelection('zhudong')">竹東推薦</button>
+    <<section id="food-place" class="container">
+        <h2 class="section-title" data-aos="fade-up">探索在地魅力</h2>
+
+        <div class="map-tabs" data-aos="fade-up" data-aos-delay="100">
+            <button class="map-tab active" onclick="switchRegion('beitun')">臺中市北屯區</button>
+            <button class="map-tab" onclick="switchRegion('zhudong')">新竹縣竹東鎮</button>
         </div>
-        <div class="grid-container" data-aos="fade-up">
-            <div class="premium-card grid-item beitun">
-                <div class="card-img mini-img"><span>[大坑圖片]</span></div>
-                <div class="card-content">
-                    <h4>大坑風景區</h4>
-                    <p>公園 / 自然景點</p>
-                </div>
+
+        <div class="map-layout-wrapper" data-aos="fade-up" data-aos-delay="200">
+            <div class="map-container premium-card">
+                <div id="interactive-map"></div>
             </div>
-            <div class="premium-card grid-item zhudong">
-                <div class="card-img mini-img"><span>[市場美食圖片]</span></div>
-                <div class="card-content">
-                    <h4>中央市場</h4>
-                    <p>客家傳統美食</p>
+
+            <div class="info-panel premium-card">
+                <div id="info-empty" class="info-content empty-state">
+                    <div class="empty-icon">📍</div>
+                    <p>請點擊地圖上的地標<br>以探索詳細資訊</p>
                 </div>
-            </div>
-            <div class="premium-card grid-item beitun">
-                <div class="card-img mini-img"><span>[洲際棒球場圖片]</span></div>
-                <div class="card-content">
-                    <h4>洲際棒球場</h4>
-                    <p>大型地標</p>
-                </div>
-            </div>
-            <div class="premium-card grid-item zhudong">
-                <div class="card-img mini-img"><span>[蕭如松圖片]</span></div>
-                <div class="card-content">
-                    <h4>蕭如松藝術園區</h4>
-                    <p>歷史藝術園區</p>
+                <div id="info-data" class="info-content" style="display: none;">
+                    <div class="info-img" id="panel-img"></div>
+                    <div class="info-text">
+                        <span class="info-tag" id="panel-tag">標籤</span>
+                        <h3 id="panel-title">地點名稱</h3>
+                        <p id="panel-desc">這裡會動態顯示該地點的介紹內容...</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+        </section>
 
-    <!-- 5. 歷史大事件與心得 -->
-    <section id="history" class="container">
-        <h2 class="section-title" data-aos="fade-up">歷史發展與心得</h2>
-        <div class="timeline">
-            <div class="timeline-item premium-card" data-aos="fade-up">
-                <div class="timeline-dot blue-dot"></div>
-                <h4>北屯發展</h4>
-                <p>從農業區轉型為重劃區，隨著捷運通車成為人口移入熱區。</p>
+        <!-- 5. 歷史大事件與心得 -->
+        <section id="history" class="container">
+            <h2 class="section-title" data-aos="fade-up">歷史發展軌跡</h2>
+
+            <!-- 地區選擇按鈕 (仿地圖) -->
+            <div class="map-tabs history-tabs" data-aos="fade-up" data-aos-delay="100">
+                <button class="map-tab history-tab active" onclick="switchHistory('beitun', event)">臺中市北屯區</button>
+                <button class="map-tab history-tab" onclick="switchHistory('zhudong', event)">新竹縣竹東鎮</button>
             </div>
-            <div class="timeline-item premium-card" data-aos="fade-up">
-                <div class="timeline-dot green-dot"></div>
-                <h4>竹東發展</h4>
-                <p>昔日林業與水泥重鎮，現受惠於竹科外溢效應，房市與人口結構改變。</p>
+
+            <!-- 北屯區歷史時間軸 -->
+            <div id="history-beitun" class="history-content timeline active" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot blue-dot"></div>
+                    <h4>清領時期：三十張犁與四張犁</h4>
+                    <p>北屯舊稱「三十張犁」，清乾隆年間逐漸形成聚落。其中「四張犁」為當時台中盆地三大開發聚落之一，以農業為主。</p>
+                </div>
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot blue-dot"></div>
+                    <h4>1862年：戴潮春事件與抗日現場</h4>
+                    <p>北屯四張犁是清代民變領袖戴潮春的故鄉，被視為義軍聚落。1895年舊社等地亦曾發生抗日行動，是歷史上反抗運動的重要現場。</p>
+                </div>
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot blue-dot"></div>
+                    <h4>1947年：併入臺中市正名北屯</h4>
+                    <p>戰後由臺中縣大屯區改隸臺中市，正名為「北屯區」。開始從單純的農業聚落，隨著都市擴張逐漸轉型為住宅與商業區。</p>
+                </div>
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot blue-dot"></div>
+                    <h4>近代：重劃區與捷運綠線開發</h4>
+                    <p>十四期、機捷特區等大型重劃區開發，加上台中捷運綠線通車與74號快速道路，帶動爆發式成長，成為台中市人口第一大區（逾31萬人）。</p>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <button id="backToTop" onclick="scrollToTop()">↑</button>
+            <!-- 竹東鎮歷史時間軸 -->
+            <div id="history-zhudong" class="history-content timeline" style="display: none;" data-aos="fade-up"
+                data-aos-delay="200">
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot green-dot"></div>
+                    <h4>清領時期：樹杞林與客家開墾</h4>
+                    <p>早期因橡棋樹繁茂成林而得名「樹杞林」。清乾隆年間起漢人入墾，以客家族群為主，與原住民有長期互動。1920年改名竹東。</p>
+                </div>
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot green-dot"></div>
+                    <h4>1934年：員崠子油田與工業奠基</h4>
+                    <p>台灣礦業株式會社開採油田時意外發現大量天然瓦斯，引發大火卻也證明能源潛力，奠定了竹東後續玻璃、水泥等工業化的基礎。</p>
+                </div>
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot green-dot"></div>
+                    <h4>1947-1951年：內灣線通車與三大鎮風華</h4>
+                    <p>鐵路內灣線通車至竹東與內灣，成為林產、礦產（水泥原料、矽砂）的重要運輸樞紐。戰後初期曾與豐原、中壢並列「台灣三大鎮」。</p>
+                </div>
+                <div class="timeline-item premium-card">
+                    <div class="timeline-dot green-dot"></div>
+                    <h4>近代：工研院設立與科技轉型</h4>
+                    <p>1973年工業技術研究院設於竹東頭重里。近年更受惠於新竹科學園區的外溢效應，逐漸由傳統工業轉向科技發展，人口結構也隨之改變。</p>
+                </div>
+            </div>
+        </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+        <!-- 6. 最終 PK 總結 -->
+        <section id="summary" class="container">
+            <h2 class="section-title" data-aos="fade-up">綜合評估與總結</h2>
+            <div class="pk-summary-wrapper" data-aos="fade-up" data-aos-delay="100">
+                
+                <!-- 竹東鎮 總結卡片 -->
+                <div class="summary-card zhudong-theme">
+                    <h3 class="city-name">新竹縣 竹東鎮</h3>
+                    <div class="verdict">「科技外溢的新興潛力區，房價親民且富含文化底蘊」</div>
+                    <ul class="pros-list">
+                        <li><span class="icon">✔️</span> 房價基期較低，適合首購族與竹科新貴。</li>
+                        <li><span class="icon">✔️</span> 客家文化與歷史底蘊深厚。</li>
+                        <li><span class="icon">✔️</span> 具備良好的綠意與自然休閒環境。</li>
+                    </ul>
+                    <div class="suitability">
+                        <strong>適合對象：</strong>重視C/P值、喜歡慢活步調、於大新竹科技園區工作者。
+                    </div>
+                </div>
+
+                <!-- 雷達圖容器 -->
+                <div class="radar-container premium-card">
+                    <canvas id="pkRadarChart"></canvas>
+                </div>
+
+                <!-- 北屯區 總結卡片 -->
+                <div class="summary-card beitun-theme">
+                    <h3 class="city-name">臺中市 北屯區</h3>
+                    <div class="verdict">「機能爆發的都會核心，交通與商業高度發展」</div>
+                    <ul class="pros-list">
+                        <li><span class="icon">✔️</span> 捷運、台鐵與74號道，交通網絡極為發達。</li>
+                        <li><span class="icon">✔️</span> 大型商場與重劃區林立，生活機能完善。</li>
+                        <li><span class="icon">✔️</span> 人口紅利帶來強大增值潛力。</li>
+                    </ul>
+                    <div class="suitability">
+                        <strong>適合對象：</strong>追求都會便捷生活、重視未來增值性、依賴大眾運輸者。
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="script.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 
 </html>
