@@ -1,19 +1,14 @@
 /* --- 頂級品牌質感配色 --- */
 :root {
-    --bg-color: #f5f5f7;
-    /* 經典大廠極淺灰背景 */
-    --card-bg: #ffffff;
-    /* 純白卡片 */
+    --bg-color: transparent;
+    /* Let liquid background show through */
     --text-main: #1d1d1f;
-    /* 深空灰文字，非純黑 */
     --text-muted: #86868b;
-    /* 次要文字顏色 */
     --accent-blue: #0066cc;
-    /* 經典大廠科技藍 */
     --accent-green: #34c759;
-    /* 柔和科技綠 */
+    --card-bg: #ffffff;
+    --font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --shadow-soft: 2px 4px 12px rgba(0, 0, 0, 0.04);
-    /* 極度輕柔的陰影 */
     --shadow-hover: 4px 8px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -23,14 +18,77 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: #f5f5f7;
     color: var(--text-main);
-    background-color: var(--bg-color);
-    background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-    background-size: 24px 24px;
+    line-height: 1.6;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    /* 讓字體更平滑 */
+}
+
+/* --- iOS Liquid Background --- */
+.liquid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+    background-color: #f2f2f7;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    animation: floatOrb 25s infinite ease-in-out alternate;
+}
+
+.orb-1 {
+    width: 60vw;
+    height: 60vw;
+    background: #0066cc;
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 50vw;
+    height: 50vw;
+    background: #34c759;
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 45vw;
+    height: 45vw;
+    background: #5ac8fa;
+    top: 30%;
+    left: 30%;
+    animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(15vw, -10vh) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-10vw, 15vh) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
 }
 
 h1,
@@ -52,11 +110,11 @@ h4,
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background: rgba(255, 255, 255, 0.72);
-    /* 高階毛玻璃特效：增加飽和度與模糊 */
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 1000;
+    box-shadow: var(--shadow-soft);
     box-sizing: border-box;
 }
 
@@ -119,7 +177,6 @@ section {
     border-radius: 2px;
 }
 
-/* --- 1. 首頁：懸浮卡片雙拼 --- */
 /* --- 1. 首頁：旗艦級滿版雙拼 (升級版動態) --- */
 #hero.full-bleed-hero {
     padding: 0;
@@ -141,12 +198,9 @@ section {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* 防止背景放大超出版面 */
-    /* 增加彈性的互動手感 */
     transition: width 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
-/* 進入畫面的遮罩滑動動畫 (非常高級感) */
 .hero-half::after {
     content: '';
     position: absolute;
@@ -158,7 +212,6 @@ section {
 
 .zhudong-half::after {
     animation-delay: 0.2s;
-    /* 竹東稍微延遲拉開 */
 }
 
 @keyframes revealSlide {
@@ -171,7 +224,6 @@ section {
     }
 }
 
-/* 獨立的背景層，方便做縮放動畫，不影響寬度 */
 .hero-bg {
     position: absolute;
     top: 0;
@@ -184,7 +236,6 @@ section {
     z-index: 1;
 }
 
-/* 預設底色 (放入真實圖片後可覆蓋) */
 .beitun-bg {
     background-color: #5b86e5;
 }
@@ -193,7 +244,6 @@ section {
     background-color: #36d1dc;
 }
 
-/* 互動：滑鼠懸停時優雅地擴張畫面，背景微微放大，非常有呼吸感 */
 .hero-half:hover {
     width: 62%;
 }
@@ -202,7 +252,6 @@ section {
     transform: scale(1.06);
 }
 
-/* 讓圖片稍微變暗，確保純白文字清晰可見 */
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -215,16 +264,12 @@ section {
     background: rgba(0, 0, 0, 0.2);
 }
 
-/* 滑過時變亮 */
-
-/* 文字內容排版 */
 .hero-content {
     position: relative;
     z-index: 3;
     color: white;
     text-align: center;
     padding: 0 20px;
-    /* 懸停時的文字微微上浮 (視差效果) */
     transition: transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
@@ -257,7 +302,6 @@ section {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 向下探索指標 */
 .scroll-down {
     position: absolute;
     bottom: 30px;
@@ -288,20 +332,18 @@ section {
 
 /* --- 大品牌無邊框卡片風格 --- */
 .premium-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: var(--card-bg);
     border-radius: 20px;
-    /* 經典大圓角 */
+    padding: 30px;
     box-shadow: var(--shadow-soft);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    overflow: hidden;
+    margin-bottom: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .premium-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
 }
 
 /* --- 2. 基本數據區塊 --- */
@@ -333,6 +375,22 @@ section {
     max-width: 900px;
     padding: 35px;
     margin-top: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
 }
 
 .table-wrapper:hover {
@@ -350,6 +408,8 @@ section {
 /* --- VS Table Design (中央對稱數據表) --- */
 .vs-table {
     width: 100%;
+    min-width: 600px;
+    /* Force scroll on small screens */
     border-collapse: collapse;
 }
 
@@ -389,7 +449,6 @@ section {
     width: 40%;
 }
 
-/* 中心項目標籤 */
 .item-name {
     font-weight: 700;
     color: var(--text-main);
@@ -403,7 +462,6 @@ section {
     white-space: nowrap;
 }
 
-/* 資料列 Flex 排版 */
 .vs-data {
     display: flex;
     align-items: center;
@@ -444,7 +502,6 @@ section {
     margin-top: 4px;
 }
 
-/* 進度條設計 */
 .vs-bar-track {
     width: 130px;
     height: 8px;
@@ -468,10 +525,6 @@ section {
     gap: 30px;
     width: 85%;
     max-width: 1000px;
-}
-
-.premium-card {
-    flex: 1;
 }
 
 .card-img {
@@ -523,7 +576,6 @@ section {
     font-size: 0.95rem;
 }
 
-/* 美食網格 */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -532,7 +584,6 @@ section {
     max-width: 1100px;
 }
 
-/* 乾淨的膠囊按鈕 */
 .filter-buttons {
     margin-bottom: 40px;
     display: flex;
@@ -612,7 +663,6 @@ section {
 .timeline-dot {
     position: absolute;
     left: -46px;
-    /* 根據新線條微調 */
     top: 30px;
     width: 14px;
     height: 14px;
@@ -643,7 +693,7 @@ section {
     height: 50px;
     font-size: 1.2rem;
     cursor: pointer;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.04);
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: 0.3s;
@@ -654,40 +704,6 @@ section {
     color: white;
 }
 
-/* --- 裝飾性背景光斑 (Glassmorphism Aura) --- */
-#data {
-    position: relative;
-}
-
-#data::before {
-    content: '';
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0, 102, 204, 0.12) 0%, rgba(0, 102, 204, 0) 70%);
-    z-index: -1;
-    border-radius: 50%;
-}
-
-#food-place {
-    position: relative;
-}
-
-#food-place::after {
-    content: '';
-    position: absolute;
-    bottom: 50px;
-    left: -100px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(52, 199, 89, 0.12) 0%, rgba(52, 199, 89, 0) 70%);
-    z-index: -1;
-    border-radius: 50%;
-}
-
-/* 歷史時間軸切換動畫 */
 .history-content {
     animation: fadeInSlideUp 0.5s ease forwards;
 }
@@ -808,53 +824,62 @@ section {
     min-height: 350px;
 }
 
+/* --- 平板端最佳化 (Responsive Design for Tablet) --- */
+@media (max-width: 1024px) {
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .map-layout-wrapper {
+        flex-direction: column;
+    }
+
+    #interactive-map {
+        height: 400px;
+    }
+}
+
 /* --- 手機端最佳化 (Responsive Design for Mobile) --- */
 @media (max-width: 768px) {
 
     .radar-container {
-        min-height: 300px;
+        min-height: 280px;
+        padding: 10px;
     }
 
-    /* 1. 導覽列：縮小內距並改為多行或緊湊排列 */
     .navbar {
-        padding: 12px 20px;
+        padding: 12px 15px;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
     }
 
     .nav-links {
-        gap: 15px;
+        gap: 10px;
         flex-wrap: wrap;
         justify-content: center;
     }
 
     .nav-links a {
         font-size: 0.85rem;
+        padding: 4px 8px;
     }
 
-    /* 2. 區塊間距與標題大小 */
     section {
         padding: 100px 15px 40px;
     }
 
     .section-title {
-        font-size: 2rem;
-        margin-bottom: 35px;
+        font-size: 1.8rem;
+        margin-bottom: 30px;
     }
 
-    /* 3. 首頁：改為上下堆疊，不使用左右切割 */
     #hero.full-bleed-hero {
         flex-direction: column;
     }
 
     .hero-half {
         width: 100% !important;
-        /* 強制覆蓋 hover 的寬度變化 */
         height: 50%;
-    }
-
-    .hero-half:hover {
-        width: 100% !important;
     }
 
     .hero-content h2 {
