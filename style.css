@@ -374,9 +374,20 @@ section {
     background-color: rgba(0, 102, 204, 0.03);
 }
 
-.align-center { text-align: center; width: 20%; }
-.align-right { text-align: right; width: 40%; }
-.align-left { text-align: left; width: 40%; }
+.align-center {
+    text-align: center;
+    width: 20%;
+}
+
+.align-right {
+    text-align: right;
+    width: 40%;
+}
+
+.align-left {
+    text-align: left;
+    width: 40%;
+}
 
 /* 中心項目標籤 */
 .item-name {
@@ -387,7 +398,7 @@ section {
     border-radius: 20px;
     display: inline-block;
     font-size: 0.95rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
     border: 1px solid #e5e5ea;
     white-space: nowrap;
 }
@@ -399,16 +410,26 @@ section {
     gap: 15px;
 }
 
-.vs-data.right { justify-content: flex-end; }
-.vs-data.left { justify-content: flex-start; }
+.vs-data.right {
+    justify-content: flex-end;
+}
+
+.vs-data.left {
+    justify-content: flex-start;
+}
 
 .vs-desc-col {
     display: flex;
     flex-direction: column;
 }
 
-.right-text { text-align: right; }
-.left-text { text-align: left; }
+.right-text {
+    text-align: right;
+}
+
+.left-text {
+    text-align: left;
+}
 
 .vs-value {
     font-size: 1.1rem;
@@ -425,12 +446,12 @@ section {
 
 /* 進度條設計 */
 .vs-bar-track {
-    width: 130px; 
+    width: 130px;
     height: 8px;
     background: #e5e5ea;
     border-radius: 4px;
     position: relative;
-    max-width: 100%; 
+    max-width: 100%;
 }
 
 .vs-bar-fill {
@@ -676,8 +697,15 @@ section {
 }
 
 @keyframes fadeInSlideUp {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- 6. 最終 PK 總結 --- */
@@ -850,14 +878,41 @@ section {
         padding: 20px 10px;
     }
 
-    .vs-table th { font-size: 0.95rem; padding: 15px 5px; }
-    .vs-table td { padding: 15px 5px; }
-    .align-center { width: 25%; }
-    .align-right, .align-left { width: 37.5%; }
-    .item-name { padding: 6px 8px; font-size: 0.8rem; }
-    .vs-bar-track { width: 50px; }
-    .vs-value { font-size: 0.9rem; white-space: normal; }
-    .vs-data { gap: 8px; }
+    .vs-table th {
+        font-size: 0.95rem;
+        padding: 15px 5px;
+    }
+
+    .vs-table td {
+        padding: 15px 5px;
+    }
+
+    .align-center {
+        width: 25%;
+    }
+
+    .align-right,
+    .align-left {
+        width: 37.5%;
+    }
+
+    .item-name {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+
+    .vs-bar-track {
+        width: 50px;
+    }
+
+    .vs-value {
+        font-size: 0.9rem;
+        white-space: normal;
+    }
+
+    .vs-data {
+        gap: 8px;
+    }
 
     .cards-wrapper {
         flex-direction: column;
