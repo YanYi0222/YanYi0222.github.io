@@ -237,11 +237,11 @@ section {
 }
 
 .beitun-bg {
-    background-color: #5b86e5;
+    background-image: url('img/beitun/beitun-bg.jpg');
 }
 
 .zhudong-bg {
-    background-color: #36d1dc;
+    background-image: url('img/zhudong/zhudong-bg.jpg');
 }
 
 .hero-half:hover {
