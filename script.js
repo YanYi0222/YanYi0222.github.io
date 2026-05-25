@@ -135,10 +135,19 @@ const mapData = {
         center: [24.175, 120.680], // 北屯區大約的中心點
         zoom: 13,
         locations: [
-            { id: 'b1', name: '大坑風景區', lat: 24.1834, lng: 120.7323, tag: '自然景點', desc: '擁有「台中後花園」美稱，多條不同難度的登山步道，是週末踏青的首選。', img: 'https://via.placeholder.com/400x250/d0e1f9/0066cc?text=Dakeng' },
-            { id: 'b2', name: '洲際棒球場', lat: 24.1999, lng: 120.6853, tag: '大型地標', desc: '台灣指標性的棒球場地，帶動了周邊十一期重劃區的商業與房市發展。', img: 'https://via.placeholder.com/400x250/d0e1f9/0066cc?text=Baseball+Stadium' },
-            { id: 'b3', name: '捷運松竹站', lat: 24.1804, lng: 120.7027, tag: '交通節點', desc: '台鐵與台中捷運共構站，大幅提升了北屯區前往市區與高鐵站的通勤效率。', img: 'https://via.placeholder.com/400x250/d0e1f9/0066cc?text=MRT+Station' }
-        ]
+            { id: 'b1', name: '大坑風景區', lat: 24.1834, lng: 120.7323, tag: '自然景點', desc: '擁有「台中後花園」美稱，多條不同難度的登山步道，是週末踏青的首選。', imgs: ['img/beitun/b1.jpg', 'https://images.unsplash.com/photo-1543165365-07232ed12fad?q=80&w=600&auto=format&fit=crop', 'https://images.unsplash.com/photo-1571401834381-80bbbaae2ea1?q=80&w=600&auto=format&fit=crop'] },
+            { id: 'b2', name: '洲際棒球場', lat: 24.1999, lng: 120.6853, tag: '大型地標', desc: '台灣指標性的棒球場地，帶動了周邊十一期重劃區的商業與房市發展。', img: 'img/beitun/b2.jpg' },
+            { id: 'b3', name: '捷運中清站', lat: 24.1741, lng: 120.6657, tag: '交通節點', desc: '台中捷運綠線重要站點，大幅提升了北屯區前往市區與高鐵站的通勤效率。', imgs: ['img/beitun/b301.jpg', 'img/beitun/b302.jpg', 'img/beitun/b303.jpg'] },
+            { id: 'b4', name: '漢神百貨', lat: 24.1866, lng: 120.6835, tag: '購物商場', desc: '位於洲際棒球場旁的超大型購物中心，帶來強大的商業動能。', img: 'img/beitun/b4.jpg' },
+            { id: 'b5', name: '中央公園', lat: 24.1856, lng: 120.6558, tag: '大型公園', desc: '水湳經貿園區內的超大型綠地，有台中之肺的美稱。', imgs: ['img/beitun/b501.jpg', 'img/beitun/b502.jpg', 'img/beitun/b503.jpg', 'img/beitun/b504.jpg', 'img/beitun/b505.jpg', 'img/beitun/b506.jpg', 'img/beitun/b507.jpg', 'img/beitun/b508.jpg'] },
+            { id: 'b6', name: '水湳生態公園', lat: 24.1888, lng: 120.6588, tag: '自然綠地', desc: '結合生態保育與休閒娛樂的優質綠地空間。', img: 'img/beitun/b6.jpg' },
+            { id: 'b7', name: '炸滋滋ZiZi', lat: 24.1853, lng: 120.6863, tag: '在地美食', desc: '台中市北屯區崇德十路二段205號。酥脆美味的炸物選擇，深受在地居民喜愛。', img: 'img/beitun/b7.jpg' }
+        ],
+        routes: {
+            mrt_green: { color: '#34c759', path: [[24.199, 120.702], [24.180, 120.702], [24.174, 120.665], [24.162, 120.648]], dashArray: '10, 10' },
+            train_beitun: { color: '#0066cc', path: [[24.180, 120.702], [24.162, 120.697], [24.137, 120.686]] },
+            bus_beitun: { color: '#ff9500', path: [[24.186, 120.683], [24.174, 120.665], [24.150, 120.680]] }
+        }
     },
     zhudong: {
         center: [24.737, 121.094], // 竹東鎮大約的中心點
@@ -147,7 +156,11 @@ const mapData = {
             { id: 'z1', name: '竹東中央市場', lat: 24.7351, lng: 121.0913, tag: '在地美食', desc: '全台最大的客家傳統市場之一，蘊含豐富的客家米食與濃濃的在地人情味。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Traditional+Market' },
             { id: 'z2', name: '蕭如松藝術園區', lat: 24.7380, lng: 121.0905, tag: '歷史文化', desc: '保留完整的日式建築群，紀念台灣水彩畫大師蕭如松，是文青打卡熱點。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Art+Park' },
             { id: 'z3', name: '竹東火車站', lat: 24.7402, lng: 121.0935, tag: '交通節點', desc: '台鐵內灣線最大的車站，過去曾是林業與水泥業的轉運重鎮。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Train+Station' }
-        ]
+        ],
+        routes: {
+            train_neiwan: { color: '#0066cc', path: [[24.770, 121.050], [24.740, 121.093], [24.700, 121.180]] },
+            bus_zhudong: { color: '#ff9500', path: [[24.735, 121.091], [24.800, 120.970]] }
+        }
     }
 };
 
@@ -162,8 +175,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // 設定初始中心點為北屯
     map = L.map('interactive-map').setView(mapData.beitun.center, mapData.beitun.zoom);
 
-    // 引入極簡風格底圖 (CartoDB Positron，比傳統 Google Map 更有質感)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    // 引入較豐富質感的底圖 (CartoDB Voyager)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap contributors & CartoDB',
         subdomains: 'abcd',
         maxZoom: 19
@@ -179,10 +192,20 @@ document.addEventListener('DOMContentLoaded', function () {
 function renderMarkers(regionKey) {
     markersLayer.clearLayers(); // 清除舊地標
     const data = mapData[regionKey];
+    const markerColor = regionKey === 'beitun' ? '#0066cc' : '#34c759';
+
+    // 建立自訂圖標 (帶有動畫波紋效果)
+    const customIcon = L.divIcon({
+        className: 'custom-map-marker',
+        html: `<div class="marker-pin" style="background-color: ${markerColor}; border-color: #fff;"></div><div class="marker-pulse" style="background-color: ${markerColor}"></div>`,
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -40]
+    });
 
     data.locations.forEach(loc => {
-        // 建立標記點
-        const marker = L.marker([loc.lat, loc.lng]).addTo(markersLayer);
+        // 建立標記點並使用自訂圖標
+        const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(markersLayer);
         // 設定點擊地標時，顯示小提示，並觸發右側面板更新
         marker.bindPopup(loc.name);
         marker.on('click', function () {
@@ -191,54 +214,172 @@ function renderMarkers(regionKey) {
     });
 }
 
+let activeRouteLayer = null;
+
 // 切換地區函數 (綁定在 Tabs 上)
 function switchRegion(regionKey, eventObj) {
     // 1. 更新按鈕樣式
     document.querySelectorAll('#food-place .map-tab').forEach(btn => btn.classList.remove('active'));
-    
-    // 如果從 HTML 傳入了 event 則使用它，否則相容原本的寫法 (不推薦，但預防錯誤)
+
     const e = eventObj || window.event;
     if (e && e.target) {
         e.target.classList.add('active');
     }
 
-    // 2. 地圖以「平滑飛行(flyTo)」的方式移動到新地區
+    // 2. 切換交通選單
+    document.getElementById('beitun-transport').style.display = regionKey === 'beitun' ? 'block' : 'none';
+    document.getElementById('zhudong-transport').style.display = regionKey === 'zhudong' ? 'block' : 'none';
+
+    // 返回並清除路線
+    closeInfoPanel();
+    clearRoutes();
+
+    // 3. 地圖移動
     const newCenter = mapData[regionKey].center;
     const newZoom = mapData[regionKey].zoom;
     map.flyTo(newCenter, newZoom, {
         animate: true,
-        duration: 1.5 // 飛行時間 1.5 秒
+        duration: 1.5
     });
 
-    // 3. 延遲一下再重新繪製地標，配合飛行視覺
+    // 4. 重繪地標
     setTimeout(() => {
         renderMarkers(regionKey);
     }, 500);
-
-    // 4. 重置右側資訊面板為空狀態
-    document.getElementById('info-empty').style.display = 'flex';
-    document.getElementById('info-data').style.display = 'none';
 }
 
-// 更新右側資訊面板
+// 畫出交通路線
+function drawRoute(routeId) {
+    clearRoutes(); // 先清除舊路線
+
+    // 更新按鈕樣式
+    document.querySelectorAll('.transport-btn').forEach(btn => btn.classList.remove('active-route'));
+    const clickedBtn = event.currentTarget || event.target.closest('.transport-btn');
+    if (clickedBtn && !clickedBtn.classList.contains('clear-btn')) {
+        clickedBtn.classList.add('active-route');
+    }
+
+    let routeData = null;
+    if (mapData.beitun.routes && mapData.beitun.routes[routeId]) {
+        routeData = mapData.beitun.routes[routeId];
+    } else if (mapData.zhudong.routes && mapData.zhudong.routes[routeId]) {
+        routeData = mapData.zhudong.routes[routeId];
+    }
+
+    if (routeData) {
+        // 隱藏詳細資訊面板
+        document.getElementById('info-data').style.display = 'none';
+
+        activeRouteLayer = L.polyline(routeData.path, {
+            color: routeData.color,
+            weight: 5,
+            opacity: 0.8,
+            dashArray: routeData.dashArray || ''
+        }).addTo(map);
+
+        map.fitBounds(activeRouteLayer.getBounds(), { padding: [50, 50], animate: true, duration: 1 });
+    }
+}
+
+function clearRoutes() {
+    if (activeRouteLayer) {
+        map.removeLayer(activeRouteLayer);
+        activeRouteLayer = null;
+    }
+    document.querySelectorAll('.transport-btn').forEach(btn => btn.classList.remove('active-route'));
+}
+
+// 關閉資訊面板，顯示交通選單
+function closeInfoPanel() {
+    document.getElementById('info-data').style.display = 'none';
+    document.getElementById('transport-menu').style.display = 'block';
+
+    // 取消標記的地圖點擊氣泡
+    map.closePopup();
+}
+
+let currentImages = [];
+let currentImageIndex = 0;
+
+// 更新右側資訊面板 (點擊地標時)
 function updateInfoPanel(locationData) {
-    // 隱藏空狀態，顯示資料
-    const emptyState = document.getElementById('info-empty');
+    // 隱藏交通選單，顯示資料
+    document.getElementById('transport-menu').style.display = 'none';
     const dataState = document.getElementById('info-data');
 
-    emptyState.style.display = 'none';
     dataState.style.display = 'flex';
 
-    // 重新觸發 CSS 動畫 (移除再加入 class)
+    // 重新觸發 CSS 動畫
     dataState.classList.remove('fade-in-slide');
-    void dataState.offsetWidth; // 觸發瀏覽器重繪 (Reflow)，這是一個實用的 JS 動畫小技巧
+    void dataState.offsetWidth;
     dataState.classList.add('fade-in-slide');
 
+    // 支援單張與多張圖片
+    if (locationData.imgs && Array.isArray(locationData.imgs) && locationData.imgs.length > 0) {
+        currentImages = locationData.imgs;
+    } else if (locationData.img) {
+        // 防止使用者誤將陣列寫在 img 屬性中
+        if (Array.isArray(locationData.img)) {
+            currentImages = locationData.img;
+        } else {
+            currentImages = [locationData.img];
+        }
+    } else {
+        currentImages = [];
+    }
+
+    currentImageIndex = 0;
+    renderCarousel();
+
     // 填入資料
-    document.getElementById('panel-img').style.backgroundImage = `url('${locationData.img}')`;
     document.getElementById('panel-tag').textContent = locationData.tag;
     document.getElementById('panel-title').textContent = locationData.name;
     document.getElementById('panel-desc').textContent = locationData.desc;
+}
+
+function renderCarousel() {
+    const imgContainer = document.getElementById('panel-img');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const indicators = document.getElementById('panel-indicators');
+
+    if (currentImages.length > 0) {
+        imgContainer.style.backgroundImage = `url('${currentImages[currentImageIndex]}')`;
+    }
+
+    if (currentImages.length > 1) {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+        indicators.style.display = 'flex';
+
+        indicators.innerHTML = currentImages.map((_, index) =>
+            `<div class="indicator-dot ${index === currentImageIndex ? 'active' : ''}" onclick="goToImage(${index}, event)"></div>`
+        ).join('');
+    } else {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        indicators.style.display = 'none';
+    }
+}
+
+function prevImage(e) {
+    if (e) e.stopPropagation();
+    if (currentImages.length <= 1) return;
+    currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+    renderCarousel();
+}
+
+function nextImage(e) {
+    if (e) e.stopPropagation();
+    if (currentImages.length <= 1) return;
+    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+    renderCarousel();
+}
+
+function goToImage(index, e) {
+    if (e) e.stopPropagation();
+    currentImageIndex = index;
+    renderCarousel();
 }
 
 // 切換歷史地區函數
@@ -258,7 +399,7 @@ function switchHistory(regionKey, eventObj) {
 
     const activeContent = document.getElementById('history-' + regionKey);
     activeContent.style.display = 'block';
-    
+
     // 重新觸發動畫
     void activeContent.offsetWidth;
     activeContent.classList.add('active');

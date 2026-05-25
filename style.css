@@ -892,7 +892,7 @@ section {
     }
 
     /* 4. 圖表區塊與卡片：滿版寬度並改為垂直堆疊 */
-    .charts-grid {
+    .charts-grid, .charts-grid-large {
         grid-template-columns: 1fr;
         width: 100%;
         gap: 20px;
@@ -903,40 +903,38 @@ section {
         padding: 20px 10px;
     }
 
-    .vs-table th {
-        font-size: 0.95rem;
-        padding: 15px 5px;
+    .vs-cards-wrapper {
+        width: 100%;
+        padding: 20px 10px;
     }
 
-    .vs-table td {
-        padding: 15px 5px;
+    .vs-row {
+        padding: 15px 0;
     }
 
-    .align-center {
-        width: 25%;
+    .vs-value-text {
+        font-size: 1rem;
     }
 
-    .align-right,
-    .align-left {
-        width: 37.5%;
-    }
-
-    .item-name {
-        padding: 6px 8px;
+    .vs-desc-text {
         font-size: 0.8rem;
     }
 
-    .vs-bar-track {
-        width: 50px;
+    .left-side {
+        padding-right: 10px;
     }
 
-    .vs-value {
-        font-size: 0.9rem;
-        white-space: normal;
+    .right-side {
+        padding-left: 10px;
     }
 
-    .vs-data {
-        gap: 8px;
+    .vs-center {
+        width: 90px;
+    }
+
+    .vs-badge {
+        padding: 4px 8px;
+        font-size: 0.8rem;
     }
 
     .cards-wrapper {
@@ -1127,8 +1125,11 @@ section {
     background-color: #f0f0f5;
     border-radius: 12px;
     margin-bottom: 20px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .info-text {
@@ -1159,4 +1160,260 @@ section {
     color: var(--text-muted);
     line-height: 1.8;
     font-size: 0.95rem;
+}
+
+.charts-grid-large {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    width: 95%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.large-chart {
+    height: 320px;
+}
+
+/* --- 數據對決排版 (VS Rows) --- */
+.vs-cards-wrapper {
+    width: 90%;
+    max-width: 900px;
+    padding: 40px;
+}
+
+.vs-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid #f0f0f5;
+}
+
+.vs-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.vs-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-side {
+    align-items: flex-end;
+    text-align: right;
+    padding-right: 25px;
+}
+
+.right-side {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 25px;
+}
+
+.vs-center {
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.vs-badge {
+    background: #f5f5f7;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    border: 1px solid #e5e5ea;
+}
+
+.header-badge {
+    background: linear-gradient(135deg, #1d1d1f, #444);
+    color: white;
+    border: none;
+    letter-spacing: 1px;
+}
+
+.vs-value-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.vs-desc-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* 進度條設計 */
+.vs-progress-container {
+    width: 100%;
+    height: 8px;
+    background: #e5e5ea;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.vs-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.left-progress {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* --- 交通按鈕選單 --- */
+.transport-menu {
+    padding: 10px 5px;
+}
+
+.transport-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    background: #f5f5f7;
+    border: 1px solid #e5e5ea;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+}
+
+.transport-btn:hover {
+    background: #ebebeb;
+    transform: translateY(-2px);
+}
+
+.transport-btn.active-route {
+    background: var(--card-bg);
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.15);
+    color: var(--accent-blue);
+}
+
+.transport-btn .icon {
+    font-size: 1.4rem;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+/* --- 地圖自訂地標 (脈衝動畫) --- */
+.custom-map-marker {
+    position: relative;
+}
+
+.marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 2px solid #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.marker-pulse {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    z-index: 1;
+    animation: mapPulse 2s infinite;
+}
+
+@keyframes mapPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(3.5);
+        opacity: 0;
+    }
+}
+
+/* --- 圖片輪播元件 (Carousel) --- */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #333;
+    z-index: 10;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.indicator-dot.active {
+    background: #fff;
+    transform: scale(1.3);
 }
