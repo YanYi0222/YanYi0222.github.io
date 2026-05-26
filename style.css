@@ -49,7 +49,7 @@ body {
 .orb-1 {
     width: 60vw;
     height: 60vw;
-    background: #0066cc;
+    background: #d6bca5;
     top: -10%;
     left: -10%;
     animation-delay: 0s;
@@ -58,7 +58,7 @@ body {
 .orb-2 {
     width: 50vw;
     height: 50vw;
-    background: #34c759;
+    background: #6d6059;
     bottom: -10%;
     right: -10%;
     animation-delay: -5s;
