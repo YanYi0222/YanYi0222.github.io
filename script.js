@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: ['人口數 (萬)'],
             datasets: [
-                { label: '北屯區', data: [30.5], backgroundColor: '#0066cc', borderRadius: 6 },
-                { label: '竹東鎮', data: [9.7], backgroundColor: '#34c759', borderRadius: 6 }
+                { label: '北屯區', data: [30.5], backgroundColor: '#4ebc97', borderRadius: 6 },
+                { label: '竹東鎮', data: [9.7], backgroundColor: '#fcc0c7', borderRadius: 6 }
             ]
         },
         options: commonOptions
@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: ['行政里數 (個)'],
             datasets: [
-                { label: '北屯區', data: [42], backgroundColor: '#0066cc', borderRadius: 6 },
-                { label: '竹東鎮', data: [25], backgroundColor: '#34c759', borderRadius: 6 }
+                { label: '北屯區', data: [42], backgroundColor: '#4ebc97', borderRadius: 6 },
+                { label: '竹東鎮', data: [25], backgroundColor: '#fcc0c7', borderRadius: 6 }
             ]
         },
         options: commonOptions
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: ['房價中位數 (萬/坪)'],
             datasets: [
-                { label: '北屯區', data: [45], backgroundColor: '#0066cc', borderRadius: 6 },
-                { label: '竹東鎮', data: [30], backgroundColor: '#34c759', borderRadius: 6 }
+                { label: '北屯區', data: [45], backgroundColor: '#4ebc97', borderRadius: 6 },
+                { label: '竹東鎮', data: [30], backgroundColor: '#fcc0c7', borderRadius: 6 }
             ]
         },
         options: commonOptions
