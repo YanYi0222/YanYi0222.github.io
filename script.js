@@ -1,128 +1,105 @@
 AOS.init({ once: true, offset: 100 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const commonOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { labels: { color: '#1d1d1f', font: { size: 13, family: "'Noto Sans TC', sans-serif" } } }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: { color: '#e5e5ea' },
-                ticks: { color: '#86868b' },
-                border: { display: false }
-            },
-            x: {
-                grid: { display: false },
-                ticks: { color: '#86868b' },
-                border: { display: false }
-            }
-        }
-    };
+    // --- 首頁探索按鈕邏輯 ---
+    const exploreBtn = document.getElementById('exploreBtn');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', function() {
+            // 1. 導覽列滑入
+            document.querySelector('.navbar').classList.add('visible');
+            
+            // 2. 解鎖網頁滾動
+            document.body.classList.remove('locked');
+            
+            // 3. 觸發首頁放大淡出動畫
+            const hero = document.getElementById('hero');
+            hero.classList.add('hero-fade-out');
+            
+            // 4. 動畫結束後隱藏首頁區塊，避免影響操作
+            setTimeout(() => {
+                hero.style.display = 'none';
+            }, 1200);
+        });
+    }
 
-    new Chart(document.getElementById('populationChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: ['人口數 (萬)'],
-            datasets: [
-                { label: '北屯區', data: [30.5], backgroundColor: '#4ebc97', borderRadius: 6 },
-                { label: '竹東鎮', data: [9.7], backgroundColor: '#fcc0c7', borderRadius: 6 }
-            ]
-        },
-        options: commonOptions
-    });
+    // --- 處理導覽列「首頁」連結點擊 ---
+    // 因為首頁區塊在探索後會被隱藏，點擊首頁時直接平滑滾動到最上方
+    const homeLink = document.querySelector('.nav-links a[href="#hero"]');
+    if (homeLink) {
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-    new Chart(document.getElementById('villagesChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: ['行政里數 (個)'],
-            datasets: [
-                { label: '北屯區', data: [42], backgroundColor: '#4ebc97', borderRadius: 6 },
-                { label: '竹東鎮', data: [25], backgroundColor: '#fcc0c7', borderRadius: 6 }
-            ]
-        },
-        options: commonOptions
-    });
-
-    new Chart(document.getElementById('priceChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: ['房價中位數 (萬/坪)'],
-            datasets: [
-                { label: '北屯區', data: [45], backgroundColor: '#4ebc97', borderRadius: 6 },
-                { label: '竹東鎮', data: [30], backgroundColor: '#fcc0c7', borderRadius: 6 }
-            ]
-        },
-        options: commonOptions
-    });
-
-    // --- 雷達圖初始化 (綜合 PK 總結) ---
-    new Chart(document.getElementById('pkRadarChart').getContext('2d'), {
-        type: 'radar',
-        data: {
-            labels: ['發展潛力', '生活機能', '房價親民度', '交通便利', '歷史人文', '教育資源'],
-            datasets: [
-                {
-                    label: '臺中市 北屯區',
-                    data: [95, 90, 50, 90, 75, 88],
-                    backgroundColor: 'rgba(0, 102, 204, 0.2)',
-                    borderColor: '#0066cc',
-                    pointBackgroundColor: '#0066cc',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: '#0066cc',
-                    borderWidth: 2
-                },
-                {
-                    label: '新竹縣 竹東鎮',
-                    data: [80, 75, 85, 70, 85, 82],
-                    backgroundColor: 'rgba(52, 199, 89, 0.2)',
-                    borderColor: '#34c759',
-                    pointBackgroundColor: '#34c759',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: '#34c759',
-                    borderWidth: 2
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    angleLines: { color: 'rgba(0, 0, 0, 0.05)' },
-                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                    pointLabels: {
-                        font: { size: 13, family: "'Noto Sans TC', sans-serif", weight: 'bold' },
-                        color: '#1d1d1f'
+    // --- 綜合評估與總結：雷達圖初始化 ---
+    const radarCtx = document.getElementById('pkRadarChart');
+    if (radarCtx) {
+        new Chart(radarCtx.getContext('2d'), {
+            type: 'radar',
+            data: {
+                labels: ['發展潛力', '生活機能', '房價親民度', '交通便利', '歷史人文', '教育資源'],
+                datasets: [
+                    {
+                        label: '臺中市 北屯區',
+                        data: [95, 90, 50, 90, 75, 88],
+                        backgroundColor: 'rgba(198, 112, 83, 0.2)',
+                        borderColor: '#c67053',
+                        pointBackgroundColor: '#c67053',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#c67053',
+                        borderWidth: 2
                     },
-                    ticks: {
-                        display: false, // 隱藏數值標籤，讓圖表更乾淨
-                        min: 0,
-                        max: 100
+                    {
+                        label: '新竹縣 竹東鎮',
+                        data: [80, 75, 85, 70, 85, 82],
+                        backgroundColor: 'rgba(92, 119, 107, 0.2)',
+                        borderColor: '#5c776b',
+                        pointBackgroundColor: '#5c776b',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#5c776b',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.05)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                        pointLabels: {
+                            font: { size: 13, family: "'Noto Sans TC', sans-serif", weight: 'bold' },
+                            color: '#1d1d1f'
+                        },
+                        ticks: {
+                            display: false,
+                            min: 0,
+                            max: 100
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#1d1d1f', font: { size: 13, family: "'Noto Sans TC', sans-serif" }, padding: 20 }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        titleColor: '#1d1d1f',
+                        bodyColor: '#1d1d1f',
+                        borderColor: '#e5e5ea',
+                        borderWidth: 1,
+                        padding: 10,
+                        boxPadding: 5
                     }
                 }
-            },
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#1d1d1f', font: { size: 13, family: "'Noto Sans TC', sans-serif" }, padding: 20 }
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    titleColor: '#1d1d1f',
-                    bodyColor: '#1d1d1f',
-                    borderColor: '#e5e5ea',
-                    borderWidth: 1,
-                    padding: 10,
-                    boxPadding: 5
-                }
             }
-        }
-    });
+        });
+    }
 });
 
 /* =========================================
@@ -144,9 +121,54 @@ const mapData = {
             { id: 'b7', name: '炸滋滋ZiZi', lat: 24.1853, lng: 120.6863, tag: '在地美食', desc: '台中市北屯區崇德十路二段205號。酥脆美味的炸物選擇，深受在地居民喜愛。', img: 'img/beitun/b7.jpg' }
         ],
         routes: {
-            mrt_green: { color: '#34c759', path: [[24.199, 120.702], [24.180, 120.702], [24.174, 120.665], [24.162, 120.648]], dashArray: '10, 10' },
-            train_beitun: { color: '#0066cc', path: [[24.180, 120.702], [24.162, 120.697], [24.137, 120.686]] },
-            bus_beitun: { color: '#ff9500', path: [[24.186, 120.683], [24.174, 120.665], [24.150, 120.680]] }
+            mrt_green: {
+                color: '#34c759',
+                path: [
+                    [24.189, 120.710], // 北屯總站
+                    [24.184, 120.706], // 舊社
+                    [24.181, 120.703], // 松竹
+                    [24.172, 120.695], // 四維國小
+                    [24.173, 120.685], // 文心崇德
+                    [24.174, 120.665], // 文心中清
+                    [24.171, 120.655], // 文華高中
+                    [24.167, 120.648], // 文心櫻花
+                    [24.163, 120.647]  // 市政府
+                ],
+                dashArray: '10, 10',
+                stations: [
+                    { name: "捷運 北屯總站", lat: 24.189, lng: 120.710 },
+                    { name: "捷運 舊社站", lat: 24.184, lng: 120.706 },
+                    { name: "捷運 松竹站", lat: 24.181, lng: 120.703 },
+                    { name: "捷運 四維國小站", lat: 24.172, lng: 120.695 },
+                    { name: "捷運 文心崇德站", lat: 24.173, lng: 120.685 },
+                    { name: "捷運 文華高中站", lat: 24.171, lng: 120.655 },
+                    { name: "捷運 文心櫻花站", lat: 24.167, lng: 120.648 },
+                    { name: "捷運 市政府站 (轉乘點)", lat: 24.163, lng: 120.647 }
+                ]
+            },
+            brt_blue: {
+                color: '#0066cc',
+                path: [
+                    [24.137, 120.686], // 台中火車站
+                    [24.155, 120.663], // 科博館
+                    [24.163, 120.647], // 市政府
+                    [24.165, 120.643], // 新光/遠百
+                    [24.168, 120.638], // 秋紅谷
+                    [24.179, 120.613], // 澄清醫院
+                    [24.181, 120.603], // 榮總/東海大學
+                    [24.226, 120.579]  // 靜宜大學
+                ],
+                stations: [
+                    { name: "BRT 台中火車站", lat: 24.137, lng: 120.686 },
+                    { name: "BRT 科博館站", lat: 24.155, lng: 120.663 },
+                    { name: "BRT 市政府站 (轉乘點)", lat: 24.163, lng: 120.647 },
+                    { name: "BRT 新光/遠百站", lat: 24.165, lng: 120.643 },
+                    { name: "BRT 秋紅谷站", lat: 24.168, lng: 120.638 },
+                    { name: "BRT 澄清醫院站", lat: 24.179, lng: 120.613 },
+                    { name: "BRT 榮總/東海大學站", lat: 24.181, lng: 120.603 },
+                    { name: "BRT 靜宜大學站", lat: 24.226, lng: 120.579 }
+                ]
+            }
         }
     },
     zhudong: {
@@ -158,19 +180,67 @@ const mapData = {
             { id: 'z3', name: '竹東火車站', lat: 24.7402, lng: 121.0935, tag: '交通節點', desc: '台鐵內灣線最大的車站，過去曾是林業與水泥業的轉運重鎮。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Train+Station' }
         ],
         routes: {
-            train_neiwan: { color: '#0066cc', path: [[24.770, 121.050], [24.740, 121.093], [24.700, 121.180]] },
-            bus_zhudong: { color: '#ff9500', path: [[24.735, 121.091], [24.800, 120.970]] }
+            train_neiwan: {
+                color: '#0066cc',
+                path: [
+                    [24.806, 121.040], // 六家
+                    [24.780, 121.031], // 竹中
+                    [24.767, 121.066], // 上員
+                    [24.747, 121.082], // 榮華
+                    [24.740, 121.093], // 竹東
+                    [24.717, 121.118], // 橫山
+                    [24.711, 121.139], // 九讚頭
+                    [24.717, 121.144], // 合興
+                    [24.715, 121.161], // 富貴
+                    [24.707, 121.182]  // 內灣
+                ],
+                dashArray: '10, 10',
+                stations: [
+                    { name: "台鐵 六家站", lat: 24.806, lng: 121.040 },
+                    { name: "台鐵 竹中站", lat: 24.780, lng: 121.031 },
+                    { name: "台鐵 上員站", lat: 24.767, lng: 121.066 },
+                    { name: "台鐵 榮華站", lat: 24.747, lng: 121.082 },
+                    { name: "台鐵 竹東站", lat: 24.740, lng: 121.093 },
+                    { name: "台鐵 橫山站", lat: 24.717, lng: 121.118 },
+                    { name: "台鐵 九讚頭站", lat: 24.711, lng: 121.139 },
+                    { name: "台鐵 合興站", lat: 24.717, lng: 121.144 },
+                    { name: "台鐵 富貴站", lat: 24.715, lng: 121.161 },
+                    { name: "台鐵 內灣站", lat: 24.707, lng: 121.182 }
+                ]
+            },
+            bus_5608: {
+                color: '#ff9500',
+                path: [
+                    [24.801, 120.971], // 新竹站
+                    [24.801, 120.993], // 馬偕醫院
+                    [24.795, 120.996], // 清華大學
+                    [24.788, 121.000], // 陽明交大
+                    [24.779, 121.026], // 科學園區
+                    [24.767, 121.043], // 工研院東門
+                    [24.740, 121.093], // 竹東火車站
+                    [24.728, 121.100]  // 下公館
+                ],
+                stations: [
+                    { name: "5608 新竹站", lat: 24.801, lng: 120.971 },
+                    { name: "5608 馬偕醫院", lat: 24.801, lng: 120.993 },
+                    { name: "5608 清華大學", lat: 24.795, lng: 120.996 },
+                    { name: "5608 陽明交大", lat: 24.788, lng: 121.000 },
+                    { name: "5608 科學園區", lat: 24.779, lng: 121.026 },
+                    { name: "5608 工研院東門", lat: 24.767, lng: 121.043 },
+                    { name: "5608 竹東火車站", lat: 24.740, lng: 121.093 },
+                    { name: "5608 下公館", lat: 24.728, lng: 121.100 }
+                ]
+            }
         }
     }
 };
 
 let map; // 宣告全域地圖變數
-let markersLayer; // 用來管理地標的群組
+let markersLayer; // 用來管理大型地標的群組
+let routeNodesLayer; // 用來管理路線小節點的群組
 
 // 初始化地圖 (在畫面載入後執行)
 document.addEventListener('DOMContentLoaded', function () {
-    // ... 保留原本 Chart.js 的初始化程式碼 ...
-
     // --- 地圖初始化 ---
     // 設定初始中心點為北屯
     map = L.map('interactive-map').setView(mapData.beitun.center, mapData.beitun.zoom);
@@ -183,6 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(map);
 
     markersLayer = L.layerGroup().addTo(map);
+    routeNodesLayer = L.layerGroup().addTo(map);
 
     // 預設載入北屯的地標
     renderMarkers('beitun');
@@ -206,8 +277,13 @@ function renderMarkers(regionKey) {
     data.locations.forEach(loc => {
         // 建立標記點並使用自訂圖標
         const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(markersLayer);
-        // 設定點擊地標時，顯示小提示，並觸發右側面板更新
-        marker.bindPopup(loc.name);
+        // 設定常駐文字標籤
+        marker.bindTooltip(loc.name, {
+            permanent: true,
+            direction: 'bottom',
+            className: 'landmark-label',
+            offset: [0, 5]
+        });
         marker.on('click', function () {
             updateInfoPanel(loc);
         });
@@ -277,6 +353,29 @@ function drawRoute(routeId) {
             dashArray: routeData.dashArray || ''
         }).addTo(map);
 
+        // 繪製沿線小站點
+        if (routeData.stations) {
+            routeData.stations.forEach(st => {
+                const node = L.circleMarker([st.lat, st.lng], {
+                    radius: 6,
+                    fillColor: '#ffffff',
+                    color: routeData.color,
+                    weight: 3,
+                    opacity: 1,
+                    fillOpacity: 1
+                }).addTo(routeNodesLayer);
+                
+                // 綁定極簡文字氣泡
+                node.bindTooltip(st.name, {
+                    direction: 'top',
+                    offset: [0, -5],
+                    className: 'route-node-tooltip',
+                    permanent: false,
+                    sticky: true
+                });
+            });
+        }
+
         map.fitBounds(activeRouteLayer.getBounds(), { padding: [50, 50], animate: true, duration: 1 });
     }
 }
@@ -285,6 +384,9 @@ function clearRoutes() {
     if (activeRouteLayer) {
         map.removeLayer(activeRouteLayer);
         activeRouteLayer = null;
+    }
+    if (typeof routeNodesLayer !== 'undefined') {
+        routeNodesLayer.clearLayers();
     }
     document.querySelectorAll('.transport-btn').forEach(btn => btn.classList.remove('active-route'));
 }
