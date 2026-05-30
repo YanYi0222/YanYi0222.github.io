@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>北屯都市感 VS 竹東鄉屋感| 雙區魅力對決</title>
+    <meta name="description" content="臺中市北屯區與新竹縣竹東鎮的全方位生活對決——從房價、交通、美食到歷史人文，用數據與互動地圖帶你深入比較兩地的居住魅力。">
+    <title>北屯都市感 VS 竹東鄉屋感 | 雙區魅力對決</title>
     <!-- 統一使用乾淨現代的無襯線黑體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +15,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="locked">
@@ -31,9 +33,16 @@
         <ul class="nav-links">
             <li><a href="#hero">首頁</a></li>
             <li><a href="#data">數據</a></li>
-            <li><a href="#transport">交通</a></li>
-            <li><a href="#food-place">美食景點</a></li>
+            <li><a href="#food-place">交通探索</a></li>
             <li><a href="#history">歷史心得</a></li>
+            <li><a href="#summary">總結</a></li>
+            <li>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="切換日夜模式" onclick="toggleTheme()">
+                    <span class="theme-icon moon-icon"><i data-lucide="moon" style="width:18px;height:18px;"></i></span>
+                    <span class="theme-icon sun-icon" style="display:none;"><i data-lucide="sun"
+                            style="width:18px;height:18px;"></i></span>
+                </button>
+            </li>
         </ul>
     </nav>
 
@@ -59,8 +68,6 @@
                     新竹縣竹東鎮</h2>
                 <p data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600" data-aos-easing="ease-out-cubic">
                     科技園區旁蘊藏的濃厚客家情</p>
-                <div class="img-hint-text" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">↑ 竹東滿版風景照預留區
-                </div>
             </div>
         </div>
         <button id="exploreBtn" class="explore-btn" data-aos="zoom-in" data-aos-delay="1000">
@@ -162,6 +169,79 @@
         </div>
     </section>
 
+    <!-- 2.5 購屋實戰：2000萬預算對決 -->
+    <section id="housing-battle" class="container bento-section" style="padding-top: 20px;">
+        <h2 class="section-title serif-title" data-aos="fade-up">2,000萬預算購屋實戰</h2>
+        <div class="housing-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- 北屯區 -->
+            <div class="housing-card premium-card">
+                <div class="housing-img beitun-housing"></div>
+                <div class="housing-content">
+                    <h3 class="serif-title" style="color: var(--brand-beitun);">臺中市 北屯區</h3>
+                    <h4 class="housing-type">精緻都會小二房</h4>
+                    <ul class="housing-tags">
+                        <li><span class="tag-label">坪數</span>約 28-32 坪</li>
+                        <li><span class="tag-label">車位</span>機械或單平面</li>
+                        <li><span class="tag-label">優勢</span>重劃區、近捷運/商場</li>
+                    </ul>
+                    <p class="housing-desc">在北屯 14 期或機捷特區，2000 萬能買到高質感的兩房建案，適合頂客族或重視生活圈機能的年輕小家庭，享受下樓即商圈的極致便利。</p>
+                </div>
+            </div>
+
+            <!-- VS 標誌 -->
+            <div class="housing-vs artistic-number">VS</div>
+
+            <!-- 竹東鎮 -->
+            <div class="housing-card premium-card">
+                <div class="housing-img zhudong-housing"></div>
+                <div class="housing-content">
+                    <h3 class="serif-title" style="color: var(--brand-zhudong);">新竹縣 竹東鎮</h3>
+                    <h4 class="housing-type">寬闊家庭大四房 / 透天</h4>
+                    <ul class="housing-tags">
+                        <li><span class="tag-label">坪數</span>約 50-60 坪</li>
+                        <li><span class="tag-label">車位</span>雙平面車位或自家車庫</li>
+                        <li><span class="tag-label">優勢</span>竹科外溢第一圈、大空間</li>
+                    </ul>
+                    <p class="housing-desc">同樣預算在竹東（如光明或至善重劃區），可直上大四房甚至透天厝。不僅給家人最寬敞的居住品質，開車前往竹科也具備通勤優勢。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.7 專屬生活型態推薦 -->
+    <section id="persona" class="container bento-section" style="padding-top: 40px;">
+        <h2 class="section-title serif-title" data-aos="fade-up">專屬生活型態推薦</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted);" data-aos="fade-up"
+            data-aos-delay="100">你是哪種人？讓我們為你推薦最適合的居住地。</p>
+
+        <div class="persona-selector" data-aos="fade-up" data-aos-delay="200">
+            <div class="persona-cards">
+                <div class="persona-card premium-card active" onclick="selectPersona('family')">
+                    <div class="persona-icon"><i data-lucide="users"
+                            style="width: 40px; height: 40px; stroke-width: 1.5;"></i></div>
+                    <h4>竹科新貴小家庭</h4>
+                    <p>重視育兒空間與通勤</p>
+                </div>
+                <div class="persona-card premium-card" onclick="selectPersona('dink')">
+                    <div class="persona-icon"><i data-lucide="glass-water"
+                            style="width: 40px; height: 40px; stroke-width: 1.5;"></i></div>
+                    <h4>都會時尚頂客族</h4>
+                    <p>重視逛街與捷運機能</p>
+                </div>
+                <div class="persona-card premium-card" onclick="selectPersona('retire')">
+                    <div class="persona-icon"><i data-lucide="tree-pine"
+                            style="width: 40px; height: 40px; stroke-width: 1.5;"></i></div>
+                    <h4>悠閒退休慢活族</h4>
+                    <p>重視自然與傳統市場</p>
+                </div>
+            </div>
+
+            <div class="persona-result premium-card" id="personaResult">
+                <!-- 動態內容將由 JS 注入 -->
+            </div>
+        </div>
+    </section>
+
     <!-- 3. 交通與在地探索 (結合地圖與交通路線) -->
     <section id="food-place" class="container" style="padding-top: 60px;">
         <h2 class="section-title serif-title" data-aos="fade-up">交通與在地探索</h2>
@@ -171,7 +251,7 @@
                 <button class="map-tab active" onclick="switchRegion('beitun', event)">臺中市北屯區</button>
                 <button class="map-tab" onclick="switchRegion('zhudong', event)">新竹縣竹東鎮</button>
             </div>
-            
+
             <!-- 左側地圖區塊 -->
             <div class="map-container premium-card">
                 <div id="interactive-map"></div>
@@ -188,29 +268,34 @@
 
                     <div id="beitun-transport" class="transport-group active">
                         <button class="transport-btn" onclick="drawRoute('mrt_green')">
-                            <div class="icon">🚆</div> 顯示捷運綠線
+                            <div class="icon"><i data-lucide="train-front" style="width:20px; height:20px;"></i></div>
+                            顯示捷運綠線
                         </button>
                         <button class="transport-btn" onclick="drawRoute('brt_blue')">
-                            <div class="icon">🚌</div> 顯示台中BRT路線 (藍線)
+                            <div class="icon"><i data-lucide="bus-front" style="width:20px; height:20px;"></i></div>
+                            顯示台中BRT路線 (藍線)
                         </button>
                     </div>
 
                     <div id="zhudong-transport" class="transport-group" style="display: none;">
                         <button class="transport-btn" onclick="drawRoute('train_neiwan')">
-                            <div class="icon">🚂</div> 顯示台鐵內灣線
+                            <div class="icon"><i data-lucide="train-track" style="width:20px; height:20px;"></i></div>
+                            顯示台鐵內灣線
                         </button>
                         <button class="transport-btn" onclick="drawRoute('bus_5608')">
-                            <div class="icon">🚌</div> 顯示 5608 公車路線
+                            <div class="icon"><i data-lucide="bus-front" style="width:20px; height:20px;"></i></div> 顯示
+                            5608 公車路線
                         </button>
                     </div>
 
                     <button class="transport-btn clear-btn" onclick="clearRoutes()"
                         style="margin-top: 20px; background: #fff1f0; color: #ff4d4f; border: 1px solid #ffccc7;">
-                        <div class="icon">🧹</div> 清除地圖路線
+                        <div class="icon"><i data-lucide="eraser" style="width:20px; height:20px;"></i></div> 清除地圖路線
                     </button>
 
                     <div class="empty-state" style="margin-top: 40px;">
-                        <div class="empty-icon" style="font-size: 2rem;">📍</div>
+                        <div class="empty-icon"><i data-lucide="map-pin"
+                                style="width:36px; height:36px; margin-bottom:10px;"></i></div>
                         <p style="font-size: 0.9rem;">點擊地圖上的地標<br>即可查看詳細介紹</p>
                     </div>
                 </div>
@@ -234,6 +319,72 @@
                     </div>
                 </div>
             </div>
+    </section>
+
+    <!-- 3.5 動態通勤時間視覺化 -->
+    <section id="commute" class="container bento-section" style="padding-top: 40px; min-height: auto;">
+        <h2 class="section-title serif-title" data-aos="fade-up">動態通勤時間視覺化</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted);" data-aos="fade-up"
+            data-aos-delay="100">時間就是金錢，比較兩地前往重要核心的通勤效率。</p>
+
+        <div class="commute-dashboard premium-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="commute-header">
+                <label for="commuteDest" class="serif-title" style="font-size: 1.2rem; margin-right: 15px;"><i
+                        data-lucide="map-pin"
+                        style="display:inline-block; vertical-align:text-bottom; width:20px; height:20px;"></i>
+                    目的地：</label>
+                <select id="commuteDest" class="commute-select" onchange="updateCommute()">
+                    <option value="" disabled selected>-- 請選擇通勤目的地 --</option>
+                    <option value="hsinchu">新竹科學園區 (竹科)</option>
+                    <option value="taichung">台中市政府 (七期)</option>
+                    <option value="hsr">高鐵站 (新竹/台中)</option>
+                </select>
+            </div>
+
+            <div class="commute-race-container">
+                <!-- 北屯 -->
+                <div class="commute-racer">
+                    <div class="racer-label">
+                        <span style="color: var(--brand-beitun); font-weight: bold; width: 120px;">臺中 北屯區</span>
+                        <div class="racer-times">
+                            <span class="drive-time"><i class="icon" data-lucide="car-front"
+                                    style="width:20px;height:20px;margin-right:5px;"></i> <span
+                                    id="time-beitun-drive">-- 分鐘</span></span>
+                            <span class="transit-time"><i class="icon" data-lucide="train-front"
+                                    style="width:20px;height:20px;margin-right:5px;"></i> <span
+                                    id="time-beitun-transit">-- 分鐘</span></span>
+                        </div>
+                    </div>
+                    <div class="racer-track">
+                        <div class="racer-fill drive-fill" id="bar-beitun-drive" style="width: 0%;"></div>
+                        <div class="racer-fill transit-fill" id="bar-beitun-transit"
+                            style="width: 0%; margin-top: 4px;"></div>
+                    </div>
+                </div>
+
+                <!-- 竹東 -->
+                <div class="commute-racer" style="margin-top: 30px;">
+                    <div class="racer-label">
+                        <span style="color: var(--brand-zhudong); font-weight: bold; width: 120px;">新竹 竹東鎮</span>
+                        <div class="racer-times">
+                            <span class="drive-time"><i class="icon" data-lucide="car-front"
+                                    style="width:20px;height:20px;margin-right:5px;"></i> <span
+                                    id="time-zhudong-drive">-- 分鐘</span></span>
+                            <span class="transit-time"><i class="icon" data-lucide="train-front"
+                                    style="width:20px;height:20px;margin-right:5px;"></i> <span
+                                    id="time-zhudong-transit">-- 分鐘</span></span>
+                        </div>
+                    </div>
+                    <div class="racer-track">
+                        <div class="racer-fill drive-fill" id="bar-zhudong-drive" style="width: 0%;"></div>
+                        <div class="racer-fill transit-fill" id="bar-zhudong-transit"
+                            style="width: 0%; margin-top: 4px;"></div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: right; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted);">
+                *以上為預估平均通勤時間（尖峰時段可能更長）</p>
+        </div>
     </section>
 
     <!-- 5. 歷史大事件與心得 -->
@@ -306,9 +457,15 @@
                 <h3 class="city-name serif-title">新竹縣 竹東鎮</h3>
                 <div class="verdict">「科技外溢的新興潛力區，房價親民且富含文化底蘊」</div>
                 <ul class="pros-list">
-                    <li><span class="icon">✔️</span> 房價基期較低，適合首購族與竹科新貴。</li>
-                    <li><span class="icon">✔️</span> 客家文化與歷史底蘊深厚。</li>
-                    <li><span class="icon">✔️</span> 具備良好的綠意與自然休閒環境。</li>
+                    <li><i data-lucide="check"
+                            style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:3px;"></i>
+                        房價基期較低，適合首購族與竹科新貴。</li>
+                    <li><i data-lucide="check"
+                            style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:3px;"></i>
+                        客家文化與歷史底蘊深厚。</li>
+                    <li><i data-lucide="check"
+                            style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:3px;"></i>
+                        具備良好的綠意與自然休閒環境。</li>
                 </ul>
                 <div class="suitability">
                     <strong>適合對象：</strong>重視C/P值、喜歡慢活步調、於大新竹科技園區工作者。
@@ -325,9 +482,15 @@
                 <h3 class="city-name serif-title">臺中市 北屯區</h3>
                 <div class="verdict">「機能爆發的都會核心，交通與商業高度發展」</div>
                 <ul class="pros-list">
-                    <li><span class="icon">✔️</span> 捷運、台鐵與74號道，交通網絡極為發達。</li>
-                    <li><span class="icon">✔️</span> 大型商場與重劃區林立，生活機能完善。</li>
-                    <li><span class="icon">✔️</span> 人口紅利帶來強大增值潛力。</li>
+                    <li><i data-lucide="check"
+                            style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:3px;"></i>
+                        捷運、台鐵與74號道，交通網絡極為發達。</li>
+                    <li><i data-lucide="check"
+                            style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:3px;"></i>
+                        大型商場與重劃區林立，生活機能完善。</li>
+                    <li><i data-lucide="check"
+                            style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:3px;"></i>
+                        人口紅利帶來強大增值潛力。</li>
                 </ul>
                 <div class="suitability">
                     <strong>適合對象：</strong>追求都會便捷生活、重視未來增值性、依賴大眾運輸者。
@@ -337,12 +500,74 @@
         </div>
     </section>
 
+    <!-- 7. 互動投票 -->
+    <section id="poll" class="container bento-section" style="padding-top: 40px; min-height: auto;">
+        <h2 class="section-title serif-title" data-aos="fade-up">你的選擇是？</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted); font-size: 1.1rem;"
+            data-aos="fade-up" data-aos-delay="100">如果有一筆頭期款，你會選擇在哪裡定居？</p>
+
+        <div class="poll-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="poll-options" id="pollOptions">
+                <div class="poll-card beitun-poll premium-card" onclick="handleVote('beitun')">
+                    <div class="poll-icon"><i data-lucide="building-2"
+                            style="width: 50px; height: 50px; stroke-width: 1.5;"></i></div>
+                    <h3 class="serif-title">我選 北屯區</h3>
+                    <p>擁抱都會與便捷機能</p>
+                </div>
+                <div class="poll-card zhudong-poll premium-card" onclick="handleVote('zhudong')">
+                    <div class="poll-icon"><i data-lucide="home"
+                            style="width: 50px; height: 50px; stroke-width: 1.5;"></i></div>
+                    <h3 class="serif-title">我選 竹東鎮</h3>
+                    <p>追求大空間與發展潛力</p>
+                </div>
+            </div>
+
+            <div class="poll-results premium-card" id="pollResults" style="display: none;">
+                <h3 class="serif-title" style="text-align: center; margin-bottom: 30px; font-size: 1.6rem;">
+                    感謝投票！目前的社群意向：</h3>
+
+                <div class="poll-bar-container">
+                    <div class="poll-label">
+                        <span style="color: var(--brand-beitun); font-weight: bold;">臺中 北屯區</span>
+                        <span id="poll-beitun-percent" class="artistic-number" style="font-size: 1.4rem;">0%</span>
+                    </div>
+                    <div class="poll-track">
+                        <div class="poll-fill beitun-fill" id="poll-beitun-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="poll-bar-container" style="margin-top: 25px;">
+                    <div class="poll-label">
+                        <span style="color: var(--brand-zhudong); font-weight: bold;">新竹 竹東鎮</span>
+                        <span id="poll-zhudong-percent" class="artistic-number" style="font-size: 1.4rem;">0%</span>
+                    </div>
+                    <div class="poll-track">
+                        <div class="poll-fill zhudong-fill" id="poll-zhudong-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: var(--text-muted);">
+                    *此為示範用模擬數據，非真實投票結果</p>
+                <button class="re-vote-btn" onclick="resetVote()">重新投票</button>
+            </div>
+        </div>
+    </section>
+
     <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-brand serif-title">北屯區 vs 竹東鎮 — 雙區魅力對決</p>
+            <p class="footer-info">資料來源：內政部戶政司、実價登錄、Google Maps、各區公所公開資訊</p>
+            <p class="footer-copy">&copy; 2025 YanYi. 本網站僅供學術研究與資訊參考之用。</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

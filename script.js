@@ -1,6 +1,8 @@
-AOS.init({ once: true, offset: 100 });
-
 document.addEventListener('DOMContentLoaded', function () {
+    // 初始化 AOS (必須在 AOS 庫載入後才執行)
+    if (typeof AOS !== 'undefined') {
+        AOS.init({ once: true, offset: 100 });
+    }
     // --- 首頁探索按鈕邏輯 ---
     const exploreBtn = document.getElementById('exploreBtn');
     if (exploreBtn) {
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 綜合評估與總結：雷達圖初始化 ---
     const radarCtx = document.getElementById('pkRadarChart');
     if (radarCtx) {
-        new Chart(radarCtx.getContext('2d'), {
+        window.radarChart = new Chart(radarCtx.getContext('2d'), {
             type: 'radar',
             data: {
                 labels: ['發展潛力', '生活機能', '房價親民度', '交通便利', '歷史人文', '教育資源'],
@@ -183,7 +185,10 @@ const mapData = {
             train_neiwan: {
                 color: '#0066cc',
                 path: [
-                    [24.806, 121.040], // 六家
+                    [24.801, 120.971], // 新竹
+                    [24.809, 120.983], // 北新竹
+                    [24.808, 121.002], // 千甲
+                    [24.793, 121.017], // 新莊
                     [24.780, 121.031], // 竹中
                     [24.767, 121.066], // 上員
                     [24.747, 121.082], // 榮華
@@ -196,7 +201,10 @@ const mapData = {
                 ],
                 dashArray: '10, 10',
                 stations: [
-                    { name: "台鐵 六家站", lat: 24.806, lng: 121.040 },
+                    { name: "台鐵 新竹站", lat: 24.801, lng: 120.971 },
+                    { name: "台鐵 北新竹站", lat: 24.809, lng: 120.983 },
+                    { name: "台鐵 千甲站", lat: 24.808, lng: 121.002 },
+                    { name: "台鐵 新莊站", lat: 24.793, lng: 121.017 },
                     { name: "台鐵 竹中站", lat: 24.780, lng: 121.031 },
                     { name: "台鐵 上員站", lat: 24.767, lng: 121.066 },
                     { name: "台鐵 榮華站", lat: 24.747, lng: 121.082 },
@@ -238,6 +246,7 @@ const mapData = {
 let map; // 宣告全域地圖變數
 let markersLayer; // 用來管理大型地標的群組
 let routeNodesLayer; // 用來管理路線小節點的群組
+let currentTileLayer; // 管理目前的底圖圖層
 
 // 初始化地圖 (在畫面載入後執行)
 document.addEventListener('DOMContentLoaded', function () {
@@ -246,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
     map = L.map('interactive-map').setView(mapData.beitun.center, mapData.beitun.zoom);
 
     // 引入較豐富質感的底圖 (CartoDB Voyager)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    currentTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap contributors & CartoDB',
         subdomains: 'abcd',
         maxZoom: 19
@@ -523,3 +532,278 @@ window.onscroll = function () {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+/* =========================================
+   互動投票邏輯 (Poll Logic)
+   ========================================= */
+function handleVote(choice) {
+    // 隱藏選項，顯示結果
+    document.getElementById('pollOptions').style.display = 'none';
+    const resultsDiv = document.getElementById('pollResults');
+    resultsDiv.style.display = 'block';
+    
+    // 重新觸發動畫
+    resultsDiv.style.animation = 'none';
+    void resultsDiv.offsetWidth;
+    resultsDiv.style.animation = 'fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+
+    // 模擬動態數據載入 (稍微給使用者選擇的項目加權)
+    let beitunTarget = 55;
+    let zhudongTarget = 45;
+
+    if (choice === 'zhudong') {
+        beitunTarget = 42;
+        zhudongTarget = 58;
+    } else {
+        beitunTarget = 68;
+        zhudongTarget = 32;
+    }
+
+    // 重置進度條
+    const beitunBar = document.getElementById('poll-beitun-bar');
+    const zhudongBar = document.getElementById('poll-zhudong-bar');
+    const beitunText = document.getElementById('poll-beitun-percent');
+    const zhudongText = document.getElementById('poll-zhudong-percent');
+
+    beitunBar.style.width = '0%';
+    zhudongBar.style.width = '0%';
+    beitunText.textContent = '0%';
+    zhudongText.textContent = '0%';
+
+    // 延遲一點點時間後開始跑條
+    setTimeout(() => {
+        beitunBar.style.width = beitunTarget + '%';
+        zhudongBar.style.width = zhudongTarget + '%';
+        
+        // 數字跑動動畫
+        animateValue(beitunText, 0, beitunTarget, 1500);
+        animateValue(zhudongText, 0, zhudongTarget, 1500);
+    }, 100);
+}
+
+function resetVote() {
+    document.getElementById('pollResults').style.display = 'none';
+    document.getElementById('pollOptions').style.display = 'flex';
+}
+
+function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        // 使用 easeOutExpo 的數學公式讓數字跳動更自然
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        
+        obj.innerHTML = Math.floor(easeProgress * (end - start) + start) + '%';
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            obj.innerHTML = end + '%';
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+/* =========================================
+   日夜切換邏輯 (Day/Night Theme)
+   ========================================= */
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark-theme');
+    
+    // 切換按鈕圖示
+    const moon = document.querySelector('.moon-icon');
+    const sun = document.querySelector('.sun-icon');
+    
+    if (moon && sun) {
+        if (isDark) {
+            moon.style.display = 'none';
+            sun.style.display = 'inline';
+        } else {
+            moon.style.display = 'inline';
+            sun.style.display = 'none';
+        }
+    }
+    
+    // 切換 Leaflet 地圖底圖
+    if (map && currentTileLayer) {
+        map.removeLayer(currentTileLayer);
+        
+        const tileUrl = isDark 
+            ? 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png'
+            : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+            
+        currentTileLayer = L.tileLayer(tileUrl, {
+            attribution: '&copy; OpenStreetMap contributors & CartoDB',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+        
+        // 將地標圖層提到最上層
+        if (markersLayer) markersLayer.bringToFront();
+        if (routeNodesLayer) routeNodesLayer.bringToFront();
+    }
+    
+    // 適配 Chart.js 雷達圖
+    if (window.radarChart) {
+        const textColor = isDark ? '#f5f5f7' : '#1d1d1f';
+        const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)';
+        
+        window.radarChart.options.scales.r.angleLines.color = gridColor;
+        window.radarChart.options.scales.r.grid.color = gridColor;
+        window.radarChart.options.scales.r.pointLabels.color = textColor;
+        window.radarChart.options.plugins.legend.labels.color = textColor;
+        window.radarChart.update();
+    }
+    
+    // 重新渲染 Lucide icon
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+}
+
+/* =========================================
+   生活型態推薦邏輯 (Persona Selector)
+   ========================================= */
+const personaData = {
+    family: {
+        winner: '竹東鎮',
+        winnerClass: 'winner-zhudong',
+        title: '大空間與竹科通勤的最佳解',
+        desc: '對於重視育兒空間的小家庭來說，竹東能以相對親民的預算買到寬敞的大四房或透天厝。不僅孩子有充裕的活動空間，開車前往竹科也能避開市區塞車車潮，省下時間陪伴家人。'
+    },
+    dink: {
+        winner: '北屯區',
+        winnerClass: 'winner-beitun',
+        title: '極致便利的都會時尚生活',
+        desc: '不需考慮大家庭空間，頂客族更適合北屯的機能爆發力。下樓就有捷運、大型商場(漢神/巨蛋)，週末可以隨時去文青咖啡廳或高檔餐廳約會，享受充滿活力與潮流的都會節奏。'
+    },
+    retire: {
+        winner: '竹東鎮',
+        winnerClass: 'winner-zhudong',
+        title: '濃郁人情味與自然慢活步調',
+        desc: '退休生活需要的是良好的自然環境與醫療資源。竹東擁有全台最大的客家傳統市場，每天都能採買新鮮食材；周邊有榮總新竹分院等醫療資源，且隨時能前往大山背等自然步道健行，慢活節奏無可取代。'
+    }
+};
+
+function selectPersona(type) {
+    // 移除所有 active
+    document.querySelectorAll('.persona-card').forEach(card => card.classList.remove('active'));
+    // 為點擊或對應的卡片加上 active
+    const targetCard = document.querySelector(`.persona-card[onclick*="selectPersona('${type}')"]`);
+    if (targetCard) {
+        targetCard.classList.add('active');
+    }
+
+    const data = personaData[type];
+    const resultDiv = document.getElementById('personaResult');
+    
+    // 動畫重置
+    resultDiv.style.animation = 'none';
+    void resultDiv.offsetWidth;
+    resultDiv.style.animation = 'fadeInSlide 0.6s ease';
+    
+    resultDiv.innerHTML = `
+        <div class="persona-winner ${data.winnerClass}">
+            <i data-lucide="award" style="display:inline-block; vertical-align:text-bottom; width:20px; height:20px;"></i> 推薦：${data.winner}
+        </div>
+        <h3 class="persona-result-title serif-title">${data.title}</h3>
+        <p class="persona-result-desc">${data.desc}</p>
+    `;
+    
+    // 重新渲染 Lucide icon
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+}
+
+// 預設載入第一個
+document.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('personaResult')) {
+        selectPersona('family');
+    }
+    
+    // 初始化 Lucide 圖示
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
+
+/* =========================================
+   通勤時間視覺化邏輯 (Commute Visualizer)
+   ========================================= */
+const commuteData = {
+    hsinchu: {
+        beitun: { drive: 75, transit: 95 }, // 開車約75分，大眾(高鐵轉台鐵)約95分
+        zhudong: { drive: 15, transit: 35 } // 快速道路15分，大眾(公車5608)約35分
+    },
+    taichung: {
+        beitun: { drive: 20, transit: 15 }, // 開車20分，捷運(文心中清->市政府)15分
+        zhudong: { drive: 80, transit: 100 }
+    },
+    hsr: {
+        beitun: { drive: 25, transit: 25 }, // 到台中高鐵
+        zhudong: { drive: 20, transit: 25 } // 到新竹高鐵(六家)
+    }
+};
+
+function updateCommute() {
+    const dest = document.getElementById('commuteDest').value;
+    if (!dest) return;
+    
+    const data = commuteData[dest];
+    
+    // 最大時間設定為 120 分鐘，為了讓進度條比例好看
+    const maxTime = 120;
+    
+    const elements = [
+        { id: 'beitun-drive', val: data.beitun.drive },
+        { id: 'beitun-transit', val: data.beitun.transit },
+        { id: 'zhudong-drive', val: data.zhudong.drive },
+        { id: 'zhudong-transit', val: data.zhudong.transit }
+    ];
+    
+    elements.forEach(el => {
+        const bar = document.getElementById(`bar-${el.id}`);
+        const text = document.getElementById(`time-${el.id}`);
+        
+        let percentage = (el.val / maxTime) * 100;
+        if(percentage > 100) percentage = 100;
+        
+        bar.style.width = '0%'; // reset
+        text.textContent = '-- 分鐘';
+        
+        setTimeout(() => {
+            bar.style.width = percentage + '%';
+            animateTime(text, 0, el.val, 1200);
+        }, 50);
+    });
+}
+
+function animateTime(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        
+        obj.innerHTML = Math.floor(easeProgress * (end - start) + start) + ' 分鐘';
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            obj.innerHTML = end + ' 分鐘';
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// 終極防護：確保在所有資源與腳本都載入完畢後，強制執行一次 Lucide 圖示渲染
+// 以防任何其他腳本錯誤中斷了 DOMContentLoaded 的執行
+window.addEventListener('load', function() {
+    try {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    } catch (e) {
+        console.error("Lucide icons rendering error:", e);
+    }
+});
