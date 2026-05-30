@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="本網站的開發理念與技術堆疊展示 - 探索北屯區與竹東鎮雙區魅力對決背後的設計與工程。">
+    <title>網站介紹與技術展示 | 雙區魅力對決</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入與主網站共用的 CSS 保持風格一致 -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Showcase 專屬微調樣式 */
+        .showcase-header {
+            padding: 120px 20px 60px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .showcase-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--brand-beitun), var(--brand-zhudong));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .showcase-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .back-nav a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 30px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-theme .back-nav a {
+            background: rgba(20, 20, 22, 0.85);
+            border-color: rgba(255, 255, 255, 0.05);
+            color: #f5f5f7;
+        }
+
+        .back-nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .feature-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(0, 122, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+        }
+
+        body.dark-theme .feature-icon-wrapper {
+            background: rgba(10, 132, 255, 0.2);
+            color: #0a84ff;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-main);
+        }
+
+        body.dark-theme .tech-tag {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- iOS Style Liquid Glass Background -->
+    <div class="liquid-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- 返回按鈕 -->
+    <div class="back-nav">
+        <a href="index.html">
+            <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i> 返回主專案
+        </a>
+    </div>
+
+    <!-- 頁首介紹 -->
+    <header class="showcase-header">
+        <h1 class="serif-title">探索本網站的設計與巧思</h1>
+        <p>歡迎來到幕後介紹頁面！「北屯區 vs 竹東鎮 — 雙區魅力對決」不只是一個提供數據的網站，我們更希望透過精心設計的視覺與互動，讓您在瀏覽時感覺像在操作一款精美的 App。以下為您一一介紹我們是怎麼做到的！</p>
+    </header>
+
+    <!-- 視覺與設計美學 -->
+    <section class="container bento-section">
+        <h2 class="section-title serif-title">視覺與設計美學</h2>
+        
+        <div class="bento-grid">
+            <div class="bento-item bento-large premium-card feature-card">
+                <div class="feature-icon-wrapper"><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i></div>
+                <h3 class="serif-title">如夢似幻的「液態毛玻璃」背景</h3>
+                <p>您是否注意到網站背景不是單調的死白？我們在畫面最底層設計了會緩慢漂浮、交融的色彩光球，並在上方蓋了一層「毛玻璃」效果。這種設計常見於蘋果（Apple）的最新產品介面中，能讓網站看起來充滿生命力，同時又不會搶走文字內容的焦點，帶來頂級的視覺享受。</p>
+            </div>
+            
+            <div class="bento-item premium-card feature-card">
+                <div class="feature-icon-wrapper" style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);"><i data-lucide="layout-grid" style="width: 24px; height: 24px;"></i></div>
+                <h3 class="serif-title">日式「便當盒」整齊排版</h3>
+                <p>在比較兩個地區時，通常會有密密麻麻的數字與文字。我們採用了近年非常流行的「便當盒（Bento）」排版法，把複雜的資訊切分成一塊一塊大小不一、邊角圓潤的卡片。這樣不但畫面看起來乾淨俐落，在手機螢幕上看也能自動排列得非常完美。</p>
+            </div>
+            
+            <div class="bento-item premium-card feature-card">
+                <div class="feature-icon-wrapper" style="color: #ff9500; background: rgba(255, 149, 0, 0.1);"><i data-lucide="moon-star" style="width: 24px; height: 24px;"></i></div>
+                <h3 class="serif-title">貼心的「日夜模式」一鍵切換</h3>
+                <p>考慮到大家可能在晚上瀏覽網站，我們在導覽列右側設計了太陽/月亮按鈕。點擊後，不只是背景變黑、文字變白，包含圖表顏色、甚至地圖的底圖風格都會瞬間跟著改變！這能保護您的眼睛，也讓網站在夜晚看起來更具科技感。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 豐富的互動與實用功能 -->
+    <section class="container bento-section" style="margin-top: 60px;">
+        <h2 class="section-title serif-title">豐富的互動與實用功能</h2>
+        
+        <div class="feature-grid">
+            <div class="premium-card feature-card">
+                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="pie-chart" style="color: var(--brand-beitun);"></i> 一目了然的「雷達圖」對比
+                </h3>
+                <p>買房或居住最看重「生活機能」、「房價」、「交通」等指標。我們沒有給您枯燥的表格，而是做了一個動態的六角形雷達圖。您可以一眼看出北屯區的強項在哪、竹東鎮的優勢在哪，兩張網疊加在一起，強弱差距立刻浮現。</p>
+            </div>
+
+            <div class="premium-card feature-card">
+                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="map-pinned" style="color: var(--brand-zhudong);"></i> 真實的地圖與交通探索
+                </h3>
+                <p>我們直接把真實世界的地圖搬進了網站！您不僅可以看到捷運綠線、台鐵內灣線的路線是怎麼跑的，還可以點擊地圖上的地標，畫面會自動滑順地飛過去，並且彈出該地點的照片與詳細介紹，讓您有身歷其境的感覺。</p>
+            </div>
+
+            <div class="premium-card feature-card">
+                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="users" style="color: var(--accent-blue);"></i> 為您量身打造的推薦
+                </h3>
+                <p>每個人對居住的需求都不一樣。因此我們設計了「生活型態選擇器」：無論您是喜歡兩人世界的頂客族、重視空間的小家庭，還是準備養老的退休族，只要點擊對應的卡片，系統就會動態為您推薦最適合的區域，並給出專屬的建議。</p>
+            </div>
+            
+            <div class="premium-card feature-card">
+                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="bar-chart-3" style="color: var(--accent-green);"></i> 即時的社群投票體驗
+                </h3>
+                <p>在網站的最下方，我們設計了一個互動式的投票區域。當您做出選擇後，選項會流暢地轉換為進度條，並搭配數字跳動的動畫，為這趟雙區探索之旅畫下一個充滿參與感的句點。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 幕後秘密 -->
+    <section class="container bento-section" style="margin-top: 60px; margin-bottom: 80px;">
+        <h2 class="section-title serif-title">技術與幕後秘密</h2>
+        <div class="premium-card" style="padding: 40px;">
+            <p><strong>「沒有使用笨重的框架，打造極致流暢的體驗」</strong></p>
+            <p style="margin-top: 15px; line-height: 1.8;">
+                或許您會好奇，這麼多動態效果，網頁會不會很慢？答案是不會！<br>
+                為了追求最快的載入速度與最滑順的動畫，這個網站沒有依賴任何龐大的網頁生成工具。我們運用了網頁最基礎的語言（HTML、CSS 與 JavaScript），親手刻畫每一個排版與按鈕。<br>
+                <br>
+                此外，網站上所有的圖示（包含您現在看到的小圖示）都不是一般的圖片，而是使用了先進的「向量線條圖示（SVG）」。這意味著無論您用多麼高解析度的螢幕（如蘋果的 Retina 螢幕）觀看，或是放大畫面，這些圖示永遠都保持清晰銳利，絕對不會有模糊的鋸齒。
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-brand serif-title">北屯區 vs 竹東鎮 — 雙區魅力對決</p>
+            <p class="footer-copy">&copy; 2025 YanYi. Showcase created as part of the architecture documentation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 確保 Lucide 圖示正確渲染
+        window.addEventListener('load', function() {
+            try {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                console.error("Lucide icons rendering error:", e);
+            }
+        });
+    </script>
+</body>
+</html>

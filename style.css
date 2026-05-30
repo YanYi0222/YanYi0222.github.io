@@ -1398,9 +1398,26 @@ section {
 .map-tab.active {
     background: var(--card-bg);
     color: var(--text-main);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+/* 歷史發展軌跡區塊的標籤 (覆蓋 map-tabs 的絕對定位) */
+.history-tabs {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 確保 dark-theme 時歷史標籤的背景也是優雅的 */
+body.dark-theme .history-tabs {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* --- Leaflet 地圖容器 --- */
 .map-layout-wrapper {
     display: block;
     width: 95%;
