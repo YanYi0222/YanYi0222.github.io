@@ -2315,6 +2315,19 @@ body.dark-theme .bento-bar-container {
     .persona-cards {
         flex-direction: column;
     }
+    .persona-result {
+        padding: 25px 20px;
+        min-height: auto;
+    }
+    .persona-result-title {
+        font-size: 1.3rem;
+    }
+    .persona-winner {
+        font-size: 1rem;
+    }
+    .bento-section {
+        padding: 90px 15px 40px;
+    }
 }
 
 /* =========================================
@@ -2426,6 +2439,13 @@ body.dark-theme .racer-track {
         align-items: flex-start;
         gap: 8px;
     }
+    .racer-label > span {
+        width: auto !important;
+    }
+    .racer-times {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
 }
 
 /* =========================================
@@ -2465,6 +2485,37 @@ body.dark-theme .racer-track {
 
     .bento-number {
         font-size: 3rem;
+    }
+
+    /* 修正手機版 Bento 對決區塊 */
+    .bento-split {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .bento-side {
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    .bento-vs {
+        margin: 5px 0;
+    }
+
+    /* 縮小手機版地圖高度，避免佔用太多螢幕 */
+    .map-container {
+        height: 380px !important;
+    }
+
+    /* 通勤面板修正 */
+    .commute-dashboard {
+        padding: 20px;
+    }
+    .commute-select {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        padding: 10px 15px;
+        font-size: 1rem;
     }
 }
 
