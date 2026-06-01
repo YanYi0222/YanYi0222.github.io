@@ -153,9 +153,9 @@ const mapData = {
         center: [24.737, 121.094], // 竹東鎮大約的中心點
         zoom: 14,
         locations: [
-            { id: 'z1', name: '竹東中央市場', lat: 24.7351, lng: 121.0913, tag: '在地美食', desc: '全台最大的客家傳統市場之一，蘊含豐富的客家米食與濃濃的在地人情味。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Traditional+Market' },
-            { id: 'z2', name: '蕭如松藝術園區', lat: 24.7380, lng: 121.0905, tag: '歷史文化', desc: '保留完整的日式建築群，紀念台灣水彩畫大師蕭如松，是文青打卡熱點。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Art+Park' },
-            { id: 'z3', name: '竹東火車站', lat: 24.7402, lng: 121.0935, tag: '交通節點', desc: '台鐵內灣線最大的車站，過去曾是林業與水泥業的轉運重鎮。', img: 'https://via.placeholder.com/400x250/d5eed1/34c759?text=Train+Station' }
+            { id: 'z1', name: '竹東中央市場', lat: 24.7351, lng: 121.0913, tag: '在地美食', desc: '全台最大的客家傳統市場之一，蘊含豐富的客家米食與濃濃的在地人情味。', img: ['img/Zhudong/91461_0.jpg', 'img/Zhudong/91449_0.jpg'] },
+            { id: 'z2', name: '蕭如松藝術園區', lat: 24.7380, lng: 121.0905, tag: '歷史文化', desc: '保留完整的日式建築群，紀念台灣水彩畫大師蕭如松，是文青打卡熱點。', img: ['img/Zhudong/91429_0.jpg', 'img/Zhudong/91445_0.jpg', 'img/Zhudong/91438_0.jpg', 'img/Zhudong/91439_0.jpg', ] },
+            { id: 'z3', name: '竹東火車站', lat: 24.7402, lng: 121.0935, tag: '交通節點', desc: '台鐵內灣線最大的車站，過去曾是林業與水泥業的轉運重鎮。', img: 'img/Zhudong/91454_0.jpg' }
         ],
         routes: {
             train_neiwan: { color: '#0066cc', path: [[24.770, 121.050], [24.740, 121.093], [24.700, 121.180]] },
