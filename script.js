@@ -6,17 +6,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 首頁探索按鈕邏輯 ---
     const exploreBtn = document.getElementById('exploreBtn');
     if (exploreBtn) {
-        exploreBtn.addEventListener('click', function() {
+        exploreBtn.addEventListener('click', function () {
             // 1. 導覽列滑入
             document.querySelector('.navbar').classList.add('visible');
-            
+
             // 2. 解鎖網頁滾動
             document.body.classList.remove('locked');
-            
+
             // 3. 觸發首頁放大淡出動畫
             const hero = document.getElementById('hero');
             hero.classList.add('hero-fade-out');
-            
+
             // 4. 動畫結束後隱藏首頁區塊，避免影響操作
             setTimeout(() => {
                 hero.style.display = 'none';
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 因為首頁區塊在探索後會被隱藏，點擊首頁時直接平滑滾動到最上方
     const homeLink = document.querySelector('.nav-links a[href="#hero"]');
     if (homeLink) {
-        homeLink.addEventListener('click', function(e) {
+        homeLink.addEventListener('click', function (e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -114,13 +114,14 @@ const mapData = {
         center: [24.175, 120.680], // 北屯區大約的中心點
         zoom: 13,
         locations: [
-            { id: 'b1', name: '大坑風景區', lat: 24.1834, lng: 120.7323, tag: '自然景點', desc: '擁有「台中後花園」美稱，多條不同難度的登山步道，是週末踏青的首選。', imgs: ['img/beitun/b1.jpg', 'https://images.unsplash.com/photo-1543165365-07232ed12fad?q=80&w=600&auto=format&fit=crop', 'https://images.unsplash.com/photo-1571401834381-80bbbaae2ea1?q=80&w=600&auto=format&fit=crop'] },
-            { id: 'b2', name: '洲際棒球場', lat: 24.1999, lng: 120.6853, tag: '大型地標', desc: '台灣指標性的棒球場地，帶動了周邊十一期重劃區的商業與房市發展。', img: 'img/beitun/b2.jpg' },
+            { id: 'b1', name: '台中國際會展中心', lat: 24.193854821224797, lng: 120.65219684877691, tag: '展覽中心', desc: '臺中國際會展中心位於水湳經貿園區，以「大樹之門」為設計概念，融合自然光影與現代工藝。作為中部首座國際級會展平台，不僅擁有超過兩千個展覽攤位與萬人會議空間，更獲鑽石級綠建築認證，將大幅帶動中部產業鏈升級與國際接軌。', imgs: ['img/beitun/b101.jpg', 'img/beitun/b102.jpg'] },
+            { id: 'b2', name: '洲際棒球場', lat: 24.1999, lng: 120.6853, tag: '大型地標', desc: '台灣指標性的棒球場地，帶動了周邊十一期重劃區的商業與房市發展。', img: ['img/beitun/b201.jpg', 'img/beitun/b202.jpg', 'img/beitun/b203.jpg', 'img/beitun/b204.jpg'] },
             { id: 'b3', name: '捷運中清站', lat: 24.1741, lng: 120.6657, tag: '交通節點', desc: '台中捷運綠線重要站點，大幅提升了北屯區前往市區與高鐵站的通勤效率。', imgs: ['img/beitun/b301.jpg', 'img/beitun/b302.jpg', 'img/beitun/b303.jpg'] },
-            { id: 'b4', name: '漢神百貨', lat: 24.1866, lng: 120.6835, tag: '購物商場', desc: '位於洲際棒球場旁的超大型購物中心，帶來強大的商業動能。', img: 'img/beitun/b4.jpg' },
-            { id: 'b5', name: '中央公園', lat: 24.1856, lng: 120.6558, tag: '大型公園', desc: '水湳經貿園區內的超大型綠地，有台中之肺的美稱。', imgs: ['img/beitun/b501.jpg', 'img/beitun/b502.jpg', 'img/beitun/b503.jpg', 'img/beitun/b504.jpg', 'img/beitun/b505.jpg', 'img/beitun/b506.jpg', 'img/beitun/b507.jpg', 'img/beitun/b508.jpg'] },
-            { id: 'b6', name: '水湳生態公園', lat: 24.1888, lng: 120.6588, tag: '自然綠地', desc: '結合生態保育與休閒娛樂的優質綠地空間。', img: 'img/beitun/b6.jpg' },
-            { id: 'b7', name: '炸滋滋ZiZi', lat: 24.1853, lng: 120.6863, tag: '在地美食', desc: '台中市北屯區崇德十路二段205號。酥脆美味的炸物選擇，深受在地居民喜愛。', img: 'img/beitun/b7.jpg' }
+            { id: 'b4', name: '漢神百貨', lat: 24.198348286926937, lng: 120.68634018979301, tag: '購物商場', desc: '位於洲際棒球場旁的超大型購物中心，帶來強大的商業動能。', img: ['img/beitun/b401.jpg', 'img/beitun/b402.jpg', 'img/beitun/b403.jpg', 'img/beitun/b404.jpg'] },
+            { id: 'b5', name: '中央公園', lat: 24.185799802200865, lng: 120.65356404998934, tag: '大型公園', desc: '水湳經貿園區內的超大型綠地，有台中之肺的美稱。', imgs: ['img/beitun/b501.jpg', 'img/beitun/b502.jpg', 'img/beitun/b503.jpg', 'img/beitun/b504.jpg', 'img/beitun/b505.jpg', 'img/beitun/b506.jpg', 'img/beitun/b507.jpg', 'img/beitun/b508.jpg'] },
+            { id: 'b6', name: '水湳生態公園', lat: 24.179791115304695, lng: 120.67938730698643, tag: '自然綠地', desc: '結合生態保育與休閒娛樂的優質綠地空間。', imgs: ['img/beitun/b601.jpg', 'img/beitun/b602.jpg', 'img/beitun/b603.jpg', 'img/beitun/b604.jpg'] },
+            { id: 'b7', name: '炸滋滋ZiZi', lat: 24.190644552470438, lng: 120.67849690698664, tag: '在地美食', desc: '台中市北屯區崇德十路二段205號。酥脆美味的炸物選擇，深受在地居民喜愛。', img: ['img/beitun/b701.jpg', 'img/beitun/b702.jpg'] }
+            { id: 'b8', name: '漆-蛋餅', lat: 24.178230519354297, lng: 120.66763545856806, tag: '在地美食', desc: '傳承自苗栗銅鑼 40 年老店「銅鑼蛋餅」，目前由第三代在台中經營。有別於一般的粉漿蛋餅，他們堅持使用手工手揉的「古早味蔥餅皮」，吃起來厚實、帶有 Q 度和明顯的麵粉香氣。', imgs: ['img/beitun/b801.jpg'] }
         ],
         routes: {
             mrt_green: {
@@ -373,7 +374,7 @@ function drawRoute(routeId) {
                     opacity: 1,
                     fillOpacity: 1
                 }).addTo(routeNodesLayer);
-                
+
                 // 綁定極簡文字氣泡
                 node.bindTooltip(st.name, {
                     direction: 'top',
@@ -541,7 +542,7 @@ function handleVote(choice) {
     document.getElementById('pollOptions').style.display = 'none';
     const resultsDiv = document.getElementById('pollResults');
     resultsDiv.style.display = 'block';
-    
+
     // 重新觸發動畫
     resultsDiv.style.animation = 'none';
     void resultsDiv.offsetWidth;
@@ -574,7 +575,7 @@ function handleVote(choice) {
     setTimeout(() => {
         beitunBar.style.width = beitunTarget + '%';
         zhudongBar.style.width = zhudongTarget + '%';
-        
+
         // 數字跑動動畫
         animateValue(beitunText, 0, beitunTarget, 1500);
         animateValue(zhudongText, 0, zhudongTarget, 1500);
@@ -593,7 +594,7 @@ function animateValue(obj, start, end, duration) {
         // 使用 easeOutExpo 的數學公式讓數字跳動更自然
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        
+
         obj.innerHTML = Math.floor(easeProgress * (end - start) + start) + '%';
         if (progress < 1) {
             window.requestAnimationFrame(step);
@@ -609,11 +610,11 @@ function animateValue(obj, start, end, duration) {
    ========================================= */
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-theme');
-    
+
     // 切換按鈕圖示
     const moon = document.querySelector('.moon-icon');
     const sun = document.querySelector('.sun-icon');
-    
+
     if (moon && sun) {
         if (isDark) {
             moon.style.display = 'none';
@@ -623,38 +624,38 @@ function toggleTheme() {
             sun.style.display = 'none';
         }
     }
-    
+
     // 切換 Leaflet 地圖底圖
     if (map && currentTileLayer) {
         map.removeLayer(currentTileLayer);
-        
-        const tileUrl = isDark 
+
+        const tileUrl = isDark
             ? 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png'
             : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-            
+
         currentTileLayer = L.tileLayer(tileUrl, {
             attribution: '&copy; OpenStreetMap contributors & CartoDB',
             subdomains: 'abcd',
             maxZoom: 19
         }).addTo(map);
-        
+
         // 將地標圖層提到最上層
         if (markersLayer) markersLayer.bringToFront();
         if (routeNodesLayer) routeNodesLayer.bringToFront();
     }
-    
+
     // 適配 Chart.js 雷達圖
     if (window.radarChart) {
         const textColor = isDark ? '#f5f5f7' : '#1d1d1f';
         const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)';
-        
+
         window.radarChart.options.scales.r.angleLines.color = gridColor;
         window.radarChart.options.scales.r.grid.color = gridColor;
         window.radarChart.options.scales.r.pointLabels.color = textColor;
         window.radarChart.options.plugins.legend.labels.color = textColor;
         window.radarChart.update();
     }
-    
+
     // 重新渲染 Lucide icon
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -696,12 +697,12 @@ function selectPersona(type) {
 
     const data = personaData[type];
     const resultDiv = document.getElementById('personaResult');
-    
+
     // 動畫重置
     resultDiv.style.animation = 'none';
     void resultDiv.offsetWidth;
     resultDiv.style.animation = 'fadeInSlide 0.6s ease';
-    
+
     resultDiv.innerHTML = `
         <div class="persona-winner ${data.winnerClass}">
             <i data-lucide="award" style="display:inline-block; vertical-align:text-bottom; width:20px; height:20px;"></i> 推薦：${data.winner}
@@ -709,7 +710,7 @@ function selectPersona(type) {
         <h3 class="persona-result-title serif-title">${data.title}</h3>
         <p class="persona-result-desc">${data.desc}</p>
     `;
-    
+
     // 重新渲染 Lucide icon
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -718,10 +719,10 @@ function selectPersona(type) {
 
 // 預設載入第一個
 document.addEventListener('DOMContentLoaded', () => {
-    if(document.getElementById('personaResult')) {
+    if (document.getElementById('personaResult')) {
         selectPersona('family');
     }
-    
+
     // 初始化 Lucide 圖示
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -749,29 +750,29 @@ const commuteData = {
 function updateCommute() {
     const dest = document.getElementById('commuteDest').value;
     if (!dest) return;
-    
+
     const data = commuteData[dest];
-    
+
     // 最大時間設定為 120 分鐘，為了讓進度條比例好看
     const maxTime = 120;
-    
+
     const elements = [
         { id: 'beitun-drive', val: data.beitun.drive },
         { id: 'beitun-transit', val: data.beitun.transit },
         { id: 'zhudong-drive', val: data.zhudong.drive },
         { id: 'zhudong-transit', val: data.zhudong.transit }
     ];
-    
+
     elements.forEach(el => {
         const bar = document.getElementById(`bar-${el.id}`);
         const text = document.getElementById(`time-${el.id}`);
-        
+
         let percentage = (el.val / maxTime) * 100;
-        if(percentage > 100) percentage = 100;
-        
+        if (percentage > 100) percentage = 100;
+
         bar.style.width = '0%'; // reset
         text.textContent = '-- 分鐘';
-        
+
         setTimeout(() => {
             bar.style.width = percentage + '%';
             animateTime(text, 0, el.val, 1200);
@@ -785,7 +786,7 @@ function animateTime(obj, start, end, duration) {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        
+
         obj.innerHTML = Math.floor(easeProgress * (end - start) + start) + ' 分鐘';
         if (progress < 1) {
             window.requestAnimationFrame(step);
@@ -798,7 +799,7 @@ function animateTime(obj, start, end, duration) {
 
 // 終極防護：確保在所有資源與腳本都載入完畢後，強制執行一次 Lucide 圖示渲染
 // 以防任何其他腳本錯誤中斷了 DOMContentLoaded 的執行
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     try {
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
