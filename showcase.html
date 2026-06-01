@@ -8,7 +8,9 @@
     <title>網站介紹與技術展示 | 雙區魅力對決</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <!-- 引入與主網站共用的 CSS 保持風格一致 -->
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -20,7 +22,7 @@
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .showcase-header h1 {
             font-size: 3rem;
             margin-bottom: 20px;
@@ -28,7 +30,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .showcase-header p {
             font-size: 1.2rem;
             color: var(--text-muted);
@@ -82,7 +84,7 @@
             flex-direction: column;
             gap: 15px;
         }
-        
+
         .feature-icon-wrapper {
             width: 48px;
             height: 48px;
@@ -99,14 +101,14 @@
             background: rgba(10, 132, 255, 0.2);
             color: #0a84ff;
         }
-        
+
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 15px;
         }
-        
+
         .tech-tag {
             padding: 6px 14px;
             border-radius: 20px;
@@ -118,6 +120,109 @@
 
         body.dark-theme .tech-tag {
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 核心區塊設計理念樣式 */
+        .architecture-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .arch-card {
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            border-left: 4px solid var(--accent-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .arch-card:nth-child(even) {
+            border-left-color: var(--accent-green);
+        }
+
+        .arch-card:hover {
+            transform: translateX(10px);
+        }
+
+        .arch-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 15px;
+        }
+
+        body.dark-theme .arch-header {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .arch-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.2);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        body.dark-theme .arch-number {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .arch-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .arch-desc,
+        .arch-tech {
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .arch-desc strong {
+            color: var(--brand-beitun);
+        }
+
+        .arch-tech strong {
+            color: var(--brand-zhudong);
+        }
+
+        .arch-tech code {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        body.dark-theme .arch-tech code {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .arch-content {
+                flex-direction: row;
+                gap: 30px;
+            }
+
+            .arch-desc,
+            .arch-tech {
+                flex: 1;
+            }
+
+            .arch-tech {
+                padding-left: 30px;
+                border-left: 1px dashed rgba(0, 0, 0, 0.1);
+            }
+
+            body.dark-theme .arch-tech {
+                border-left-color: rgba(255, 255, 255, 0.1);
+            }
         }
     </style>
 </head>
@@ -146,24 +251,31 @@
     <!-- 視覺與設計美學 -->
     <section class="container bento-section">
         <h2 class="section-title serif-title">視覺與設計美學</h2>
-        
+
         <div class="bento-grid">
             <div class="bento-item bento-large premium-card feature-card">
-                <div class="feature-icon-wrapper"><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i></div>
+                <div class="feature-icon-wrapper"><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i>
+                </div>
                 <h3 class="serif-title">如夢似幻的「液態毛玻璃」背景</h3>
-                <p>您是否注意到網站背景不是單調的死白？我們在畫面最底層設計了會緩慢漂浮、交融的色彩光球，並在上方蓋了一層「毛玻璃」效果。這種設計常見於蘋果（Apple）的最新產品介面中，能讓網站看起來充滿生命力，同時又不會搶走文字內容的焦點，帶來頂級的視覺享受。</p>
+                <p>您是否注意到網站背景不是單調的死白？我們在畫面最底層設計了會緩慢漂浮、交融的色彩光球，並在上方蓋了一層「毛玻璃」效果。這種設計常見於蘋果（Apple）的最新產品介面中，能讓網站看起來充滿生命力，同時又不會搶走文字內容的焦點，帶來頂級的視覺享受。
+                </p>
             </div>
-            
+
             <div class="bento-item premium-card feature-card">
-                <div class="feature-icon-wrapper" style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);"><i data-lucide="layout-grid" style="width: 24px; height: 24px;"></i></div>
+                <div class="feature-icon-wrapper"
+                    style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);"><i data-lucide="layout-grid"
+                        style="width: 24px; height: 24px;"></i></div>
                 <h3 class="serif-title">日式「便當盒」整齊排版</h3>
-                <p>在比較兩個地區時，通常會有密密麻麻的數字與文字。我們採用了近年非常流行的「便當盒（Bento）」排版法，把複雜的資訊切分成一塊一塊大小不一、邊角圓潤的卡片。這樣不但畫面看起來乾淨俐落，在手機螢幕上看也能自動排列得非常完美。</p>
+                <p>在比較兩個地區時，通常會有密密麻麻的數字與文字。我們採用了近年非常流行的「便當盒（Bento）」排版法，把複雜的資訊切分成一塊一塊大小不一、邊角圓潤的卡片。這樣不但畫面看起來乾淨俐落，在手機螢幕上看也能自動排列得非常完美。
+                </p>
             </div>
-            
+
             <div class="bento-item premium-card feature-card">
-                <div class="feature-icon-wrapper" style="color: #ff9500; background: rgba(255, 149, 0, 0.1);"><i data-lucide="moon-star" style="width: 24px; height: 24px;"></i></div>
+                <div class="feature-icon-wrapper" style="color: #ff9500; background: rgba(255, 149, 0, 0.1);"><i
+                        data-lucide="moon-star" style="width: 24px; height: 24px;"></i></div>
                 <h3 class="serif-title">貼心的「日夜模式」一鍵切換</h3>
-                <p>考慮到大家可能在晚上瀏覽網站，我們在導覽列右側設計了太陽/月亮按鈕。點擊後，不只是背景變黑、文字變白，包含圖表顏色、甚至地圖的底圖風格都會瞬間跟著改變！這能保護您的眼睛，也讓網站在夜晚看起來更具科技感。</p>
+                <p>考慮到大家可能在晚上瀏覽網站，我們在導覽列右側設計了太陽/月亮按鈕。點擊後，不只是背景變黑、文字變白，包含圖表顏色、甚至地圖的底圖風格都會瞬間跟著改變！這能保護您的眼睛，也讓網站在夜晚看起來更具科技感。
+                </p>
             </div>
         </div>
     </section>
@@ -171,13 +283,14 @@
     <!-- 豐富的互動與實用功能 -->
     <section class="container bento-section" style="margin-top: 60px;">
         <h2 class="section-title serif-title">豐富的互動與實用功能</h2>
-        
+
         <div class="feature-grid">
             <div class="premium-card feature-card">
                 <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
                     <i data-lucide="pie-chart" style="color: var(--brand-beitun);"></i> 一目了然的「雷達圖」對比
                 </h3>
-                <p>買房或居住最看重「生活機能」、「房價」、「交通」等指標。我們沒有給您枯燥的表格，而是做了一個動態的六角形雷達圖。您可以一眼看出北屯區的強項在哪、竹東鎮的優勢在哪，兩張網疊加在一起，強弱差距立刻浮現。</p>
+                <p>買房或居住最看重「生活機能」、「房價」、「交通」等指標。我們沒有給您枯燥的表格，而是做了一個動態的六角形雷達圖。您可以一眼看出北屯區的強項在哪、竹東鎮的優勢在哪，兩張網疊加在一起，強弱差距立刻浮現。
+                </p>
             </div>
 
             <div class="premium-card feature-card">
@@ -191,14 +304,143 @@
                 <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
                     <i data-lucide="users" style="color: var(--accent-blue);"></i> 為您量身打造的推薦
                 </h3>
-                <p>每個人對居住的需求都不一樣。因此我們設計了「生活型態選擇器」：無論您是喜歡兩人世界的頂客族、重視空間的小家庭，還是準備養老的退休族，只要點擊對應的卡片，系統就會動態為您推薦最適合的區域，並給出專屬的建議。</p>
+                <p>每個人對居住的需求都不一樣。因此我們設計了「生活型態選擇器」：無論您是喜歡兩人世界的頂客族、重視空間的小家庭，還是準備養老的退休族，只要點擊對應的卡片，系統就會動態為您推薦最適合的區域，並給出專屬的建議。
+                </p>
             </div>
-            
+
             <div class="premium-card feature-card">
                 <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
                     <i data-lucide="bar-chart-3" style="color: var(--accent-green);"></i> 即時的社群投票體驗
                 </h3>
                 <p>在網站的最下方，我們設計了一個互動式的投票區域。當您做出選擇後，選項會流暢地轉換為進度條，並搭配數字跳動的動畫，為這趟雙區探索之旅畫下一個充滿參與感的句點。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心區塊設計理念與架構剖析 -->
+    <section class="container" style="margin-top: 80px;">
+        <h2 class="section-title serif-title" style="text-align: center; margin-bottom: 40px;">核心區塊設計理念與架構</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted);">針對 <code>index.html</code>
+            中各大核心區塊，為您深度剖析其背後的設計思維與前端實作技術。</p>
+
+        <div class="architecture-timeline">
+            <!-- 1. 首頁 -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">01</div>
+                    <h3 class="serif-title">首頁：旗艦級滿版雙拼</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>以左右分割的滿版畫面呈現「對決」氛圍，第一眼即確立雙區爭霸的主題。搭配滑順的文字進場動畫，營造頂級發佈會般的氣勢。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>採用 <code>Flexbox</code> 達成響應式對半佈局。底層運用 <code>liquid-bg</code>
+                        液態光球，上層疊加毛玻璃遮罩 (backdrop-filter)，創造深邃的立體層次。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 數據 PK -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">02</div>
+                    <h3 class="serif-title">數據對決：Bento UI 便當盒排版</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>捨棄傳統枯燥的數據表格，將人口、房價等統計數字卡片化。透過大小不一的網格與視覺化雙色進度條，讓資訊閱讀直覺且現代化。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>高度依賴 <code>CSS Grid</code> 的排列與 <code>grid-column: span</code> 屬性。結合 Serif
+                        襯線體呈現數字美學，並加入微透光的玻璃質感。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2.5 購屋實戰 -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">03</div>
+                    <h3 class="serif-title">預算購屋：2000萬雙區比較</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>將抽象的房價數據轉化為具體的「購屋實戰」。利用精緻的卡片對比北屯小二房與竹東大四房，讓使用者對預算的購買力有真實感受。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>利用 <code>housing-grid</code> 設定雙欄佈局，中間使用偽元素或絕對定位放置 <code>VS</code>
+                        標誌。卡片內則結合列表 (ul) 與自訂標籤 (tag) 呈現重點資訊。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 生活型態 -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">04</div>
+                    <h3 class="serif-title">專屬生活型態：互動式 Persona</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>從「以人為本」出發，設計竹科新貴、頂客族、退休族三種人物誌。讓使用者能代入情境，獲得客製化的生活建議，增強帶入感。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>運用 <code>JavaScript</code> 監聽卡片點擊事件，動態置換下方結果區塊
+                        (<code>#personaResult</code>) 的 DOM 結構與內容，並加入淡入動畫提升回饋感。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 交通地圖 -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">05</div>
+                    <h3 class="serif-title">在地探索：整合真實互動地圖</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>提供可互動的真實地圖取代靜態截圖。使用者能自由開關捷運、台鐵等交通路線，點擊地標還能查看詳細圖文，創造沉浸式探索體驗。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>引入 <code>Leaflet.js</code> 開源地圖套件。透過 JS 動態載入經緯度、繪製路線 (Polyline) 與圖標
+                        (Marker)。資訊面板則採用絕對定位覆蓋於右側。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 通勤時間 -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">06</div>
+                    <h3 class="serif-title">動態通勤時間：視覺化賽車跑道</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>將抽象的通勤時間轉化為直覺的「長條圖競賽」。當改變目的地時，長條圖如賽車般動態伸長縮短，讓比較過程不再單調。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>藉由 HTML <code>&lt;select&gt;</code> 觸發 JS 更新邏輯，計算對應數據後改變 CSS
+                        <code>width</code> 屬性，搭配 <code>transition</code> 屬性達成平滑的伸展過場。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 總結與投票 -->
+            <div class="arch-card premium-card">
+                <div class="arch-header">
+                    <div class="arch-number">07</div>
+                    <h3 class="serif-title">總結與投票：雷達圖與即時開票</h3>
+                </div>
+                <div class="arch-content">
+                    <div class="arch-desc">
+                        <strong>設計理念：</strong>以六角雷達圖精準呈現兩區綜合能力。最後的投票區塊將單向資訊轉為雙向互動，讓使用者在評估所有數據後，表達最終的居住意向。
+                    </div>
+                    <div class="arch-tech">
+                        <strong>架構技術：</strong>雷達圖由 <code>Chart.js</code> 渲染並支援響應式。投票系統則利用 JS
+                        模擬投票送出，動態計算比例並調整進度條寬度，呈現真實的開票效果。
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -212,7 +454,8 @@
                 或許您會好奇，這麼多動態效果，網頁會不會很慢？答案是不會！<br>
                 為了追求最快的載入速度與最滑順的動畫，這個網站沒有依賴任何龐大的網頁生成工具。我們運用了網頁最基礎的語言（HTML、CSS 與 JavaScript），親手刻畫每一個排版與按鈕。<br>
                 <br>
-                此外，網站上所有的圖示（包含您現在看到的小圖示）都不是一般的圖片，而是使用了先進的「向量線條圖示（SVG）」。這意味著無論您用多麼高解析度的螢幕（如蘋果的 Retina 螢幕）觀看，或是放大畫面，這些圖示永遠都保持清晰銳利，絕對不會有模糊的鋸齒。
+                此外，網站上所有的圖示（包含您現在看到的小圖示）都不是一般的圖片，而是使用了先進的「向量線條圖示（SVG）」。這意味著無論您用多麼高解析度的螢幕（如蘋果的 Retina
+                螢幕）觀看，或是放大畫面，這些圖示永遠都保持清晰銳利，絕對不會有模糊的鋸齒。
             </p>
         </div>
     </section>
@@ -221,13 +464,13 @@
     <footer class="site-footer">
         <div class="footer-content">
             <p class="footer-brand serif-title">北屯區 vs 竹東鎮 — 雙區魅力對決</p>
-            <p class="footer-copy">&copy; 2025 YanYi. Showcase created as part of the architecture documentation.</p>
+            <p class="footer-copy">&copy; 2026 YanYi. Showcase created as part of the architecture documentation.</p>
         </div>
     </footer>
 
     <script>
         // 確保 Lucide 圖示正確渲染
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             try {
                 if (typeof lucide !== 'undefined') {
                     lucide.createIcons();
@@ -238,4 +481,5 @@
         });
     </script>
 </body>
+
 </html>
