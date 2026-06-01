@@ -120,7 +120,7 @@ const mapData = {
             { id: 'b4', name: '漢神百貨', lat: 24.198348286926937, lng: 120.68634018979301, tag: '購物商場', desc: '位於洲際棒球場旁的超大型購物中心，帶來強大的商業動能。', img: ['img/beitun/b401.jpg', 'img/beitun/b402.jpg', 'img/beitun/b403.jpg', 'img/beitun/b404.jpg'] },
             { id: 'b5', name: '中央公園', lat: 24.185799802200865, lng: 120.65356404998934, tag: '大型公園', desc: '水湳經貿園區內的超大型綠地，有台中之肺的美稱。', imgs: ['img/beitun/b501.jpg', 'img/beitun/b502.jpg', 'img/beitun/b503.jpg', 'img/beitun/b504.jpg', 'img/beitun/b505.jpg', 'img/beitun/b506.jpg', 'img/beitun/b507.jpg', 'img/beitun/b508.jpg'] },
             { id: 'b6', name: '水湳生態公園', lat: 24.179791115304695, lng: 120.67938730698643, tag: '自然綠地', desc: '結合生態保育與休閒娛樂的優質綠地空間。', imgs: ['img/beitun/b601.jpg', 'img/beitun/b602.jpg', 'img/beitun/b603.jpg', 'img/beitun/b604.jpg'] },
-            { id: 'b7', name: '炸滋滋ZiZi', lat: 24.190644552470438, lng: 120.67849690698664, tag: '在地美食', desc: '台中市北屯區崇德十路二段205號。酥脆美味的炸物選擇，深受在地居民喜愛。', img: ['img/beitun/b701.jpg', 'img/beitun/b702.jpg'] }
+            { id: 'b7', name: '炸滋滋ZiZi', lat: 24.190644552470438, lng: 120.67849690698664, tag: '在地美食', desc: '台中市北屯區崇德十路二段205號。酥脆美味的炸物選擇，深受在地居民喜愛。', img: ['img/beitun/b701.jpg', 'img/beitun/b702.jpg'] },
             { id: 'b8', name: '漆-蛋餅', lat: 24.178230519354297, lng: 120.66763545856806, tag: '在地美食', desc: '傳承自苗栗銅鑼 40 年老店「銅鑼蛋餅」，目前由第三代在台中經營。有別於一般的粉漿蛋餅，他們堅持使用手工手揉的「古早味蔥餅皮」，吃起來厚實、帶有 Q 度和明顯的麵粉香氣。', imgs: ['img/beitun/b801.jpg'] }
         ],
         routes: {
@@ -733,17 +733,21 @@ document.addEventListener('DOMContentLoaded', () => {
    通勤時間視覺化邏輯 (Commute Visualizer)
    ========================================= */
 const commuteData = {
-    hsinchu: {
-        beitun: { drive: 75, transit: 95 }, // 開車約75分，大眾(高鐵轉台鐵)約95分
-        zhudong: { drive: 15, transit: 35 } // 快速道路15分，大眾(公車5608)約35分
+    science_park: {
+        beitun: { drive: 20, transit: 45 }, // 到中科
+        zhudong: { drive: 15, transit: 35 } // 到竹科
     },
-    taichung: {
-        beitun: { drive: 20, transit: 15 }, // 開車20分，捷運(文心中清->市政府)15分
-        zhudong: { drive: 80, transit: 100 }
+    city_hall: {
+        beitun: { drive: 20, transit: 15 }, // 到台中市政府
+        zhudong: { drive: 20, transit: 50 } // 到新竹縣政府
     },
     hsr: {
         beitun: { drive: 25, transit: 25 }, // 到台中高鐵
         zhudong: { drive: 20, transit: 25 } // 到新竹高鐵(六家)
+    },
+    airport: {
+        beitun: { drive: 30, transit: 60 }, // 到清泉崗機場
+        zhudong: { drive: 55, transit: 90 } // 到桃園國際機場
     }
 };
 
