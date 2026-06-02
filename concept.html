@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="本專題的幕後開發心得與設計過程 - 探索北屯區與竹東鎮居住比較的設計紀錄。">
-    <title>專題介紹與開發心得 | 雙區居住探索</title>
+    <title>專題介紹與開發心得</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -227,7 +227,7 @@
     </style>
 </head>
 
-<body>
+<body class="dark-theme">
     <!-- 動態背景 -->
     <div class="liquid-bg">
         <div class="orb orb-1"></div>
@@ -245,7 +245,7 @@
     <!-- 頁首介紹 -->
     <header class="showcase-header">
         <h1 class="serif-title">專題介紹與開發紀錄</h1>
-        <p>歡迎來到幕後頁面！這份「北屯區 vs 竹東鎮居住比較」專案，起源於我對這兩區城鄉差異的觀察。除了單純的數據呈現，我也嘗試加入了一些視覺設計與互動效果，以下是各部分的開發過程分享。</p>
+        <p>「北屯區 vs 竹東鎮居住比較」專案，除了單純的數據呈現，我也嘗試加入了一些視覺設計與互動效果，以下是各部分的開發過程分享。</p>
     </header>
 
     <!-- 視覺與設計 -->
@@ -257,7 +257,8 @@
                 <div class="feature-icon-wrapper"><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i>
                 </div>
                 <h3 class="serif-title">動態背景設計</h3>
-                <p>為了讓網頁看起來不那麼死板，我在背景加入了一些緩慢漂浮的漸層色塊，再蓋上一層毛玻璃 (Backdrop-filter) 濾鏡效果。這種處理方式能讓畫面多一點層次感，同時保持文字的易讀性，不會搶走主要內容的焦點。
+                <p>為了讓網頁看起來不那麼死板，我在背景加入了一些緩慢漂浮的漸層色塊，再蓋上一層毛玻璃 (Backdrop-filter)
+                    濾鏡效果。這種處理方式能讓畫面多一點層次感，同時保持文字的易讀性，不會搶走主要內容的焦點。
                 </p>
             </div>
 
@@ -265,8 +266,8 @@
                 <div class="feature-icon-wrapper"
                     style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);"><i data-lucide="layout-grid"
                         style="width: 24px; height: 24px;"></i></div>
-                <h3 class="serif-title">卡片式 (Bento) 排版</h3>
-                <p>在處理大量數據對比時，我選擇了近期蠻流行的 Bento Grid。將各項數據切分成大小不一的圓角卡片，除了在視覺上比較乾淨俐落，在適應手機版本 (RWD) 時也很方便做網格調整。
+                <h3 class="serif-title">卡片式 (Bento便當盒設計法) 排版</h3>
+                <p>在處理大量數據對比時，我選擇了近期蠻流行的 Bento Grid(便當盒設計法)。將各項數據切分成大小不一的圓角卡片，除了在視覺上比較乾淨俐落，在適應手機版本 (RWD) 時也很方便做網格調整。
                 </p>
             </div>
 
@@ -335,7 +336,8 @@
                         <strong>首頁版面：</strong>一進網站就用滿版視窗將畫面分為左右兩半，配上簡單的進場動畫，幫助讀者快速掌握接下來要對比的兩個行政區。
                     </div>
                     <div class="arch-tech">
-                        <strong>實作方式：</strong>採用 <code>Flexbox</code> 達成響應式對半佈局。背景則是繪製了動態漸層光球，最後加上 CSS 毛玻璃 (backdrop-filter) 創造層次。
+                        <strong>實作方式：</strong>採用 <code>Flexbox</code> 達成響應式對半佈局。背景則是繪製了動態漸層光球，最後加上 CSS 毛玻璃
+                        (backdrop-filter) 創造層次。
                     </div>
                 </div>
             </div>
@@ -351,7 +353,8 @@
                         <strong>排版規劃：</strong>把生硬的人口、房價數據抓出來，單獨做成一張一張的卡片。為了不讓畫面太枯燥，加上了簡單的雙色進度條作為點綴。
                     </div>
                     <div class="arch-tech">
-                        <strong>實作方式：</strong>主要仰賴 <code>CSS Grid</code> 的網頁佈局，利用 <code>grid-column: span</code> 去編排卡片大小，配上一點透明度的邊框。
+                        <strong>實作方式：</strong>主要仰賴 <code>CSS Grid</code> 的網頁佈局，利用 <code>grid-column: span</code>
+                        去編排卡片大小，配上一點透明度的邊框。
                     </div>
                 </div>
             </div>
@@ -367,7 +370,8 @@
                         <strong>情境帶入：</strong>把單坪的房價轉化為有實感的購物情境：「預算兩千萬在北屯買小兩房、在竹東買四房」，這樣比單純列出房價會更有感一點。
                     </div>
                     <div class="arch-tech">
-                        <strong>實作方式：</strong>使用雙欄排列，並以偽元素 (pseudo-elements) 安排分隔線與標籤。項目則是用原生的 <code>&lt;ul&gt;</code> 搭配客製化標籤樣式。
+                        <strong>實作方式：</strong>使用雙欄排列，並以偽元素 (pseudo-elements) 安排分隔線與標籤。項目則是用原生的 <code>&lt;ul&gt;</code>
+                        搭配客製化標籤樣式。
                     </div>
                 </div>
             </div>
@@ -399,7 +403,8 @@
                         <strong>地圖整合：</strong>放入可縮放拖曳的動態地圖，代替死板的地圖截圖；點擊旁邊的目的地卡片，地圖就會自動移動並開啟該標籤的照片與說明。
                     </div>
                     <div class="arch-tech">
-                        <strong>實作方式：</strong>串接 <code>Leaflet.js</code>。自己將座標寫死在陣列裡，用 JS 在地圖上畫線 (Polyline)，並控制中心點的飛越 (flyTo) 特效。
+                        <strong>實作方式：</strong>串接 <code>Leaflet.js</code>。自己將座標寫死在陣列裡，用 JS 在地圖上畫線 (Polyline)，並控制中心點的飛越
+                        (flyTo) 特效。
                     </div>
                 </div>
             </div>
@@ -415,7 +420,8 @@
                         <strong>動態回饋：</strong>通勤時間如果只放個數字會有點無聊，所以在切換園區或市區時，底下的長條圖會隨著數值改變長短。
                     </div>
                     <div class="arch-tech">
-                        <strong>實作方式：</strong>透過監控 HTML <code>&lt;select&gt;</code> 變更，用 JS 更新進度條 CSS 裡的 <code>width</code>。
+                        <strong>實作方式：</strong>透過監控 HTML <code>&lt;select&gt;</code> 變更，用 JS 更新進度條 CSS 裡的
+                        <code>width</code>。
                     </div>
                 </div>
             </div>
@@ -424,14 +430,16 @@
             <div class="arch-card premium-card">
                 <div class="arch-header">
                     <div class="arch-number">07</div>
-                    <h3 class="serif-title">網頁收尾：雷達圖與按鈕投票</h3>
+                    <h3 class="serif-title">網頁收尾：雙層進度條與真實數據庫 (Google Sheets)</h3>
                 </div>
                 <div class="arch-content">
                     <div class="arch-desc">
-                        <strong>體驗總結：</strong>放上一個簡單的雷達圖歸納特色。同時加了投票按鈕，讓讀者點選後能看到大家傾向的結果，不過目前只是一個體驗性質的前端動畫。
+                        <strong>體驗總結：</strong>捨棄傳統的雷達圖表，改用乾淨直覺的雙層進度條歸納兩地特色。不僅如此，投票功能不再只是前端動畫，而是真正串接了資料庫，讓讀者點選後能即時看見所有社群參與者的真實意向。
                     </div>
                     <div class="arch-tech">
-                        <strong>實作方式：</strong>導入 <code>Chart.js</code> 繪製多邊形區域。投票則是用原生 JS 取代寫死區塊的 class，變更寬度來製造進度推進的效果。
+                        <strong>實作方式：</strong>資料視覺化完全使用原生的 HTML 與 CSS Flexbox 排版，去除了外部圖表套件的依賴。後端則是利用
+                        <code>Google Apps Script (GAS)</code> 建立免費的 API，將 Google 試算表轉化為輕量級的 JSON 資料庫。當讀者按下投票按鈕，前端會透過非同步
+                        <code>fetch</code> 請求將資料送回試算表，並即時運算最新的得票佔比回傳至網頁更新進度條。
                     </div>
                 </div>
             </div>
@@ -444,9 +452,9 @@
         <div class="premium-card" style="padding: 40px;">
             <p><strong>「沒有使用笨重的框架」</strong></p>
             <p style="margin-top: 15px; line-height: 1.8;">
-                這個專題主要是用來當作簡單的呈現與比較，所以並沒有套用像是 React 或是 Vue 這類比較厚重的前端框架，而是全部回歸以原生的 HTML、CSS 以及純 JavaScript 開發。<br>
+                這個專題主要是用來當作簡單的呈現與比較，以原生的 HTML、CSS 以及純 JavaScript 開發。<br>
                 <br>
-                此外，為了避免載入許多不同解析度的圖片，Icon 的部分都是引用開源的 SVG 向量圖庫 (Lucide)。一來避免圖片模糊，二來也是比較輕量化的做法。
+                此外，為了降低ai感，我將所有emoji改用lucide的圖示來替代，同時也更好看。
             </p>
         </div>
     </section>
@@ -455,6 +463,7 @@
     <footer class="site-footer">
         <div class="footer-content">
             <p class="footer-brand serif-title">北屯區 vs 竹東鎮 — 雙區居住探索</p>
+            <p class="footer-info">技術提供:Gemini 3.1 Pro, Github</p>
             <p class="footer-copy">&copy; 2026 YanYi. Project concept overview.</p>
         </div>
     </footer>

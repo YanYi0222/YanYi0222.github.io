@@ -1053,7 +1053,18 @@ section {
 
 #backToTop:hover {
     background: var(--text-main);
-    color: white;
+    color: var(--bg-color);
+}
+
+body.dark-theme #backToTop {
+    background: rgba(40, 40, 42, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme #backToTop:hover {
+    background: var(--text-main);
+    color: var(--bg-color);
 }
 
 .history-content {
@@ -1093,22 +1104,129 @@ section {
 
 .summary-card {
     flex: 1;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .summary-card.zhudong-theme {
-    border-top: 5px solid var(--brand-zhudong);
+    --glow-color: var(--brand-zhudong);
 }
 
 .summary-card.beitun-theme {
-    border-top: 5px solid var(--brand-beitun);
+    --glow-color: var(--brand-beitun);
+}
+
+/* --- 雙層並排進度條樣式 --- */
+.stacked-chart-container {
+    flex: 1.2;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stacked-header {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.beitun-color {
+    background: var(--brand-beitun);
+}
+
+.zhudong-color {
+    background: var(--brand-zhudong);
+}
+
+.stacked-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stacked-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.stacked-label {
+    width: 90px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.stacked-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stacked-bar {
+    height: 18px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 30px;
+}
+
+.beitun-bar {
+    background: linear-gradient(90deg, rgba(198, 112, 83, 0.5) 0%, var(--brand-beitun) 100%);
+}
+
+.zhudong-bar {
+    background: linear-gradient(90deg, rgba(92, 119, 107, 0.5) 0%, var(--brand-zhudong) 100%);
 }
 
 .summary-card .city-name {
@@ -2167,13 +2285,9 @@ body.dark-theme .img-hint-text {
     color: #fff;
 }
 
-/* 夜間英雄圖片 */
-body.dark-theme .beitun-bg {
-    background-image: url('https://images.unsplash.com/photo-1574676458514-9b54ce060b29?q=80&w=1000&auto=format&fit=crop');
-}
-
-body.dark-theme .zhudong-bg {
-    background-image: url('https://images.unsplash.com/photo-1549479373-f9f3033d5f30?q=80&w=1000&auto=format&fit=crop');
+/* 移除壞掉的外部圖片，沿用預設的本地圖片，並加深疊加層即可 */
+body.dark-theme .hero-overlay {
+    background: rgba(0, 0, 0, 0.75);
 }
 
 body.dark-theme .liquid-bg {
@@ -2197,6 +2311,22 @@ body.dark-theme .transport-btn,
 body.dark-theme .re-vote-btn {
     color: #f5f5f7;
     border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .map-tabs {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .map-tab.active,
+body.dark-theme .transport-btn.active-route {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-theme .landmark-label {
+    color: #f5f5f7 !important;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9), 0 -2px 5px rgba(0, 0, 0, 0.9), 2px 0 5px rgba(0, 0, 0, 0.9), -2px 0 5px rgba(0, 0, 0, 0.9) !important;
 }
 
 body.dark-theme .bento-vs,
@@ -2570,16 +2700,13 @@ body.dark-theme .racer-track {
    修復：深色模式下 Summary / Suitability
    ========================================= */
 body.dark-theme .summary-card {
-    background: rgba(30, 30, 32, 0.8);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(30, 30, 32, 0.5);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-body.dark-theme .summary-card.zhudong-theme {
-    border-top-color: var(--brand-zhudong);
-}
-
-body.dark-theme .summary-card.beitun-theme {
-    border-top-color: var(--brand-beitun);
+body.dark-theme .summary-card::before {
+    opacity: 0.1;
 }
 
 body.dark-theme .city-name,

@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body class="locked">
+<body class="locked dark-theme">
 
     <!-- iOS Style Liquid Glass Background -->
     <div class="liquid-bg">
@@ -38,9 +38,9 @@
             <li><a href="#summary">總結</a></li>
             <li>
                 <button id="themeToggle" class="theme-toggle-btn" aria-label="切換日夜模式" onclick="toggleTheme()">
-                    <span class="theme-icon moon-icon"><i data-lucide="moon" style="width:18px;height:18px;"></i></span>
-                    <span class="theme-icon sun-icon" style="display:none;"><i data-lucide="sun"
+                    <span class="theme-icon moon-icon" style="display:none;"><i data-lucide="moon"
                             style="width:18px;height:18px;"></i></span>
+                    <span class="theme-icon sun-icon"><i data-lucide="sun" style="width:18px;height:18px;"></i></span>
                 </button>
             </li>
         </ul>
@@ -473,9 +473,69 @@
                 </div>
             </div>
 
-            <!-- 雷達圖容器 -->
-            <div class="radar-container premium-card">
-                <canvas id="pkRadarChart"></canvas>
+            <!-- 雙層並排進度條容器 -->
+            <div class="stacked-chart-container premium-card">
+                <div class="stacked-header">
+                    <div class="legend-item">
+                        <span class="legend-color beitun-color"></span>
+                        <span>臺中市 北屯區</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color zhudong-color"></span>
+                        <span>新竹縣 竹東鎮</span>
+                    </div>
+                </div>
+
+                <div class="stacked-chart">
+                    <!-- 發展潛力 -->
+                    <div class="stacked-row">
+                        <div class="stacked-label">發展潛力</div>
+                        <div class="stacked-bars">
+                            <div class="stacked-bar beitun-bar" style="width: 95%;"><span>95</span></div>
+                            <div class="stacked-bar zhudong-bar" style="width: 80%;"><span>80</span></div>
+                        </div>
+                    </div>
+                    <!-- 生活機能 -->
+                    <div class="stacked-row">
+                        <div class="stacked-label">生活機能</div>
+                        <div class="stacked-bars">
+                            <div class="stacked-bar beitun-bar" style="width: 90%;"><span>90</span></div>
+                            <div class="stacked-bar zhudong-bar" style="width: 75%;"><span>75</span></div>
+                        </div>
+                    </div>
+                    <!-- 房價親民度 -->
+                    <div class="stacked-row">
+                        <div class="stacked-label">房價親民度</div>
+                        <div class="stacked-bars">
+                            <div class="stacked-bar beitun-bar" style="width: 50%;"><span>50</span></div>
+                            <div class="stacked-bar zhudong-bar" style="width: 85%;"><span>85</span></div>
+                        </div>
+                    </div>
+                    <!-- 交通便利 -->
+                    <div class="stacked-row">
+                        <div class="stacked-label">交通便利</div>
+                        <div class="stacked-bars">
+                            <div class="stacked-bar beitun-bar" style="width: 90%;"><span>90</span></div>
+                            <div class="stacked-bar zhudong-bar" style="width: 70%;"><span>70</span></div>
+                        </div>
+                    </div>
+                    <!-- 歷史人文 -->
+                    <div class="stacked-row">
+                        <div class="stacked-label">歷史人文</div>
+                        <div class="stacked-bars">
+                            <div class="stacked-bar beitun-bar" style="width: 75%;"><span>75</span></div>
+                            <div class="stacked-bar zhudong-bar" style="width: 85%;"><span>85</span></div>
+                        </div>
+                    </div>
+                    <!-- 教育資源 -->
+                    <div class="stacked-row">
+                        <div class="stacked-label">教育資源</div>
+                        <div class="stacked-bars">
+                            <div class="stacked-bar beitun-bar" style="width: 88%;"><span>88</span></div>
+                            <div class="stacked-bar zhudong-bar" style="width: 82%;"><span>82</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 北屯區 總結卡片 -->
@@ -548,7 +608,7 @@
                 </div>
 
                 <p style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: var(--text-muted);">
-                    *此為示範用模擬數據，非真實投票結果</p>
+                    *此為實時動態數據，真實投票結果</p>
                 <button class="re-vote-btn" onclick="resetVote()">重新投票</button>
             </div>
         </div>
@@ -561,6 +621,7 @@
         <div class="footer-content">
             <p class="footer-brand serif-title">北屯區 vs 竹東鎮 — 雙區魅力對決</p>
             <p class="footer-info">資料來源：內政部戶政司、実價登錄、Google Maps、各區公所公開資訊</p>
+            <p class="footer-info">技術提供:Gemini 3.1 Pro, Github</p>
             <p class="footer-copy">&copy; 2026 YanYi. 本網站僅供學術研究與資訊參考之用。</p>
         </div>
     </footer>

@@ -34,74 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- 綜合評估與總結：雷達圖初始化 ---
-    const radarCtx = document.getElementById('pkRadarChart');
-    if (radarCtx) {
-        window.radarChart = new Chart(radarCtx.getContext('2d'), {
-            type: 'radar',
-            data: {
-                labels: ['發展潛力', '生活機能', '房價親民度', '交通便利', '歷史人文', '教育資源'],
-                datasets: [
-                    {
-                        label: '臺中市 北屯區',
-                        data: [95, 90, 50, 90, 75, 88],
-                        backgroundColor: 'rgba(198, 112, 83, 0.2)',
-                        borderColor: '#c67053',
-                        pointBackgroundColor: '#c67053',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#c67053',
-                        borderWidth: 2
-                    },
-                    {
-                        label: '新竹縣 竹東鎮',
-                        data: [80, 75, 85, 70, 85, 82],
-                        backgroundColor: 'rgba(92, 119, 107, 0.2)',
-                        borderColor: '#5c776b',
-                        pointBackgroundColor: '#5c776b',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#5c776b',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(0, 0, 0, 0.05)' },
-                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                        pointLabels: {
-                            font: { size: 13, family: "'Noto Sans TC', sans-serif", weight: 'bold' },
-                            color: '#1d1d1f'
-                        },
-                        ticks: {
-                            display: false,
-                            min: 0,
-                            max: 100
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#1d1d1f', font: { size: 13, family: "'Noto Sans TC', sans-serif" }, padding: 20 }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                        titleColor: '#1d1d1f',
-                        bodyColor: '#1d1d1f',
-                        borderColor: '#e5e5ea',
-                        borderWidth: 1,
-                        padding: 10,
-                        boxPadding: 5
-                    }
-                }
-            }
-        });
-    }
+
 });
 
 /* =========================================
@@ -179,7 +112,7 @@ const mapData = {
         zoom: 14,
         locations: [
             { id: 'z1', name: '竹東中央市場', lat: 24.7351, lng: 121.0913, tag: '在地美食', desc: '全台最大的客家傳統市場之一，蘊含豐富的客家米食與濃濃的在地人情味。', img: ['img/Zhudong/91461_0.jpg', 'img/Zhudong/91449_0.jpg'] },
-            { id: 'z2', name: '蕭如松藝術園區', lat: 24.7380, lng: 121.0905, tag: '歷史文化', desc: '保留完整的日式建築群，紀念台灣水彩畫大師蕭如松，是文青打卡熱點。', img: ['img/Zhudong/91429_0.jpg', 'img/Zhudong/91445_0.jpg', 'img/Zhudong/91438_0.jpg', 'img/Zhudong/91439_0.jpg', ] },
+            { id: 'z2', name: '蕭如松藝術園區', lat: 24.7380, lng: 121.0905, tag: '歷史文化', desc: '保留完整的日式建築群，紀念台灣水彩畫大師蕭如松，是文青打卡熱點。', img: ['img/Zhudong/91429_0.jpg', 'img/Zhudong/91445_0.jpg', 'img/Zhudong/91438_0.jpg', 'img/Zhudong/91439_0.jpg',] },
             { id: 'z3', name: '竹東火車站', lat: 24.7402, lng: 121.0935, tag: '交通節點', desc: '台鐵內灣線最大的車站，過去曾是林業與水泥業的轉運重鎮。', img: 'img/Zhudong/91454_0.jpg' }
         ],
         routes: {
@@ -255,8 +188,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // 設定初始中心點為北屯
     map = L.map('interactive-map').setView(mapData.beitun.center, mapData.beitun.zoom);
 
-    // 引入較豐富質感的底圖 (CartoDB Voyager)
-    currentTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    // 依據主題模式引入對應的底圖
+    const isDark = document.body.classList.contains('dark-theme');
+    const tileUrl = isDark
+        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
+    currentTileLayer = L.tileLayer(tileUrl, {
         attribution: '&copy; OpenStreetMap contributors & CartoDB',
         subdomains: 'abcd',
         maxZoom: 19
@@ -537,7 +475,10 @@ function scrollToTop() {
 /* =========================================
    互動投票邏輯 (Poll Logic)
    ========================================= */
-function handleVote(choice) {
+// ====== 請將此處替換為您從 Google Apps Script 部署取得的 URL ======
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzRzXJ8SLMe_F-cLrzrlZOsneT4GatuqjgXTfLq35LgTQo--U8KRIle9PwSTVRfK8-g/exec';
+
+async function handleVote(choice) {
     // 隱藏選項，顯示結果
     document.getElementById('pollOptions').style.display = 'none';
     const resultsDiv = document.getElementById('pollResults');
@@ -548,35 +489,69 @@ function handleVote(choice) {
     void resultsDiv.offsetWidth;
     resultsDiv.style.animation = 'fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
 
-    // 模擬動態數據載入 (稍微給使用者選擇的項目加權)
-    let beitunTarget = 55;
-    let zhudongTarget = 45;
-
-    if (choice === 'zhudong') {
-        beitunTarget = 42;
-        zhudongTarget = 58;
-    } else {
-        beitunTarget = 68;
-        zhudongTarget = 32;
-    }
-
-    // 重置進度條
     const beitunBar = document.getElementById('poll-beitun-bar');
     const zhudongBar = document.getElementById('poll-zhudong-bar');
     const beitunText = document.getElementById('poll-beitun-percent');
     const zhudongText = document.getElementById('poll-zhudong-percent');
 
+    // 重置進度條並顯示狀態
     beitunBar.style.width = '0%';
     zhudongBar.style.width = '0%';
-    beitunText.textContent = '0%';
-    zhudongText.textContent = '0%';
+    beitunText.textContent = '計算中...';
+    zhudongText.textContent = '計算中...';
 
-    // 延遲一點點時間後開始跑條
+    let beitunTarget = 55;
+    let zhudongTarget = 45;
+
+    try {
+        // 若還沒填寫真實 URL，會故意拋出錯誤進入 catch，執行模擬邏輯
+        if (GOOGLE_SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
+            throw new Error('未設定真實的 Google Apps Script 網址');
+        }
+
+        // 發送投票資料
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `vote=${choice}`
+        });
+
+        const data = await response.json();
+
+        // 檢查後端是否回傳了錯誤 (例如 Apps Script 內部當機)
+        if (data.error) {
+            throw new Error('Google Sheet 內部錯誤: ' + data.error);
+        }
+        
+        // 確保回傳的資料格式正確
+        if (typeof data.beitun !== 'number') {
+            throw new Error('Google Sheet 回傳的資料格式不正確 (找不到 beitun 票數)');
+        }
+
+        // 假設後端回傳格式 { beitun: 15, zhudong: 10, total: 25 }
+        const total = data.total || 1; // 避免除以零
+        beitunTarget = Math.round((data.beitun / total) * 100);
+        zhudongTarget = 100 - beitunTarget;
+
+    } catch (error) {
+        console.warn('Google Sheet 連線失敗或尚未設定，改為呈現模擬數據。', error);
+        // 模擬動態數據載入 (稍微給使用者選擇的項目加權)
+        if (choice === 'zhudong') {
+            beitunTarget = 42;
+            zhudongTarget = 58;
+        } else {
+            beitunTarget = 68;
+            zhudongTarget = 32;
+        }
+    }
+
+    // 延遲一點點時間後開始跑條與數字跑動
     setTimeout(() => {
         beitunBar.style.width = beitunTarget + '%';
         zhudongBar.style.width = zhudongTarget + '%';
 
-        // 數字跑動動畫
         animateValue(beitunText, 0, beitunTarget, 1500);
         animateValue(zhudongText, 0, zhudongTarget, 1500);
     }, 100);
@@ -644,17 +619,7 @@ function toggleTheme() {
         if (routeNodesLayer) routeNodesLayer.bringToFront();
     }
 
-    // 適配 Chart.js 雷達圖
-    if (window.radarChart) {
-        const textColor = isDark ? '#f5f5f7' : '#1d1d1f';
-        const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)';
 
-        window.radarChart.options.scales.r.angleLines.color = gridColor;
-        window.radarChart.options.scales.r.grid.color = gridColor;
-        window.radarChart.options.scales.r.pointLabels.color = textColor;
-        window.radarChart.options.plugins.legend.labels.color = textColor;
-        window.radarChart.update();
-    }
 
     // 重新渲染 Lucide icon
     if (typeof lucide !== 'undefined') {
