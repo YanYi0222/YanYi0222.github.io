@@ -377,8 +377,8 @@ section {
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    padding: 16px 44px 16px 50px;
-    /* 扣除右側 6px 的 letter-spacing，保持視覺置中 */
+    padding: 16px 50px;
+    text-indent: 6px; /* text-indent 抵銷 letter-spacing，保持視覺完美置中 */
     border: none;
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.15);
@@ -414,8 +414,9 @@ section {
     transform: translateX(-50%) scale(1.1) translateY(-5px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
     letter-spacing: 10px;
-    padding: 16px 40px 16px 50px;
-    /* 扣除 hover 時右側 10px 的 letter-spacing */
+    padding: 16px 50px;
+    text-indent: 10px;
+    /* 抵銷 hover 時的 letter-spacing */
 }
 
 .explore-btn:hover::before {
