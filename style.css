@@ -1,4 +1,4 @@
-/* --- 頂級品牌質感配色 --- */
+/* --- ������鞈芣��滩𠧧 --- */
 :root {
     --bg-color: transparent;
     /* Let liquid background show through */
@@ -9,12 +9,12 @@
     --brand-beitun: #c67053;
     --brand-zhudong: #5c776b;
 
-    /* 字體 */
+    /* 摮烾� */
     --font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-serif: 'Noto Serif TC', serif;
     --font-artistic: 'Cormorant Garamond', serif;
 
-    /* 陰影 */
+    /* �啣蔣 */
     --shadow-soft: 2px 4px 12px rgba(0, 0, 0, 0.04);
     --shadow-hover: 4px 8px 24px rgba(0, 0, 0, 0.08);
 }
@@ -109,10 +109,10 @@ h4,
 .logo {
     font-weight: 600;
     letter-spacing: -0.015em;
-    /* 微微縮減字距，看起來更緊湊專業 */
+    /* 敺桀凝蝮格�摮𡑒�嚗𣬚�韏瑚��渡�皝𠰴�璆� */
 }
 
-/* --- 導覽列 (Saturate 毛玻璃特效) --- */
+/* --- 撠舘汗�� (Saturate 瘥𤤿縧��鸌��) --- */
 .navbar {
     position: fixed;
     top: 0;
@@ -124,7 +124,7 @@ h4,
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    z-index: 1000;
+    z-index: 3000;
     box-shadow: var(--shadow-soft);
     box-sizing: border-box;
     transform: translateY(-100%);
@@ -161,7 +161,7 @@ h4,
     color: var(--accent-blue);
 }
 
-/* --- 通用區塊設定 --- */
+/* --- �𡁶鍂��憛𡃏身摰� --- */
 section {
     padding: 120px 20px 60px;
     display: flex;
@@ -193,7 +193,7 @@ section {
     border-radius: 2px;
 }
 
-/* --- 1. 首頁：旗艦級滿版雙拼 (升級版動態) --- */
+/* --- 1. 擐㚚�嚗𡁏��衣�皛輻��蹱𣄽 (��������) --- */
 #hero.full-bleed-hero {
     padding: 0;
     display: flex;
@@ -204,7 +204,7 @@ section {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 50;
+    z-index: 2000;
     overflow: hidden;
     background: var(--bg-color);
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
@@ -378,7 +378,8 @@ section {
     transform: translateX(-50%);
     z-index: 100;
     padding: 16px 50px;
-    text-indent: 6px; /* text-indent 抵銷 letter-spacing，保持視覺完美置中 */
+    text-indent: 6px;
+    /* text-indent �菟啹 letter-spacing嚗䔶����閬箏�蝢𡒊蔭銝� */
     border: none;
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.15);
@@ -394,7 +395,7 @@ section {
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 動態流光漸層邊框 */
+/* �閙�瘚��瞍詨惜�𦠜� */
 .explore-btn::before {
     content: '';
     position: absolute;
@@ -416,7 +417,7 @@ section {
     letter-spacing: 10px;
     padding: 16px 50px;
     text-indent: 10px;
-    /* 抵銷 hover 時的 letter-spacing */
+    /* �菟啹 hover ��� letter-spacing */
 }
 
 .explore-btn:hover::before {
@@ -472,7 +473,7 @@ section {
     }
 }
 
-/* --- 大品牌無邊框卡片風格 --- */
+/* --- 憭批��𣬚��𦠜��∠�憸冽聢 --- */
 .premium-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
@@ -490,7 +491,7 @@ section {
     box-shadow: var(--shadow-hover);
 }
 
-/* --- 2. 基本數據區塊 --- */
+/* --- 2. �箸𧋦�豢���憛� --- */
 .charts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -549,10 +550,10 @@ section {
 }
 
 /* =========================================
-   藝術字體與 Bento Box 數據版面
+   �肽�摮烾��� Bento Box �豢���𢒰
    ========================================= */
 
-/* --- 字體美學設定 --- */
+/* --- 摮烾�蝢𤾸飛閮剖� --- */
 .serif-title {
     font-family: var(--font-serif);
     font-weight: 700;
@@ -562,10 +563,10 @@ section {
     font-family: var(--font-artistic);
     font-weight: 700;
     font-style: italic;
-    /* Cormorant Garamond 斜體極具藝術感 */
+    /* Cormorant Garamond �𣈯�璆萄��肽��� */
 }
 
-/* --- Bento Box 數據區塊 --- */
+/* --- Bento Box �豢���憛� --- */
 .bento-section {
     padding: 80px 20px;
     background-color: var(--bg-color);
@@ -600,7 +601,7 @@ section {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
-/* 卡片邊緣微光感 */
+/* �∠��羓楠敺桀��� */
 .bento-card::after {
     content: '';
     position: absolute;
@@ -673,7 +674,7 @@ section {
 .bento-unit {
     font-size: 1.4rem;
     font-family: var(--font-family);
-    /* 單位用回黑體 */
+    /* �桐��典�暺煾� */
     font-style: normal;
     color: var(--text-muted);
     margin-left: 5px;
@@ -696,7 +697,7 @@ section {
     flex-shrink: 0;
 }
 
-/* 進度條對決 */
+/* �脣漲璇嘥�瘙� */
 .bento-bar-container {
     width: 100%;
     height: 6px;
@@ -727,7 +728,7 @@ section {
     line-height: 1.6;
 }
 
-/* 小卡片樣式 */
+/* 撠誩㨃��見撘� */
 .bento-stack {
     display: flex;
     flex-direction: column;
@@ -757,7 +758,7 @@ section {
     font-weight: bold;
 }
 
-/* --- VS Table Design (中央對稱數據表) --- */
+/* --- VS Table Design (銝剖亢撠滨迂�豢�銵�) --- */
 .vs-table {
     width: 100%;
     min-width: 600px;
@@ -871,7 +872,7 @@ section {
     transition: width 1s ease-in-out;
 }
 
-/* --- 3 & 4. 卡片排版 --- */
+/* --- 3 & 4. �∠��垍� --- */
 .cards-wrapper {
     display: flex;
     gap: 30px;
@@ -982,7 +983,7 @@ section {
     opacity: 1;
 }
 
-/* --- 5. 乾淨版時間軸 --- */
+/* --- 5. 銋暹楊����栞遘 --- */
 .timeline {
     width: 80%;
     max-width: 700px;
@@ -1087,7 +1088,7 @@ body.dark-theme #backToTop:hover {
     }
 }
 
-/* --- 6. 最終 PK 總結 --- */
+/* --- 6. ��蝯� PK 蝮賜� --- */
 .pk-summary-wrapper {
     display: flex;
     flex-direction: column;
@@ -1140,7 +1141,7 @@ body.dark-theme #backToTop:hover {
     --glow-color: var(--brand-beitun);
 }
 
-/* --- 雙層並排進度條樣式 --- */
+/* --- �坔惜銝行��脣漲璇脲見撘� --- */
 .stacked-chart-container {
     flex: 1.2;
     padding: 30px 40px;
@@ -1269,7 +1270,7 @@ body.dark-theme #backToTop:hover {
     margin-top: 2px;
 }
 
-/* --- 地圖路線節點小氣泡樣式 --- */
+/* --- �啣�頝舐�蝭�暺𧼮�瘞�部璅�� --- */
 .route-node-tooltip {
     background: rgba(255, 255, 255, 0.95) !important;
     border: 1px solid rgba(0, 0, 0, 0.05) !important;
@@ -1286,7 +1287,7 @@ body.dark-theme #backToTop:hover {
     border-top-color: rgba(255, 255, 255, 0.95) !important;
 }
 
-/* --- 景點常駐漂浮標籤樣式 --- */
+/* --- �舫�撣賊�瞍�筑璅嗵惜璅�� --- */
 .landmark-label {
     background: transparent !important;
     border: none !important;
@@ -1298,7 +1299,7 @@ body.dark-theme #backToTop:hover {
     padding: 0 !important;
     margin-top: 15px !important;
     pointer-events: none !important;
-    /* 讓點擊穿透到地標上 */
+    /* 霈㯄��羓忽�誩��唳�銝� */
 }
 
 .landmark-label::before {
@@ -1330,7 +1331,7 @@ body.dark-theme #backToTop:hover {
     min-height: 350px;
 }
 
-/* --- 平板端最佳化 (Responsive Design for Tablet) --- */
+/* --- 撟單踎蝡舀�雿喳� (Responsive Design for Tablet) --- */
 @media (max-width: 1024px) {
     .charts-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1366,7 +1367,7 @@ body.dark-theme #backToTop:hover {
     }
 }
 
-/* --- 手機端最佳化 (Responsive Design for Mobile) --- */
+/* --- �𧢲�蝡舀�雿喳� (Responsive Design for Mobile) --- */
 @media (max-width: 768px) {
 
     .radar-container {
@@ -1418,7 +1419,7 @@ body.dark-theme #backToTop:hover {
         font-size: 1rem;
     }
 
-    /* 4. 圖表區塊與卡片：滿版寬度並改為垂直堆疊 */
+    /* 4. �𤥁”��憛𡃏��∠�嚗𡁏遛��祝摨虫蒂�寧���凒��� */
     .charts-grid,
     .charts-grid-large {
         grid-template-columns: 1fr;
@@ -1470,7 +1471,7 @@ body.dark-theme #backToTop:hover {
         width: 100%;
     }
 
-    /* 5. 美食景點：按鈕換行，網格自動適應 */
+    /* 5. 蝢𡡞��舫�嚗𡁏��閙�銵䕘�蝬脫聢�芸��拇� */
     .filter-buttons {
         flex-wrap: wrap;
         justify-content: center;
@@ -1478,10 +1479,10 @@ body.dark-theme #backToTop:hover {
 
     .grid-container {
         grid-template-columns: 1fr;
-        /* 手機上一行一個卡片最好看 */
+        /* �𧢲�銝𠹺�銵䔶��见㨃���憟賜� */
     }
 
-    /* 6. 時間軸：縮小左側邊距，對齊光點 */
+    /* 6. ���頠賂�蝮桀�撌血��𡃏�嚗��朣𠰴�暺� */
     .timeline {
         width: 100%;
         padding-left: 25px;
@@ -1493,7 +1494,7 @@ body.dark-theme #backToTop:hover {
 
     .timeline-dot {
         left: -31px;
-        /* 根據新的 padding 調整點的位置 */
+        /* �寞��啁� padding 隤踵㟲暺䂿�雿滨蔭 */
         width: 12px;
         height: 12px;
     }
@@ -1502,20 +1503,20 @@ body.dark-theme #backToTop:hover {
         padding: 15px 15px 15px 20px;
     }
 
-    /* 7. 隱藏過大的背景光斑避免橫向捲軸 */
+    /* 7. �梯��𤾸之����臬��煾��齿帖�烐㬢頠� */
     #data::before,
     #food-place::after {
         display: none;
     }
 
-    /* 修正向下探索按鈕 */
+    /* 靽格迤�睲��Ｙ揣�厰� */
     .scroll-down {
         bottom: 15px;
         font-size: 0.8rem;
     }
 }
 
-/* --- 4. 高階互動地圖區塊 --- */
+/* --- 4. 擃㗛�鈭鍦��啣���憛� --- */
 .map-tabs {
     display: flex;
     gap: 15px;
@@ -1548,7 +1549,7 @@ body.dark-theme #backToTop:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* 歷史發展軌跡區塊的標籤 (覆蓋 map-tabs 的絕對定位) */
+/* 甇瑕蟮�澆�頠諹楚��憛羓�璅嗵惜 (閬�� map-tabs ���撠滚�雿�) */
 .history-tabs {
     position: relative;
     top: auto;
@@ -1559,12 +1560,12 @@ body.dark-theme #backToTop:hover {
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* 確保 dark-theme 時歷史標籤的背景也是優雅的 */
+/* 蝣箔� dark-theme ��風�脫�蝐斤��峕艶銋�糓�芷��� */
 body.dark-theme .history-tabs {
     background: rgba(0, 0, 0, 0.3);
 }
 
-/* --- Leaflet 地圖容器 --- */
+/* --- Leaflet �啣�摰孵膥 --- */
 .map-layout-wrapper {
     display: block;
     width: 95%;
@@ -1576,7 +1577,7 @@ body.dark-theme .history-tabs {
     margin: 0 auto;
 }
 
-/* 左側地圖 */
+/* 撌血��啣� */
 .map-container {
     width: 100%;
     height: 100%;
@@ -1596,7 +1597,7 @@ body.dark-theme .history-tabs {
     height: 100%;
 }
 
-/* Leaflet 彈出視窗(Popup)的微調，讓它符合大廠風格 */
+/* Leaflet 敶�枂閬𣇉�(Popup)��凝隤選�霈枏�蝚血�憭批�憸冽聢 */
 .leaflet-popup-content-wrapper {
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
@@ -1610,7 +1611,7 @@ body.dark-theme .history-tabs {
     margin: 10px 15px;
 }
 
-/* 右側資訊面板 */
+/* �喳�鞈���Ｘ踎 */
 .info-panel {
     position: absolute;
     top: 20px;
@@ -1632,7 +1633,7 @@ body.dark-theme .history-tabs {
     margin-bottom: 0;
 }
 
-/* 面板內容切換動畫 */
+/* �Ｘ踎�批捆����閧𧞄 */
 .info-content {
     width: 100%;
     height: 100%;
@@ -1656,7 +1657,7 @@ body.dark-theme .history-tabs {
     }
 }
 
-/* 空狀態樣式 */
+/* 蝛箇��𧢲見撘� */
 .empty-state {
     align-items: center;
     justify-content: center;
@@ -1683,7 +1684,7 @@ body.dark-theme .history-tabs {
     }
 }
 
-/* 點擊後顯示的資料樣式 */
+/* 暺墧�敺屸＊蝷箇�鞈��璅�� */
 .info-img {
     width: 100%;
     height: 200px;
@@ -1744,7 +1745,7 @@ body.dark-theme .history-tabs {
     height: 320px;
 }
 
-/* --- 數據對決排版 (VS Rows) --- */
+/* --- �豢�撠齿捱�垍� (VS Rows) --- */
 .vs-cards-wrapper {
     width: 90%;
     max-width: 900px;
@@ -1818,7 +1819,7 @@ body.dark-theme .history-tabs {
     color: var(--text-muted);
 }
 
-/* 進度條設計 */
+/* �脣漲璇肽身閮� */
 .vs-progress-container {
     width: 100%;
     height: 8px;
@@ -1838,7 +1839,7 @@ body.dark-theme .history-tabs {
     justify-content: flex-end;
 }
 
-/* --- 交通按鈕選單 --- */
+/* --- 鈭日�𡁏��閖��� --- */
 .transport-menu {
     padding: 10px 5px;
 }
@@ -1880,7 +1881,7 @@ body.dark-theme .history-tabs {
     text-decoration: underline;
 }
 
-/* --- 地圖自訂地標 (脈衝動畫) --- */
+/* --- �啣��芾��唳� (����閧𧞄) --- */
 .custom-map-marker {
     position: relative;
 }
@@ -1921,7 +1922,7 @@ body.dark-theme .history-tabs {
     }
 }
 
-/* --- 圖片輪播元件 (Carousel) --- */
+/* --- �𣇉�頛芣偘��辣 (Carousel) --- */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -1984,7 +1985,7 @@ body.dark-theme .history-tabs {
 }
 
 /* =========================================
-   新增：2000萬購屋實戰 (Housing Battle)
+   �啣�嚗�2000�祈頃撅见祕�� (Housing Battle)
    ========================================= */
 .housing-grid {
     display: flex;
@@ -2093,7 +2094,7 @@ body.dark-theme .history-tabs {
 }
 
 /* =========================================
-   新增：互動投票 (Poll)
+   �啣�嚗帋��閙�蟡� (Poll)
    ========================================= */
 .poll-container {
     width: 100%;
@@ -2212,7 +2213,7 @@ body.dark-theme .history-tabs {
 }
 
 /* =========================================
-   新增：晝夜情境切換 (Dark Mode)
+   �啣�嚗𡁏�憭𨀣�憓���� (Dark Mode)
    ========================================= */
 .theme-toggle-btn {
     background: transparent;
@@ -2243,7 +2244,7 @@ body.dark-theme .history-tabs {
     transform: scale(1.2);
 }
 
-/* 深色模式變數覆蓋與全域樣式 */
+/* 瘛梯𠧧璅∪�霈𦠜彍閬�������見撘� */
 body.dark-theme {
     background-color: #121212;
     color: #f5f5f7;
@@ -2285,7 +2286,7 @@ body.dark-theme .img-hint-text {
     color: #fff;
 }
 
-/* 移除壞掉的外部圖片，沿用預設的本地圖片，並加深疊加層即可 */
+/* 蝘駁膄憯墧�����典����瘝輻鍂�鞱身��𧋦�啣����銝血�瘛梁��惩惜�喳虾 */
 body.dark-theme .hero-overlay {
     background: rgba(0, 0, 0, 0.75);
 }
@@ -2347,7 +2348,7 @@ body.dark-theme .bento-bar-container {
 }
 
 /* =========================================
-   新增：專屬生活型態推薦 (Persona Selector)
+   �啣�嚗𡁜�撅祉�瘣餃��𧢲綫�� (Persona Selector)
    ========================================= */
 .persona-selector {
     width: 100%;
@@ -2445,23 +2446,27 @@ body.dark-theme .bento-bar-container {
     .persona-cards {
         flex-direction: column;
     }
+
     .persona-result {
         padding: 25px 20px;
         min-height: auto;
     }
+
     .persona-result-title {
         font-size: 1.3rem;
     }
+
     .persona-winner {
         font-size: 1rem;
     }
+
     .bento-section {
         padding: 90px 15px 40px;
     }
 }
 
 /* =========================================
-   新增：動態通勤視覺化 (Commute Visualizer)
+   �啣�嚗𡁜��钅�𡁜𠹻閬𤥁死�� (Commute Visualizer)
    ========================================= */
 .commute-dashboard {
     width: 100%;
@@ -2569,9 +2574,11 @@ body.dark-theme .racer-track {
         align-items: flex-start;
         gap: 8px;
     }
-    .racer-label > span {
+
+    .racer-label>span {
         width: auto !important;
     }
+
     .racer-times {
         gap: 10px;
         flex-wrap: wrap;
@@ -2579,7 +2586,7 @@ body.dark-theme .racer-track {
 }
 
 /* =========================================
-   修復：fadeInSlide 動畫 (Persona 區塊使用)
+   靽桀儔嚗餎adeInSlide �閧𧞄 (Persona ��憛𠹺蝙��)
    ========================================= */
 @keyframes fadeInSlide {
     from {
@@ -2594,7 +2601,7 @@ body.dark-theme .racer-track {
 }
 
 /* =========================================
-   修復：Bento Grid RWD (從舊位置還原)
+   靽桀儔嚗鋳ento Grid RWD (敺噼�雿滨蔭���)
    ========================================= */
 @media (max-width: 992px) {
     .bento-grid {
@@ -2617,30 +2624,31 @@ body.dark-theme .racer-track {
         font-size: 3rem;
     }
 
-    /* 修正手機版 Bento 對決區塊 */
+    /* 靽格迤�𧢲��� Bento 撠齿捱��憛� */
     .bento-split {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .bento-side {
         align-items: center !important;
         text-align: center !important;
     }
-    
+
     .bento-vs {
         margin: 5px 0;
     }
 
-    /* 縮小手機版地圖高度，避免佔用太多螢幕 */
+    /* 蝮桀��𧢲���𧑐�㚚�摨佗��踹�雿𠉛鍂憭芸��Ｗ� */
     .map-container {
         height: 380px !important;
     }
 
-    /* 通勤面板修正 */
+    /* �𡁜𠹻�Ｘ踎靽格迤 */
     .commute-dashboard {
         padding: 20px;
     }
+
     .commute-select {
         max-width: 100%;
         text-overflow: ellipsis;
@@ -2650,7 +2658,7 @@ body.dark-theme .racer-track {
 }
 
 /* =========================================
-   修復：購屋實戰 & Persona 手機 RWD
+   靽桀儔嚗朞頃撅见祕�� & Persona �𧢲� RWD
    ========================================= */
 @media (max-width: 768px) {
     .housing-grid {
@@ -2663,7 +2671,7 @@ body.dark-theme .racer-track {
 }
 
 /* =========================================
-   新增：Footer
+   �啣�嚗鎄ooter
    ========================================= */
 .site-footer {
     background: rgba(29, 29, 31, 0.95);
@@ -2697,7 +2705,7 @@ body.dark-theme .racer-track {
 }
 
 /* =========================================
-   修復：深色模式下 Summary / Suitability
+   靽桀儔嚗𡁏楛�脫芋撘譍� Summary / Suitability
    ========================================= */
 body.dark-theme .summary-card {
     background: rgba(30, 30, 32, 0.5);
@@ -2734,4 +2742,249 @@ body.dark-theme .persona-result-title {
 
 body.dark-theme .site-footer {
     background: rgba(10, 10, 12, 0.98);
+}
+
+/* =========================================
+   Modern Vertical Timeline (Shared)
+   ========================================= */
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* 中央連接線 */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background: linear-gradient(to bottom,
+            transparent,
+            rgba(0, 0, 0, 0.1) 5%,
+            rgba(0, 0, 0, 0.1) 95%,
+            transparent);
+    z-index: 1;
+}
+
+body.dark-theme .timeline-container::before {
+    background: linear-gradient(to bottom,
+            transparent,
+            rgba(255, 255, 255, 0.2) 5%,
+            rgba(255, 255, 255, 0.2) 95%,
+            transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* 中央發光節點 */
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg-color);
+    border: 3px solid var(--text-main);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+body.dark-theme .timeline-dot {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.timeline-item:hover .timeline-dot {
+    background: var(--accent-blue);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 122, 255, 0.6);
+    transform: translate(-50%, -50%) scale(1.3);
+}
+
+.timeline-item:nth-child(even):hover .timeline-dot {
+    background: var(--accent-green);
+    box-shadow: 0 0 20px rgba(52, 199, 89, 0.6);
+}
+
+/* 支援指定顏色的時間軸 (for index.html tabs) */
+.beitun-timeline .timeline-item:hover .timeline-dot {
+    background: var(--brand-beitun);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(198, 112, 83, 0.6);
+}
+
+.zhudong-timeline .timeline-item:hover .timeline-dot {
+    background: var(--brand-zhudong);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(92, 119, 107, 0.6);
+}
+
+/* 卡片內容容器 */
+.timeline-content {
+    width: 45%;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+body.dark-theme .timeline-content {
+    background: rgba(30, 30, 32, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-blue);
+}
+
+body.dark-theme .timeline-item:hover .timeline-content {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.beitun-timeline .timeline-item:hover .timeline-content {
+    border-color: var(--brand-beitun);
+}
+
+.zhudong-timeline .timeline-item:hover .timeline-content {
+    border-color: var(--brand-zhudong);
+}
+
+/* 奇數在左，偶數在右 */
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: auto;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: auto;
+}
+
+.timeline-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.05);
+    font-family: 'Cormorant Garamond', serif;
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+body.dark-theme .timeline-number {
+    color: rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item:nth-child(even) .timeline-number {
+    right: auto;
+    left: 20px;
+}
+
+.timeline-item:hover .timeline-number {
+    color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .timeline-item:hover .timeline-number {
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.timeline-content h3,
+.timeline-content h4 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-desc,
+.timeline-tech {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-desc strong {
+    color: var(--brand-beitun);
+}
+
+.timeline-tech strong {
+    color: var(--brand-zhudong);
+}
+
+.timeline-tech {
+    padding-top: 15px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+}
+
+body.dark-theme .timeline-tech {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-tech code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.9em;
+    color: var(--text-main);
+}
+
+body.dark-theme .timeline-tech code {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e5e5ea;
+}
+
+/* RWD: 小螢幕變為單邊時間軸 */
+@media (max-width: 768px) {
+    .timeline-container::before {
+        left: 30px;
+    }
+
+    .timeline-dot {
+        left: 30px;
+    }
+
+    .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 80px !important;
+        margin-right: 0 !important;
+    }
+
+    .timeline-number {
+        right: 20px !important;
+        left: auto !important;
+    }
 }

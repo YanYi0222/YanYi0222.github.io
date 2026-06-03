@@ -15,24 +15,28 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Showcase 專屬微調樣式 */
+        /* =========================================
+           Showcase 專屬微調樣式 (Redesign)
+           ========================================= */
+
         .showcase-header {
-            padding: 120px 20px 60px;
+            padding: 140px 20px 80px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
 
         .showcase-header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
             background: linear-gradient(135deg, var(--brand-beitun), var(--brand-zhudong));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
         .showcase-header p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
             line-height: 1.8;
         }
@@ -48,7 +52,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -58,171 +62,293 @@
             text-decoration: none;
             font-weight: 500;
             box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body.dark-theme .back-nav a {
-            background: rgba(20, 20, 22, 0.85);
-            border-color: rgba(255, 255, 255, 0.05);
+            background: rgba(20, 20, 22, 0.7);
+            border-color: rgba(255, 255, 255, 0.08);
             color: #f5f5f7;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .back-nav a:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 1);
         }
 
+        body.dark-theme .back-nav a:hover {
+            background: rgba(30, 30, 32, 0.9);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 統一區塊間距 */
+        .showcase-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: -30px;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        /* 網格系統強化 */
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .feature-card {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            height: 100%;
         }
 
         .feature-icon-wrapper {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             background: rgba(0, 122, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent-blue);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
         }
 
         body.dark-theme .feature-icon-wrapper {
-            background: rgba(10, 132, 255, 0.2);
+            background: rgba(10, 132, 255, 0.15);
             color: #0a84ff;
         }
 
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+        /* =========================================
+           Design System (網頁基本元素)
+           ========================================= */
+        .ds-colors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .tech-tag {
-            padding: 6px 14px;
+        .color-card {
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .color-card h4 {
+            margin: 0;
+            font-size: 1.2rem;
             color: var(--text-main);
         }
 
-        body.dark-theme .tech-tag {
-            background: rgba(255, 255, 255, 0.1);
+        .color-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
-        /* 核心區塊設計理念樣式 */
-        .architecture-timeline {
+        .color-hex {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            align-self: flex-start;
+            color: #fff;
+        }
+
+        .ds-typography {
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
+            gap: 20px;
         }
 
-        .arch-card {
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            border-left: 4px solid var(--accent-blue);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .arch-card:nth-child(even) {
-            border-left-color: var(--accent-green);
-        }
-
-        .arch-card:hover {
-            transform: translateX(10px);
-        }
-
-        .arch-header {
+        .typo-card {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding-bottom: 15px;
+            gap: 30px;
+            padding: 30px;
         }
 
-        body.dark-theme .arch-header {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
+        .typo-preview {
+            font-size: 3rem;
+            line-height: 1;
+            width: 120px;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding-right: 30px;
         }
 
-        .arch-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: rgba(0, 0, 0, 0.2);
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        body.dark-theme .arch-number {
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        .arch-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .arch-desc,
-        .arch-tech {
-            line-height: 1.7;
-            font-size: 1.05rem;
+        .typo-info h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
             color: var(--text-main);
         }
 
-        .arch-desc strong {
-            color: var(--brand-beitun);
+        .typo-info p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        .arch-tech strong {
-            color: var(--brand-zhudong);
+        @media (max-width: 768px) {
+            .typo-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .typo-preview {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-right: 0;
+                padding-bottom: 20px;
+                width: 100%;
+            }
         }
 
-        .arch-tech code {
-            background: rgba(0, 0, 0, 0.05);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9em;
+        /* =========================================
+           Project Showcase (專案剪影)
+           ========================================= */
+        .showcase-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
 
-        body.dark-theme .arch-tech code {
-            background: rgba(255, 255, 255, 0.1);
+        .gallery-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        @media (min-width: 768px) {
-            .arch-content {
-                flex-direction: row;
-                gap: 30px;
-            }
+        .gallery-img-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+            filter: brightness(0.8);
+        }
 
-            .arch-desc,
-            .arch-tech {
-                flex: 1;
-            }
+        .gallery-item:hover .gallery-img-placeholder {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
 
-            .arch-tech {
-                padding-left: 30px;
-                border-left: 1px dashed rgba(0, 0, 0, 0.1);
-            }
+        .placeholder-text {
+            position: absolute;
+            z-index: 10;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none;
+        }
 
-            body.dark-theme .arch-tech {
-                border-left-color: rgba(255, 255, 255, 0.1);
+        .gallery-item:hover .placeholder-text {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-gallery {
+                grid-template-columns: 1fr;
             }
+        }
+
+        /* =========================================
+           Modern Vertical Timeline (Shared in style.css)
+           ========================================= */
+
+        /* =========================================
+           Dev & Models (開發環境與 AI 模型)
+           ========================================= */
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .tech-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .tech-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -244,227 +370,290 @@
 
     <!-- 頁首介紹 -->
     <header class="showcase-header">
-        <h1 class="serif-title">專題介紹與開發紀錄</h1>
-        <p>「北屯區 vs 竹東鎮居住比較」專案，除了單純的數據呈現，我也嘗試加入了一些視覺設計與互動效果，以下是各部分的開發過程分享。</p>
+        <h1 class="serif-title">期末網頁專題介紹</h1>
+        <p>以下為本專案的設計理念、色彩系統與開發架構紀實。</p>
     </header>
 
+    <!-- 網頁基本元素 (Design System) -->
+    <section class="showcase-section">
+        <h2 class="section-title serif-title">設計系統與基本元素</h2>
+        <p class="section-subtitle">Design System & Core Elements</p>
+
+        <h3 class="serif-title" style="margin-bottom: 20px; font-size: 1.5rem;"><i data-lucide="palette"
+                style="vertical-align: middle; margin-right: 8px;"></i> 色彩使用</h3>
+        <div class="ds-colors">
+            <!-- 北屯色 -->
+            <div class="color-card premium-card" style="background: rgba(198, 112, 83, 0.15);">
+                <div class="color-circle" style="background: #c67053;"></div>
+                <div>
+                    <h4>北屯橘紅 (Beitun)</h4>
+                    <span class="color-hex">#C67053</span>
+                </div>
+                <p>象徵都市的繁華、活力與房市的熱度。帶有一點溫暖的磚紅色調，呼應新興重劃區的建築意象。</p>
+            </div>
+            <!-- 竹東色 -->
+            <div class="color-card premium-card" style="background: rgba(92, 119, 107, 0.15);">
+                <div class="color-circle" style="background: #5c776b;"></div>
+                <div>
+                    <h4>竹東深綠 (Zhudong)</h4>
+                    <span class="color-hex">#5C776B</span>
+                </div>
+                <p>代表自然環境、客家山城與悠閒的生活步調。沉穩的墨綠色能讓人聯想到山林與寧靜的居住氛圍。</p>
+            </div>
+            <!-- 背景主色 -->
+            <div class="color-card premium-card" style="background: rgba(29, 29, 31, 0.4);">
+                <div class="color-circle" style="background: #1d1d1f; border-color: #333;"></div>
+                <div>
+                    <h4>曜石黑 (Text Main)</h4>
+                    <span class="color-hex">#1D1D1F</span>
+                </div>
+                <p>作為深色模式的主色調與文字基底，比起純黑更能降低視覺疲勞，提供如雜誌般頂級的閱讀體驗。</p>
+            </div>
+        </div>
+
+        <h3 class="serif-title" style="margin: 40px 0 20px; font-size: 1.5rem;"><i data-lucide="type"
+                style="vertical-align: middle; margin-right: 8px;"></i> 字體使用</h3>
+        <div class="ds-typography">
+            <div class="typo-card premium-card">
+                <div class="typo-preview" style="font-family: 'Cormorant Garamond', serif; font-style: italic;">Ag</div>
+                <div class="typo-info">
+                    <h4>Cormorant Garamond (藝術點綴)</h4>
+                    <p>用於大字體的數字排版與序號（如 01, 02），賦予頁面優雅與高級感，打破純中文排版的單調。</p>
+                </div>
+            </div>
+            <div class="typo-card premium-card">
+                <div class="typo-preview" style="font-family: 'Noto Serif TC', serif; font-weight: 700;">標題</div>
+                <div class="typo-info">
+                    <h4>Noto Serif TC (思源宋體)</h4>
+                    <p>應用於所有的段落大標題 (H1, H2)，宋體的筆觸能帶來穩重、具文化底蘊的視覺感受，與雜誌風排版完美契合。</p>
+                </div>
+            </div>
+            <div class="typo-card premium-card">
+                <div class="typo-preview" style="font-family: 'Noto Sans TC', sans-serif; font-weight: 400;">內文</div>
+                <div class="typo-info">
+                    <h4>Noto Sans TC (思源黑體)</h4>
+                    <p>網頁主要的內文閱讀字體。無襯線的設計在螢幕顯示上具備絕佳的清晰度與易讀性，確保長篇文章也能舒適閱讀。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 專案剪影 (Project Showcase) -->
+    <section class="showcase-section">
+        <h2 class="section-title serif-title">專案介面剪影</h2>
+        <p class="section-subtitle">Project Showcase Highlights</p>
+
+        <div class="showcase-gallery">
+            <!-- 圖片佔位 1 -->
+            <div class="gallery-item premium-card" style="padding: 0;">
+                <div class="placeholder-text">
+                    <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.5;"></i>
+                    <span>在此放入專案截圖 1</span>
+                    <span style="font-size: 0.85rem; opacity: 0.7;">(建議比例 16:10，直接替換 img 標籤路徑)</span>
+                </div>
+                <!-- 請將下方的 src 替換為您的真實圖片路徑 -->
+                <div class="gallery-img-placeholder"
+                    style="background: linear-gradient(45deg, rgba(198, 112, 83, 0.2), rgba(0,0,0,0.5));"></div>
+                <!-- <img src="您的圖片路徑1.jpg" alt="專案剪影 1" class="gallery-img-placeholder" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            </div>
+
+            <!-- 圖片佔位 2 -->
+            <div class="gallery-item premium-card" style="padding: 0;">
+                <div class="placeholder-text">
+                    <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.5;"></i>
+                    <span>在此放入專案截圖 2</span>
+                    <span style="font-size: 0.85rem; opacity: 0.7;">(建議比例 16:10，直接替換 img 標籤路徑)</span>
+                </div>
+                <!-- 請將下方的 src 替換為您的真實圖片路徑 -->
+                <div class="gallery-img-placeholder"
+                    style="background: linear-gradient(45deg, rgba(92, 119, 107, 0.2), rgba(0,0,0,0.5));"></div>
+                <!-- <img src="您的圖片路徑2.jpg" alt="專案剪影 2" class="gallery-img-placeholder" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            </div>
+        </div>
+    </section>
+
     <!-- 視覺與設計 -->
-    <section class="container bento-section">
-        <h2 class="section-title serif-title">設計靈感與排版</h2>
+    <section class="showcase-section">
+        <h2 class="section-title serif-title">互動設計與排版策略</h2>
+        <p class="section-subtitle">Interactive Design & Layout Strategy</p>
 
         <div class="feature-grid">
             <div class="bento-item premium-card feature-card">
                 <div class="feature-icon-wrapper"><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i>
                 </div>
-                <h3 class="serif-title">動態背景設計</h3>
-                <p>為了讓網頁看起來不那麼死板，我在背景加入了一些緩慢漂浮的漸層色塊，再蓋上一層毛玻璃 (Backdrop-filter)
-                    濾鏡效果。這種處理方式能讓畫面多一點層次感，同時保持文字的易讀性，不會搶走主要內容的焦點。
-                </p>
+                <h3 class="serif-title">動態背景與毛玻璃</h3>
+                <p>為了讓網頁看起來不那麼死板，在背景加入緩慢漂浮的漸層光球，再蓋上一層毛玻璃 (Backdrop-filter) 濾鏡效果。這種處理能讓畫面多一點層次感，同時保持文字的易讀性。</p>
             </div>
 
             <div class="bento-item premium-card feature-card">
                 <div class="feature-icon-wrapper"
-                    style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);"><i data-lucide="layout-grid"
-                        style="width: 24px; height: 24px;"></i></div>
-                <h3 class="serif-title">卡片式 (Bento便當盒設計法) 排版</h3>
-                <p>在處理大量數據對比時，我選擇了近期蠻流行的 Bento Grid(便當盒設計法)。將各項數據切分成大小不一的圓角卡片，除了在視覺上比較乾淨俐落，在適應手機版本 (RWD) 時也很方便做網格調整。
-                </p>
+                    style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);">
+                    <i data-lucide="layout-grid" style="width: 24px; height: 24px;"></i>
+                </div>
+                <h3 class="serif-title">Bento 便當盒設計法</h3>
+                <p>在處理大量數據對比時，選擇 Bento Grid 將各項數據切分成大小不一的圓角卡片，視覺上乾淨俐落，且在適應手機版本 (RWD) 時也很方便做網格堆疊調整。</p>
             </div>
 
             <div class="bento-item premium-card feature-card">
-                <div class="feature-icon-wrapper" style="color: #ff9500; background: rgba(255, 149, 0, 0.1);"><i
-                        data-lucide="moon-star" style="width: 24px; height: 24px;"></i></div>
-                <h3 class="serif-title">日夜模式 (深色主題) 切換</h3>
-                <p>考量到閱讀舒適度，我在導覽列加入了日夜模式切換功能。點擊之後，除了背景和文字顏色更換，我也特別調整了圖表的配色，以及將地圖底圖一併切換為夜間模式，讓整體的深色主題更為一致。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 系統功能 -->
-    <section class="container bento-section" style="margin-top: 60px;">
-        <h2 class="section-title serif-title">圖表與地圖互動</h2>
-
-        <div class="feature-grid">
-            <div class="premium-card feature-card">
-                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
-                    <i data-lucide="pie-chart" style="color: var(--brand-beitun);"></i> 雷達圖 (Radar Chart) 資料視覺化
-                </h3>
-                <p>針對居住評估的各項指標（如生活機能、房價、交通等），我用 Chart.js 實作了雷達圖。比起傳統的數據表格，將兩地的數據疊加後，讀者能更直覺地比較出北屯區與竹東鎮各自的面向。
-                </p>
-            </div>
-
-            <div class="premium-card feature-card">
-                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
-                    <i data-lucide="map-pinned" style="color: var(--brand-zhudong);"></i> 實際地圖整合與圖資切換
-                </h3>
-                <p>在交通探索的區塊，我利用 Leaflet.js 串接了地圖服務。除了標示出捷運綠線與台鐵內灣線的位置，也結合了點擊地標後平滑移動並顯示詳細圖文的功能，讓使用者在觀看時能有更具體的地理空間感。</p>
-            </div>
-
-            <div class="premium-card feature-card">
-                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
-                    <i data-lucide="users" style="color: var(--accent-blue);"></i> 篩選不同生活型態 (Persona)
-                </h3>
-                <p>由於每個人的居住需求不同，我實作了一個簡單的「生活型態選擇器」：設計了頂客族、小家庭和退休族的情境。使用者點擊對應卡片後，系統會切換對應的文案，希望讓不同族群都有些參與感。
-                </p>
-            </div>
-
-            <div class="premium-card feature-card">
-                <h3 class="serif-title" style="display: flex; align-items: center; gap: 10px;">
-                    <i data-lucide="bar-chart-3" style="color: var(--accent-green);"></i> 簡易投票與橫條動畫
-                </h3>
-                <p>在網站下方的總結處有一個簡易投票系統。點擊選項後，會以動畫方式展開進度條呈現結果比例，做為體驗的最後收尾。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 各區塊實作說明 -->
-    <section class="container" style="margin-top: 80px;">
-        <h2 class="section-title serif-title" style="text-align: center; margin-bottom: 40px;">核心區塊與技術筆記</h2>
-        <p style="text-align: center; margin-bottom: 40px; color: var(--text-muted);">針對 <code>index.html</code>
-            中的幾個主要區塊，簡略紀錄開發過程與前端實作方式。</p>
-
-        <div class="architecture-timeline">
-            <!-- 1. 首頁 -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">01</div>
-                    <h3 class="serif-title">首頁：滿版雙區域設計</h3>
+                <div class="feature-icon-wrapper" style="color: #ff9500; background: rgba(255, 149, 0, 0.1);">
+                    <i data-lucide="moon-star" style="width: 24px; height: 24px;"></i>
                 </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>首頁版面：</strong>一進網站就用滿版視窗將畫面分為左右兩半，配上簡單的進場動畫，幫助讀者快速掌握接下來要對比的兩個行政區。
+                <h3 class="serif-title">日夜模式 (Theme) 切換</h3>
+                <p>考量閱讀舒適度，實作了日夜模式功能。點擊後除了背景更換，也特別調整了圖表配色，以及將地圖底圖一併切換為夜間模式，讓整體的深色主題更為一致。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 各區塊實作說明 (Modern Timeline) -->
+    <section class="showcase-section">
+        <h2 class="section-title serif-title">核心區塊開發歷程</h2>
+        <p class="section-subtitle">Architecture & Development Timeline</p>
+
+        <div class="timeline-container">
+            <!-- 1. 首頁 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">01</div>
+                    <h3 class="serif-title">首頁：滿版雙區域設計</h3>
+                    <div class="timeline-desc">
+                        <strong>視覺規劃：</strong>一進網站就用滿版視窗將畫面分為左右兩半，配上進場動畫，幫助讀者快速掌握接下來要對比的兩個行政區。
                     </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>採用 <code>Flexbox</code> 達成響應式對半佈局。背景則是繪製了動態漸層光球，最後加上 CSS 毛玻璃
-                        (backdrop-filter) 創造層次。
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>採用 <code>Flexbox</code> 達成響應式對半佈局。背景繪製動態漸層光球，最後加上
+                        <code>backdrop-filter</code> 創造立體感。
                     </div>
                 </div>
             </div>
 
             <!-- 2. 數據 PK -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">02</div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">02</div>
                     <h3 class="serif-title">資料呈現：Bento 式排版</h3>
-                </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>排版規劃：</strong>把生硬的人口、房價數據抓出來，單獨做成一張一張的卡片。為了不讓畫面太枯燥，加上了簡單的雙色進度條作為點綴。
+                    <div class="timeline-desc">
+                        <strong>資訊拆解：</strong>把生硬的人口、房價數據抓出來，單獨做成卡片，加上雙色進度條作為點綴，降低資料閱讀的枯燥感。
                     </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>主要仰賴 <code>CSS Grid</code> 的網頁佈局，利用 <code>grid-column: span</code>
-                        去編排卡片大小，配上一點透明度的邊框。
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>仰賴 <code>CSS Grid</code> 佈局，利用 <code>grid-column: span</code>
+                        編排卡片大小，配上微透明邊框。
                     </div>
                 </div>
             </div>
 
-            <!-- 2.5 購屋實戰 -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">03</div>
-                    <h3 class="serif-title">購屋情境：2000萬預算能買哪裡</h3>
-                </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>情境帶入：</strong>把單坪的房價轉化為有實感的購物情境：「預算兩千萬在北屯買小兩房、在竹東買四房」，這樣比單純列出房價會更有感一點。
+            <!-- 3. 購屋實戰 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">03</div>
+                    <h3 class="serif-title">購屋情境：預算實戰轉換</h3>
+                    <div class="timeline-desc">
+                        <strong>情境帶入：</strong>把單坪的房價轉化為有實感的購物情境：「預算兩千萬在北屯買小兩房、在竹東買四房」，比單純列出房價更有感。
                     </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>使用雙欄排列，並以偽元素 (pseudo-elements) 安排分隔線與標籤。項目則是用原生的 <code>&lt;ul&gt;</code>
-                        搭配客製化標籤樣式。
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. 生活型態 -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">04</div>
-                    <h3 class="serif-title">受眾劃分：使用者 Persona 切換</h3>
-                </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>角色設計：</strong>設計了竹科上班族、頂客族和退休長輩三個常見的目標客群。可以切換並查看對應的生活建議。
-                    </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>利用 JavaScript 監聽按鈕點擊，並抽換下方容器內的 HTML 內容，加上 CSS 過渡動畫讓切換過程不會太生硬。
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>使用雙欄排列，並以偽元素 <code>::before</code> 安排分隔線與標籤。項目使用原生 <code>&lt;ul&gt;</code>
+                        搭配客製樣式。
                     </div>
                 </div>
             </div>
 
             <!-- 4. 交通地圖 -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">05</div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">04</div>
                     <h3 class="serif-title">在地探索：地圖 API 串接</h3>
-                </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>地圖整合：</strong>放入可縮放拖曳的動態地圖，代替死板的地圖截圖；點擊旁邊的目的地卡片，地圖就會自動移動並開啟該標籤的照片與說明。
+                    <div class="timeline-desc">
+                        <strong>空間連結：</strong>放入可縮放的動態地圖代替截圖；點擊目的地卡片，地圖就會自動平滑移動並開啟該標籤的照片與說明。
                     </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>串接 <code>Leaflet.js</code>。自己將座標寫死在陣列裡，用 JS 在地圖上畫線 (Polyline)，並控制中心點的飛越
-                        (flyTo) 特效。
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>串接 <code>Leaflet.js</code>。自己將座標寫死在陣列裡，用 JS 在地圖上畫線，並控制中心點的
+                        <code>flyTo</code> 飛越特效。
                     </div>
                 </div>
             </div>
 
-            <!-- 5. 通勤時間 -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">06</div>
-                    <h3 class="serif-title">資料比較：動態長條圖</h3>
-                </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>動態回饋：</strong>通勤時間如果只放個數字會有點無聊，所以在切換園區或市區時，底下的長條圖會隨著數值改變長短。
+            <!-- 5. 總結與投票 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">05</div>
+                    <h3 class="serif-title">網頁收尾：真實數據連動</h3>
+                    <div class="timeline-desc">
+                        <strong>參與感營造：</strong>投票功能不再只是前端動畫，而是真正串接了資料庫，讓讀者點選後能即時看見所有社群參與者的真實意向。
                     </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>透過監控 HTML <code>&lt;select&gt;</code> 變更，用 JS 更新進度條 CSS 裡的
-                        <code>width</code>。
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>後端利用 <code>Google Apps Script (GAS)</code> 將 Google 試算表轉化為免費 API。前端透過非同步
+                        <code>fetch</code> 收發資料並更新進度條。
                     </div>
                 </div>
             </div>
 
-            <!-- 6. 總結與投票 -->
-            <div class="arch-card premium-card">
-                <div class="arch-header">
-                    <div class="arch-number">07</div>
-                    <h3 class="serif-title">網頁收尾：雙層進度條與真實數據庫 (Google Sheets)</h3>
-                </div>
-                <div class="arch-content">
-                    <div class="arch-desc">
-                        <strong>體驗總結：</strong>捨棄傳統的雷達圖表，改用乾淨直覺的雙層進度條歸納兩地特色。不僅如此，投票功能不再只是前端動畫，而是真正串接了資料庫，讓讀者點選後能即時看見所有社群參與者的真實意向。
+            <!-- 6. 歷史區塊升級 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">06</div>
+                    <h3 class="serif-title">歷史區塊：時間軸設計統一</h3>
+                    <div class="timeline-desc">
+                        <strong>體驗一致性：</strong>為了讓主專案的「歷史發展軌跡」也能擁有高級感，我們將設計紀實中的「現代化垂直時間軸 (Modern Timeline)」封裝並共用至首頁。
                     </div>
-                    <div class="arch-tech">
-                        <strong>實作方式：</strong>資料視覺化完全使用原生的 HTML 與 CSS Flexbox 排版，去除了外部圖表套件的依賴。後端則是利用
-                        <code>Google Apps Script (GAS)</code> 建立免費的 API，將 Google 試算表轉化為輕量級的 JSON 資料庫。當讀者按下投票按鈕，前端會透過非同步
-                        <code>fetch</code> 請求將資料送回試算表，並即時運算最新的得票佔比回傳至網頁更新進度條。
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>將時間軸 CSS 樣式抽離至 <code>style.css</code>，並新增 <code>.beitun-timeline</code> 與 <code>.zhudong-timeline</code> 樣式，讓發光節點與卡片邊框能隨地區動態切換專屬品牌色。
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 開發筆記 -->
-    <section class="container bento-section" style="margin-top: 60px; margin-bottom: 80px;">
-        <h2 class="section-title serif-title">一些開發筆記</h2>
-        <div class="premium-card" style="padding: 40px;">
-            <p><strong>「沒有使用笨重的框架」</strong></p>
-            <p style="margin-top: 15px; line-height: 1.8;">
-                這個專題主要是用來當作簡單的呈現與比較，以原生的 HTML、CSS 以及純 JavaScript 開發。<br>
-                <br>
-                此外，為了降低ai感，我將所有emoji改用lucide的圖示來替代，同時也更好看。
-            </p>
+    <!-- 開發環境與模型使用 (Tech Stack) -->
+    <section class="showcase-section">
+        <h2 class="section-title serif-title">開發環境與 AI 模型輔助</h2>
+        <p class="section-subtitle">Development Environment & AI Tools</p>
+
+        <div class="tech-stack-grid">
+            <div class="tech-item premium-card">
+                <div class="tech-logo">
+                    <i data-lucide="code" style="color: #007acc; width: 32px; height: 32px;"></i>
+                </div>
+                <div class="tech-info">
+                    <h4>VS Code (Visual Studio Code)</h4>
+                    <p>作為主要的前端開發編輯器，利用其輕量級與豐富的擴充套件（如 Live Server）進行網頁即時預覽與切版開發。</p>
+                </div>
+            </div>
+
+            <div class="tech-item premium-card">
+                <div class="tech-logo">
+                    <i data-lucide="github" style="color: var(--text-main); width: 32px; height: 32px;"></i>
+                </div>
+                <div class="tech-info">
+                    <h4>GitHub & GitHub Pages</h4>
+                    <p>負責專案的版本控制 (Git)，並透過 GitHub Pages 提供免費且穩定的靜態網頁代管服務，將作品公開展示。</p>
+                </div>
+            </div>
+
+            <div class="tech-item premium-card">
+                <div class="tech-logo">
+                    <i data-lucide="bot" style="color: #0a84ff; width: 32px; height: 32px;"></i>
+                </div>
+                <div class="tech-info">
+                    <h4>Gemini 3.1 Pro (AI 助手)</h4>
+                    <p>在此次專案中擔任重要的協作角色，協助進行程式碼重構、排版美化建議（例如現在這個精美的時間軸與設計系統區塊），以及技術難點的突破。</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-content">
-            <p class="footer-brand serif-title">北屯區 vs 竹東鎮 — 雙區居住探索</p>
-            <p class="footer-info">技術提供:Gemini 3.1 Pro, Github</p>
-            <p class="footer-copy">&copy; 2026 YanYi. Project concept overview.</p>
+        <div class="footer-content"
+            style="text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px;">
+            <p class="footer-brand serif-title" style="margin-bottom: 10px; font-size: 1.2rem;">北屯區 vs 竹東鎮 — 雙區居住探索</p>
+            <p class="footer-info" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">技術提供: Gemini
+                3.1 Pro, GitHub</p>
+            <p class="footer-copy" style="color: var(--text-muted); font-size: 0.85rem;">&copy; 2026 YanYi. Project
+                concept overview.</p>
         </div>
     </footer>
 
