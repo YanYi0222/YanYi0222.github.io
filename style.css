@@ -4,8 +4,8 @@
     /* Let liquid background show through */
     --text-main: #1d1d1f;
     --text-muted: #86868b;
-    --accent-blue: #007aff;
-    --accent-green: #34c759;
+    --accent-blue: #c67053;
+    --accent-green: #5c776b;
     --brand-beitun: #c67053;
     --brand-zhudong: #5c776b;
 
@@ -294,11 +294,11 @@ section {
 }
 
 .beitun-half:hover .hero-overlay {
-    background: linear-gradient(135deg, rgba(0, 102, 204, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+    background: linear-gradient(135deg, rgba(198, 112, 83, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
 .zhudong-half:hover .hero-overlay {
-    background: linear-gradient(135deg, rgba(52, 199, 89, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+    background: linear-gradient(135deg, rgba(92, 119, 107, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
 .hero-content {

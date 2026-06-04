@@ -123,11 +123,11 @@
             width: 56px;
             height: 56px;
             border-radius: 16px;
-            background: rgba(0, 122, 255, 0.1);
+            background: rgba(198, 112, 83, 0.1); /* Beitun orange */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-blue);
+            color: var(--brand-beitun);
             margin-bottom: 10px;
             transition: transform 0.3s ease;
         }
@@ -137,8 +137,8 @@
         }
 
         body.dark-theme .feature-icon-wrapper {
-            background: rgba(10, 132, 255, 0.15);
-            color: #0a84ff;
+            background: rgba(198, 112, 83, 0.15); /* Beitun orange */
+            color: var(--brand-beitun);
         }
 
         /* =========================================
@@ -253,51 +253,63 @@
            ========================================= */
         .showcase-gallery {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            align-items: stretch;
         }
 
         .gallery-item {
             position: relative;
             border-radius: 24px;
-            overflow: hidden;
-            aspect-ratio: 16 / 10;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 14px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .gallery-img-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-            filter: brightness(0.8);
-        }
-
-        .gallery-item:hover .gallery-img-placeholder {
-            transform: scale(1.05);
-            filter: brightness(1);
-        }
-
-        .placeholder-text {
+        .gallery-item::before {
+            content: '';
             position: absolute;
-            z-index: 10;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 60%);
             pointer-events: none;
+            opacity: 0.5;
+            transition: opacity 0.5s ease;
         }
 
-        .gallery-item:hover .placeholder-text {
-            opacity: 0;
-            transition: opacity 0.3s;
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
         @media (max-width: 768px) {
@@ -444,30 +456,21 @@
         <p class="section-subtitle">Project Showcase Highlights</p>
 
         <div class="showcase-gallery">
-            <!-- 圖片佔位 1 -->
-            <div class="gallery-item premium-card" style="padding: 0;">
-                <div class="placeholder-text">
-                    <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.5;"></i>
-                    <span>在此放入專案截圖 1</span>
-                    <span style="font-size: 0.85rem; opacity: 0.7;">(建議比例 16:10，直接替換 img 標籤路徑)</span>
-                </div>
-                <!-- 請將下方的 src 替換為您的真實圖片路徑 -->
-                <div class="gallery-img-placeholder"
-                    style="background: linear-gradient(45deg, rgba(198, 112, 83, 0.2), rgba(0,0,0,0.5));"></div>
-                <!-- <img src="您的圖片路徑1.jpg" alt="專案剪影 1" class="gallery-img-placeholder" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            <!-- 專案截圖 1 -->
+            <div class="gallery-item">
+                <img src="img/concept1.jpg" alt="專案截圖 1" class="gallery-img">
             </div>
 
-            <!-- 圖片佔位 2 -->
-            <div class="gallery-item premium-card" style="padding: 0;">
-                <div class="placeholder-text">
-                    <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.5;"></i>
-                    <span>在此放入專案截圖 2</span>
-                    <span style="font-size: 0.85rem; opacity: 0.7;">(建議比例 16:10，直接替換 img 標籤路徑)</span>
-                </div>
-                <!-- 請將下方的 src 替換為您的真實圖片路徑 -->
-                <div class="gallery-img-placeholder"
-                    style="background: linear-gradient(45deg, rgba(92, 119, 107, 0.2), rgba(0,0,0,0.5));"></div>
-                <!-- <img src="您的圖片路徑2.jpg" alt="專案剪影 2" class="gallery-img-placeholder" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            <!-- 專案截圖 2 -->
+            <div class="gallery-item">
+                <img src="img/concept2.jpg" alt="專案截圖 2" class="gallery-img">
+            </div>
+
+            <!-- 程式碼截圖 (Coding) -->
+            <div class="gallery-item">
+                <!-- 如果沒有圖片會暫時顯示備用圖片，當您把自己的截圖放進 img/ 資料夾並命名為 coding.jpg 即可自動替換 -->
+                <img src="img/coding.jpg" alt="程式碼截圖" class="gallery-img" 
+                     onerror="this.src='https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';">
             </div>
         </div>
     </section>
@@ -487,7 +490,7 @@
 
             <div class="bento-item premium-card feature-card">
                 <div class="feature-icon-wrapper"
-                    style="color: var(--accent-green); background: rgba(52, 199, 89, 0.1);">
+                    style="color: var(--brand-zhudong); background: rgba(92, 119, 107, 0.1);">
                     <i data-lucide="layout-grid" style="width: 24px; height: 24px;"></i>
                 </div>
                 <h3 class="serif-title">Bento 便當盒設計法</h3>
@@ -600,7 +603,8 @@
                         <strong>體驗一致性：</strong>為了讓主專案的「歷史發展軌跡」也能擁有高級感，我們將設計紀實中的「現代化垂直時間軸 (Modern Timeline)」封裝並共用至首頁。
                     </div>
                     <div class="timeline-tech">
-                        <strong>實作方式：</strong>將時間軸 CSS 樣式抽離至 <code>style.css</code>，並新增 <code>.beitun-timeline</code> 與 <code>.zhudong-timeline</code> 樣式，讓發光節點與卡片邊框能隨地區動態切換專屬品牌色。
+                        <strong>實作方式：</strong>將時間軸 CSS 樣式抽離至 <code>style.css</code>，並新增 <code>.beitun-timeline</code> 與
+                        <code>.zhudong-timeline</code> 樣式，讓發光節點與卡片邊框能隨地區動態切換專屬品牌色。
                     </div>
                 </div>
             </div>
