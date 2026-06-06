@@ -1,3 +1,9 @@
+// 確保網頁重新載入時，瀏覽器不會自動記憶並捲動到之前的位置
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', function () {
     // 初始化 AOS (必須在 AOS 庫載入後才執行)
     if (typeof AOS !== 'undefined') {
@@ -20,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
             // 4. 動畫結束後隱藏首頁區塊，避免影響操作
             setTimeout(() => {
                 hero.style.display = 'none';
+                
+                // 重新計算 AOS 元素位置，解決電腦端往下滑才出現內容的 bug
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
             }, 1200);
         });
     }
@@ -453,6 +464,13 @@ function switchHistory(regionKey, eventObj) {
     // 重新觸發動畫
     void activeContent.offsetWidth;
     activeContent.classList.add('active');
+    
+    // 重新計算 AOS，避免切換內容後影響下方元素位置
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    }, 50);
 }
 
 const style = document.createElement('style');

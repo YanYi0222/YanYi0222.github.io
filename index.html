@@ -15,7 +15,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- 預先載入首頁大圖，大幅提升首屏渲染速度 -->
+    <link rel="preload" href="img/beitun/beitun-bg.jpg" as="image">
+    <link rel="preload" href="img/Zhudong/92047.jpg" as="image">
 </head>
 
 <body class="locked dark-theme">
@@ -643,10 +645,12 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <!-- 將腳本加上 defer 屬性，避免阻塞畫面渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
