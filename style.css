@@ -303,40 +303,24 @@ section {
 .beitun-half .hero-bg { transform: translateX(-3%); }
 .zhudong-half .hero-bg { transform: translateX(3%); }
 
-/* --- 3D Hover 視角轉換 (完全顛覆傳統分裂) --- */
-.full-bleed-hero:has(.beitun-half:hover) .beitun-half {
+/* --- 3D 自動轉正視角 (取消 Hover 互動，改為自動執行) --- */
+.full-bleed-hero.auto-hover .hero-half {
+    transition: transform 2.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 2.5s ease, box-shadow 2.5s ease;
     transform: rotateY(0deg) translateZ(80px) scale(1.02);
     filter: brightness(1.05) saturate(1.1);
     box-shadow: 0 60px 120px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.4);
     z-index: 10;
 }
-.full-bleed-hero:has(.beitun-half:hover) .beitun-half .hero-bg {
+.full-bleed-hero.auto-hover .hero-half .hero-bg {
+    transition: transform 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     transform: translateX(0) scale(1.03); /* 背景對焦 */
 }
-.full-bleed-hero:has(.beitun-half:hover) .zhudong-half {
-    transform: rotateY(-22deg) translateZ(-250px) scale(0.85);
-    filter: brightness(0.4) blur(4px) grayscale(40%); /* 減輕模糊與變暗程度 */
-}
 
-.full-bleed-hero:has(.zhudong-half:hover) .zhudong-half {
-    transform: rotateY(0deg) translateZ(80px) scale(1.02);
-    filter: brightness(1.05) saturate(1.1);
-    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.4);
-    z-index: 10;
-}
-.full-bleed-hero:has(.zhudong-half:hover) .zhudong-half .hero-bg {
-    transform: translateX(0) scale(1.03); /* 背景對焦 */
-}
-.full-bleed-hero:has(.zhudong-half:hover) .beitun-half {
-    transform: rotateY(22deg) translateZ(-250px) scale(0.85);
-    filter: brightness(0.4) blur(4px) grayscale(40%); /* 減輕模糊與變暗程度 */
-}
-
-/* 副標題在 hover 時的互動效果 */
-.hero-half:hover .hero-subtitle {
-    transform: translateY(-8px);
+/* 副標題自動轉正時的效果 */
+.full-bleed-hero.auto-hover .hero-subtitle {
+    transform: translateY(-8px) !important;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: all 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .hero-overlay {
@@ -347,11 +331,13 @@ section {
     z-index: 2;
 }
 
-.beitun-half:hover .hero-overlay {
+.full-bleed-hero.auto-hover .beitun-half .hero-overlay {
+    transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     background: linear-gradient(135deg, rgba(198, 112, 83, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
-.zhudong-half:hover .hero-overlay {
+.full-bleed-hero.auto-hover .zhudong-half .hero-overlay {
+    transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     background: linear-gradient(135deg, rgba(92, 119, 107, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
@@ -364,7 +350,8 @@ section {
     transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-half:hover .hero-content {
+.full-bleed-hero.auto-hover .hero-content {
+    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateY(-5px);
 }
 
@@ -394,15 +381,17 @@ section {
     border-radius: 2px;
 }
 
-/* Hover 時文字瞬間填滿並發光，不再上下跳動！ */
-.hero-half:hover .hero-title {
+/* 自動轉正時文字瞬間填滿並發光！ */
+.full-bleed-hero.auto-hover .hero-title {
+    transition: color 2.5s ease, -webkit-text-stroke 2.5s ease, text-shadow 2.5s ease, letter-spacing 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     color: white;
     -webkit-text-stroke: 0px white;
     letter-spacing: 8px; /* 微幅張開，不誇張放大 */
     text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 5px 20px rgba(0, 0, 0, 0.8);
 }
 
-.hero-half:hover .hero-content h2::after {
+.full-bleed-hero.auto-hover .hero-content h2::after {
+    transition: width 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
 }
 
@@ -413,7 +402,8 @@ section {
     transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-half:hover .hero-content p {
+.full-bleed-hero.auto-hover .hero-content p {
+    transition: opacity 2.5s ease, transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 1;
     transform: translateY(-5px);
 }
@@ -775,6 +765,8 @@ section {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     overflow: hidden;
     position: relative;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .bento-card:hover {
@@ -909,12 +901,12 @@ section {
     line-height: 1.6;
 }
 
-/* 撠誩㨃��見撘� */
+/* 撠誩㨃見撘 */
 .bento-stack {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: 100%;
+    margin: auto 0;
     justify-content: center;
 }
 
@@ -3382,6 +3374,7 @@ body.dark-theme .expandable-card.expanded .chart-expand-area {
 
 .chart-expand-area > div {
     overflow: hidden;
+    min-height: 0;
 }
 
 /* 圖表佈局 */

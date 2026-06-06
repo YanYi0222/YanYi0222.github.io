@@ -13,25 +13,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const exploreBtn = document.getElementById('exploreBtn');
     if (exploreBtn) {
         exploreBtn.addEventListener('click', function () {
-            // 1. 導覽列滑入
-            document.querySelector('.navbar').classList.add('visible');
-
-            // 2. 解鎖網頁滾動
-            document.body.classList.remove('locked');
-
-            // 3. 觸發首頁放大淡出動畫
             const hero = document.getElementById('hero');
-            hero.classList.add('hero-fade-out');
+            
+            // 0. 按下後先觸發轉正發光動畫
+            hero.classList.add('auto-hover');
+            exploreBtn.style.opacity = '0';
+            exploreBtn.style.pointerEvents = 'none';
 
-            // 4. 動畫結束後隱藏首頁區塊，避免影響操作
+            // 等待發光轉正動畫執行完畢 (約 1.5 秒)
             setTimeout(() => {
-                hero.style.display = 'none';
-                
-                // 重新計算 AOS 元素位置，解決電腦端往下滑才出現內容的 bug
-                if (typeof AOS !== 'undefined') {
-                    AOS.refresh();
-                }
-            }, 1200);
+                // 1. 導覽列滑入
+                document.querySelector('.navbar').classList.add('visible');
+
+                // 2. 解鎖網頁滾動
+                document.body.classList.remove('locked');
+
+                // 3. 觸發首頁放大淡出動畫
+                hero.classList.add('hero-fade-out');
+
+                // 4. 動畫結束後隱藏首頁區塊，避免影響操作
+                setTimeout(() => {
+                    hero.style.display = 'none';
+                    
+                    // 重新計算 AOS 元素位置，解決電腦端往下滑才出現內容的 bug
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refresh();
+                    }
+                }, 1200);
+            }, 2500); // 2.5 秒的展演時間
         });
     }
 
