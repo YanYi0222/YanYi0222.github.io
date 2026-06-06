@@ -108,8 +108,14 @@
         /* 網格系統強化 */
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .feature-card {
@@ -504,6 +510,14 @@
                 <h3 class="serif-title">日夜模式 (Theme) 切換</h3>
                 <p>考量閱讀舒適度，實作了日夜模式功能。點擊後除了背景更換，也特別調整了圖表配色，以及將地圖底圖一併切換為夜間模式，讓整體的深色主題更為一致。</p>
             </div>
+
+            <div class="bento-item premium-card feature-card">
+                <div class="feature-icon-wrapper" style="color: #007acc; background: rgba(0, 122, 204, 0.1);">
+                    <i data-lucide="bar-chart-3" style="width: 24px; height: 24px;"></i>
+                </div>
+                <h3 class="serif-title">資料視覺化與微互動</h3>
+                <p>為了避免版面塞滿圖表顯得凌亂，我們導入了 Chart.js 並結合「無縫展開 (Accordion)」的互動。滑鼠懸停時才會平滑展開顯示進階圖表；同時地圖標記也加入了精緻的活躍浮動動畫，增添操作時的細膩回饋。</p>
+            </div>
         </div>
     </section>
 
@@ -605,6 +619,51 @@
                     <div class="timeline-tech">
                         <strong>實作方式：</strong>將時間軸 CSS 樣式抽離至 <code>style.css</code>，並新增 <code>.beitun-timeline</code> 與
                         <code>.zhudong-timeline</code> 樣式，讓發光節點與卡片邊框能隨地區動態切換專屬品牌色。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 資料視覺化升級 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">07</div>
+                    <h3 class="serif-title">資料擴充：無縫展開的視覺化圖表</h3>
+                    <div class="timeline-desc">
+                        <strong>資訊降噪：</strong>在不破壞原本乾淨版面的前提下，利用 Hover 或點擊觸發 Bento 卡片的平滑展開，將深度的歷史走勢與結構比例隱藏在第二層資訊中。
+                    </div>
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>採用 <code>CSS Grid (grid-template-rows)</code> 打造流暢的 Accordion 展開動畫，並結合 <code>Chart.js</code> 動態繪製折線圖、甜甜圈圖與雙條列對比圖。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. 地圖互動優化 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">08</div>
+                    <h3 class="serif-title">地圖互動：活躍地標焦點動畫</h3>
+                    <div class="timeline-desc">
+                        <strong>視覺回饋：</strong>解決了在地圖上點擊標籤後，使用者容易迷失當前觀看地標的問題，透過微小的視覺焦點引導視線。
+                    </div>
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>在 <code>Leaflet.js</code> 事件中動態綁定自訂 CSS 樣式，並利用 <code>@keyframes</code> 設計不干擾閱讀的上下浮動與光暈動畫，強化了 Web App 般的操作手感。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. 資料來源與公信力 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-number">09</div>
+                    <h3 class="serif-title">信任建立：資料來源與公信力</h3>
+                    <div class="timeline-desc">
+                        <strong>資訊透明度：</strong>為提升專案的學術價值與公信力，在首頁、數據對決與地圖等所有引用數據的區塊，皆設計了無縫融入排版的資料來源標示。
+                    </div>
+                    <div class="timeline-tech">
+                        <strong>實作方式：</strong>於版面最下方建置完整的資料來源列表區塊，並延續整體的高級質感，採用支援深淺色主題切換的毛玻璃卡片（Bento Card）進行設計，確保附屬資訊也能維持一致的視覺體驗。
                     </div>
                 </div>
             </div>

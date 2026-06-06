@@ -136,7 +136,9 @@ h4,
 }
 
 .logo {
-    font-size: 1.4rem;
+    font-size: 0.95rem; /* 與右側導覽列選單字體大小一致 */
+    font-weight: normal; /* 取消粗體，與右側字體一致 */
+    letter-spacing: normal;
     color: var(--text-main);
 }
 
@@ -1704,7 +1706,7 @@ body.dark-theme #backToTop:hover {
     border-radius: 40px;
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 65px;
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
@@ -3179,5 +3181,233 @@ body.dark-theme .timeline-tech code {
         width: 100% !important;
         height: 45vh;
         border-radius: 20px;
+    }
+}
+
+/* --- 資料來源卡片 (Data Sources Grid) --- */
+.ds-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.ds-section-header {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    color: var(--text-main);
+    margin: 60px 0 25px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.ds-section-header::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08); /* 淺色主題線條 */
+}
+body.dark-theme .ds-section-header::after {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* 預設(淺色)卡片樣式 */
+.ds-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 30px 25px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.ds-source-name {
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+.ds-card-title {
+    font-size: 1.25rem;
+    color: var(--text-main);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+.ds-card-desc {
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.55);
+    line-height: 1.6;
+    margin: 0;
+    margin-top: auto;
+}
+
+.ds-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* 自訂質感 Hover 動畫：底部發光漸層線條展開 */
+.ds-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0;
+    height: 3px;
+    background: transparent;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.beitun-group .ds-card::after { background: var(--brand-beitun); }
+.zhudong-group .ds-card::after { background: var(--brand-zhudong); }
+
+.ds-card:hover::after {
+    width: 100%;
+    left: 0;
+}
+.beitun-group .ds-card:hover::after { box-shadow: 0 -2px 15px var(--brand-beitun); }
+.zhudong-group .ds-card:hover::after { box-shadow: 0 -2px 15px var(--brand-zhudong); }
+
+/* Hover 文字顏色微調 */
+.beitun-group .ds-card:hover .ds-card-title { color: var(--brand-beitun); }
+.zhudong-group .ds-card:hover .ds-card-title { color: var(--brand-zhudong); }
+.ds-card:hover .ds-source-name { color: rgba(0, 0, 0, 0.7); }
+
+/* --- 暗色主題覆寫 --- */
+body.dark-theme .ds-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: none;
+}
+body.dark-theme .ds-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+body.dark-theme .ds-source-name {
+    color: rgba(255, 255, 255, 0.4);
+}
+body.dark-theme .ds-card-title {
+    color: #ffffff;
+}
+body.dark-theme .ds-card-desc {
+    color: rgba(255, 255, 255, 0.55);
+}
+body.dark-theme .ds-card:hover .ds-source-name { color: rgba(255, 255, 255, 0.7); }
+
+/* --- RWD 響應式佈局 --- */
+@media (max-width: 768px) {
+    .ds-grid {
+        grid-template-columns: 1fr;
+    }
+    .ds-card {
+        padding: 20px 20px;
+    }
+}
+
+/* --- Active Marker Animation --- */
+.active-map-marker {
+    z-index: 1000 !important;
+}
+
+.active-map-marker .marker-pin {
+    animation: activeMarkerBounce 0.6s infinite alternate ease-in-out;
+    filter: brightness(1.2);
+}
+
+.active-map-marker .marker-pulse {
+    animation: activeMarkerPulse 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes activeMarkerBounce {
+    0% { transform: translateY(0) rotate(-45deg); }
+    100% { transform: translateY(-8px) rotate(-45deg); }
+}
+
+@keyframes activeMarkerPulse {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-8px) scale(1.1); }
+}
+
+/* --- Expandable Bento Cards (Accordion) --- */
+.expandable-card {
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.expand-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 8px;
+    color: var(--text-muted);
+    transition: transform 0.4s ease;
+}
+
+.expandable-card.expanded .expand-icon {
+    transform: rotate(180deg);
+}
+
+.chart-expand-area {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.5s, padding-top 0.5s, opacity 0.5s;
+    opacity: 0;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+}
+
+.expandable-card.expanded .chart-expand-area {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 黑暗模式適配 */
+body.dark-theme .expandable-card.expanded .chart-expand-area {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-expand-area > div {
+    overflow: hidden;
+}
+
+/* 圖表佈局 */
+.chart-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.chart-col {
+    flex: 1;
+    min-width: 0; /* 確保 canvas 能縮小 */
+    position: relative;
+    height: 220px; /* 給圖表固定高度 */
+}
+
+.chart-col.single-col {
+    height: 250px;
+}
+
+@media (max-width: 768px) {
+    .chart-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .chart-col {
+        height: 200px;
     }
 }

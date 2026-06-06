@@ -236,6 +236,8 @@ function renderMarkers(regionKey) {
     data.locations.forEach(loc => {
         // 建立標記點並使用自訂圖標
         const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(markersLayer);
+        loc.marker = marker; // 儲存 marker 參照以供後續動畫使用
+        
         // 設定常駐文字標籤
         marker.bindTooltip(loc.name, {
             permanent: true,
@@ -357,6 +359,9 @@ function closeInfoPanel() {
 
     // 取消標記的地圖點擊氣泡
     map.closePopup();
+
+    // 移除所有地標的活躍狀態動畫
+    document.querySelectorAll('.custom-map-marker').forEach(el => el.classList.remove('active-map-marker'));
 }
 
 let currentImages = [];
@@ -364,6 +369,14 @@ let currentImageIndex = 0;
 
 // 更新右側資訊面板 (點擊地標時)
 function updateInfoPanel(locationData) {
+    // 移除所有地標的活躍狀態動畫
+    document.querySelectorAll('.custom-map-marker').forEach(el => el.classList.remove('active-map-marker'));
+    
+    // 替目前點擊的地標加上活躍狀態動畫
+    if (locationData.marker && locationData.marker.getElement()) {
+        locationData.marker.getElement().classList.add('active-map-marker');
+    }
+
     // 隱藏交通選單，顯示資料
     document.getElementById('transport-menu').style.display = 'none';
     const dataState = document.getElementById('info-data');
@@ -785,7 +798,154 @@ function animateTime(obj, start, end, duration) {
 }
 
 // 終極防護：確保在所有資源與腳本都載入完畢後，強制執行一次 Lucide 圖示渲染
-// 以防任何其他腳本錯誤中斷了 DOMContentLoaded 的執行
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
+
+// =========================================
+// 圖表展開與渲染邏輯 (Chart.js)
+// =========================================
+
+let chartsInitialized = {};
+
+function expandChart(type, element) {
+    if (window.innerWidth <= 768) return; // 手機版交給點擊處理
+    element.classList.add('expanded');
+    initDataCharts(type);
+}
+
+function collapseChart(element) {
+    if (window.innerWidth <= 768) return;
+    element.classList.remove('expanded');
+}
+
+function toggleChartMobile(type, element) {
+    if (window.innerWidth > 768) return;
+    if (element.classList.contains('expanded')) {
+        element.classList.remove('expanded');
+    } else {
+        // 收起其他已展開的
+        document.querySelectorAll('.expandable-card.expanded').forEach(el => el.classList.remove('expanded'));
+        element.classList.add('expanded');
+        initDataCharts(type);
+    }
+}
+
+function initDataCharts(type) {
+    if (chartsInitialized[type]) return;
+    chartsInitialized[type] = true;
+    
+    // 設定 Chart.js 預設樣式
+    Chart.defaults.color = 'rgba(150, 150, 150, 0.8)';
+    Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
+
+    if (type === 'population') {
+        // 歷年人口折線圖
+        new Chart(document.getElementById('popTrendChart'), {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [
+                    { label: '北屯區 (萬)', data: [28.7, 29.2, 29.8, 30.2, 30.5], borderColor: '#c67053', backgroundColor: 'rgba(198, 112, 83, 0.1)', tension: 0.4, fill: true },
+                    { label: '竹東鎮 (萬)', data: [9.6, 9.65, 9.68, 9.7, 9.73], borderColor: '#5c776b', backgroundColor: 'rgba(92, 119, 107, 0.1)', tension: 0.4, fill: true }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '近五年人口成長趨勢' } } }
+        });
+        
+        // 人口結構圓餅圖
+        new Chart(document.getElementById('popStructureChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['0-14歲', '15-64歲', '65歲以上'],
+                datasets: [
+                    { label: '北屯', data: [15, 72, 13], backgroundColor: ['#d59b66', '#c67053', '#965a45'] },
+                    { label: '竹東', data: [13, 70, 17], backgroundColor: ['#7a9e8e', '#5c776b', '#3e5148'] }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '人口年齡結構比較 (%)' } } }
+        });
+    }
+
+    if (type === 'housing') {
+        new Chart(document.getElementById('priceTrendChart'), {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [
+                    { label: '北屯14期/水湳 (萬/坪)', data: [35, 45, 55, 62, 68], borderColor: '#c67053', tension: 0.4 },
+                    { label: '竹東重劃區 (萬/坪)', data: [22, 28, 35, 42, 46], borderColor: '#5c776b', tension: 0.4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '近五年預售屋單價走勢' } } }
+        });
+
+        new Chart(document.getElementById('houseTypeChart'), {
+            type: 'bar',
+            data: {
+                labels: ['大樓/華廈', '透天/別墅', '其他'],
+                datasets: [
+                    { label: '北屯區', data: [85, 10, 5], backgroundColor: '#c67053' },
+                    { label: '竹東鎮', data: [55, 40, 5], backgroundColor: '#5c776b' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '主力交易物件類型分佈 (%)' } } }
+        });
+    }
+
+    if (type === 'area') {
+        new Chart(document.getElementById('areaChart'), {
+            type: 'pie',
+            data: {
+                labels: ['住宅區', '商業區', '工業區', '農業/保育/其他'],
+                datasets: [
+                    { label: '北屯', data: [25, 10, 2, 63], backgroundColor: ['#c67053', '#d59b66', '#888', '#e0c9b1'] },
+                    { label: '竹東', data: [15, 5, 8, 72], backgroundColor: ['#5c776b', '#7a9e8e', '#444', '#b1c2bb'] }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '土地使用分區概況 (%)' } } }
+        });
+    }
+
+    if (type === 'village') {
+        new Chart(document.getElementById('villageChart'), {
+            type: 'bar',
+            indexAxis: 'y',
+            data: {
+                labels: ['北屯: 廍子里', '北屯: 水景里', '北屯: 舊社里', '竹東: 二重里', '竹東: 竹東里'],
+                datasets: [{
+                    label: '人口數',
+                    data: [25000, 16000, 14000, 13000, 8000],
+                    backgroundColor: ['#c67053', '#d59b66', '#e0c9b1', '#5c776b', '#7a9e8e']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '前五大人口密集生活圈' } } }
+        });
+    }
+
+    if (type === 'future') {
+        // 使用雙條列圖 (Bar chart with 2 datasets) 滿足第5點的需求
+        new Chart(document.getElementById('futureChart'), {
+            type: 'bar',
+            data: {
+                labels: ['交通樞紐性', '商業發展動能', '科技就業潛力', '公共建設規模', '綠地休閒空間'],
+                datasets: [
+                    { label: '北屯 (水湳/14期)', data: [95, 90, 60, 95, 85], backgroundColor: '#c67053' },
+                    { label: '竹東 (竹科外溢/橋下)', data: [80, 65, 95, 75, 80], backgroundColor: '#5c776b' }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                scales: { y: { beginAtZero: true, max: 100 } },
+                plugins: { title: { display: true, text: '未來發展潛力雙條列對比 (滿分100)' } }
+            }
+        });
+    }
+}
+
 window.addEventListener('load', function () {
     try {
         if (typeof lucide !== 'undefined') {
