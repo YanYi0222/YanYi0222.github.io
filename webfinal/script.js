@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (exploreBtn) {
         exploreBtn.addEventListener('click', function () {
             const hero = document.getElementById('hero');
-            
+
             // 0. 按下後先觸發轉正發光動畫
             hero.classList.add('auto-hover');
             exploreBtn.style.opacity = '0';
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // 4. 動畫結束後隱藏首頁區塊，避免影響操作
                 setTimeout(() => {
                     hero.style.display = 'none';
-                    
+
                     // 重新計算 AOS 元素位置，解決電腦端往下滑才出現內容的 bug
                     if (typeof AOS !== 'undefined') {
                         AOS.refresh();
@@ -246,7 +246,7 @@ function renderMarkers(regionKey) {
         // 建立標記點並使用自訂圖標
         const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(markersLayer);
         loc.marker = marker; // 儲存 marker 參照以供後續動畫使用
-        
+
         // 設定常駐文字標籤
         marker.bindTooltip(loc.name, {
             permanent: true,
@@ -380,7 +380,7 @@ let currentImageIndex = 0;
 function updateInfoPanel(locationData) {
     // 移除所有地標的活躍狀態動畫
     document.querySelectorAll('.custom-map-marker').forEach(el => el.classList.remove('active-map-marker'));
-    
+
     // 替目前點擊的地標加上活躍狀態動畫
     if (locationData.marker && locationData.marker.getElement()) {
         locationData.marker.getElement().classList.add('active-map-marker');
@@ -486,7 +486,7 @@ function switchHistory(regionKey, eventObj) {
     // 重新觸發動畫
     void activeContent.offsetWidth;
     activeContent.classList.add('active');
-    
+
     // 重新計算 AOS，避免切換內容後影響下方元素位置
     setTimeout(() => {
         if (typeof AOS !== 'undefined') {
@@ -516,9 +516,29 @@ function scrollToTop() {
    互動投票邏輯 (Poll Logic)
    ========================================= */
 // ====== 請將此處替換為您從 Google Apps Script 部署取得的 URL ======
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzRzXJ8SLMe_F-cLrzrlZOsneT4GatuqjgXTfLq35LgTQo--U8KRIle9PwSTVRfK8-g/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwPRvk1AM2u_NQhDvlCKgZA-i2mHMOxahF_kJ3hNq6GfwgMjYag2CfXq74WY8LoZbPO/exec';
+const RECAPTCHA_SITE_KEY = '6LdPohEtAAAAAIeZO-dw6ZScinO8l6Kvok2uqrmg';
 
 async function handleVote(choice) {
+    // 1. 本地端防護：檢查 LocalStorage，防止同瀏覽器一般使用者重複投票
+    if (localStorage.getItem('hasVoted')) {
+        alert('您已經投過票囉！感謝您的參與。');
+        document.getElementById('pollOptions').style.display = 'none';
+        document.getElementById('pollResults').style.display = 'block';
+        return;
+    }
+
+    // 2. 取得 reCAPTCHA Token
+    let token = '';
+    try {
+        if (typeof grecaptcha !== 'undefined' && RECAPTCHA_SITE_KEY !== 'YOUR_RECAPTCHA_SITE_KEY') {
+            await new Promise(resolve => grecaptcha.ready(resolve));
+            token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_vote' });
+        }
+    } catch (e) {
+        console.warn('reCAPTCHA 驗證失敗', e);
+    }
+
     // 隱藏選項，顯示結果
     document.getElementById('pollOptions').style.display = 'none';
     const resultsDiv = document.getElementById('pollResults');
@@ -549,13 +569,13 @@ async function handleVote(choice) {
             throw new Error('未設定真實的 Google Apps Script 網址');
         }
 
-        // 發送投票資料
+        // 發送投票資料與 Token
         const response = await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `vote=${choice}`
+            body: `vote=${choice}&token=${token}`
         });
 
         const data = await response.json();
@@ -564,11 +584,14 @@ async function handleVote(choice) {
         if (data.error) {
             throw new Error('Google Sheet 內部錯誤: ' + data.error);
         }
-        
+
         // 確保回傳的資料格式正確
         if (typeof data.beitun !== 'number') {
             throw new Error('Google Sheet 回傳的資料格式不正確 (找不到 beitun 票數)');
         }
+
+        // 標記為已投票 (防君子)
+        localStorage.setItem('hasVoted', 'true');
 
         // 假設後端回傳格式 { beitun: 15, zhudong: 10, total: 25 }
         const total = data.total || 1; // 避免除以零
@@ -845,7 +868,7 @@ function toggleChartMobile(type, element) {
 function initDataCharts(type) {
     if (chartsInitialized[type]) return;
     chartsInitialized[type] = true;
-    
+
     // 設定 Chart.js 預設樣式
     Chart.defaults.color = 'rgba(150, 150, 150, 0.8)';
     Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
@@ -863,7 +886,7 @@ function initDataCharts(type) {
             },
             options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: '近五年人口成長趨勢' } } }
         });
-        
+
         // 人口結構圓餅圖
         new Chart(document.getElementById('popStructureChart'), {
             type: 'doughnut',
@@ -945,9 +968,9 @@ function initDataCharts(type) {
                     { label: '竹東 (竹科外溢/橋下)', data: [80, 65, 95, 75, 80], backgroundColor: '#5c776b' }
                 ]
             },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false, 
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: { y: { beginAtZero: true, max: 100 } },
                 plugins: { title: { display: true, text: '未來發展潛力雙條列對比 (滿分100)' } }
             }

@@ -15,6 +15,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdPohEtAAAAAIeZO-dw6ZScinO8l6Kvok2uqrmg"></script>
     <!-- 預先載入首頁大圖，大幅提升首屏渲染速度 -->
     <link rel="preload" href="img/beitun/beitun-bg.jpg" as="image">
     <link rel="preload" href="img/Zhudong/92047.jpg" as="image">
@@ -87,7 +88,9 @@
 
         <div class="bento-grid">
             <!-- 核心指標：人口 -->
-            <div class="bento-card bento-large glass-card expandable-card" data-aos="fade-up" data-aos-delay="100" onmouseenter="expandChart('population', this)" onmouseleave="collapseChart(this)" onclick="toggleChartMobile('population', this)">
+            <div class="bento-card bento-large glass-card expandable-card" data-aos="fade-up" data-aos-delay="100"
+                onmouseenter="expandChart('population', this)" onmouseleave="collapseChart(this)"
+                onclick="toggleChartMobile('population', this)">
                 <h3 class="bento-title serif-title">人口總數對決 <i data-lucide="chevron-down" class="expand-icon"></i></h3>
                 <div class="bento-split">
                     <div class="bento-side beitun-side">
@@ -115,7 +118,9 @@
             </div>
 
             <!-- 核心指標：房價 -->
-            <div class="bento-card bento-large glass-card expandable-card" data-aos="fade-up" data-aos-delay="200" onmouseenter="expandChart('housing', this)" onmouseleave="collapseChart(this)" onclick="toggleChartMobile('housing', this)">
+            <div class="bento-card bento-large glass-card expandable-card" data-aos="fade-up" data-aos-delay="200"
+                onmouseenter="expandChart('housing', this)" onmouseleave="collapseChart(this)"
+                onclick="toggleChartMobile('housing', this)">
                 <h3 class="bento-title serif-title">平均預售房價 <i data-lucide="chevron-down" class="expand-icon"></i></h3>
                 <div class="bento-split">
                     <div class="bento-side beitun-side">
@@ -142,7 +147,9 @@
             </div>
 
             <!-- 附屬指標 -->
-            <div class="bento-card bento-small glass-card expandable-card" data-aos="fade-up" data-aos-delay="300" onmouseenter="expandChart('area', this)" onmouseleave="collapseChart(this)" onclick="toggleChartMobile('area', this)">
+            <div class="bento-card bento-small glass-card expandable-card" data-aos="fade-up" data-aos-delay="300"
+                onmouseenter="expandChart('area', this)" onmouseleave="collapseChart(this)"
+                onclick="toggleChartMobile('area', this)">
                 <h3 class="bento-title serif-title">行政面積 <i data-lucide="chevron-down" class="expand-icon"></i></h3>
                 <div class="bento-stack">
                     <div class="bento-stat">
@@ -159,7 +166,9 @@
                 </div>
             </div>
 
-            <div class="bento-card bento-small glass-card expandable-card" data-aos="fade-up" data-aos-delay="400" onmouseenter="expandChart('village', this)" onmouseleave="collapseChart(this)" onclick="toggleChartMobile('village', this)">
+            <div class="bento-card bento-small glass-card expandable-card" data-aos="fade-up" data-aos-delay="400"
+                onmouseenter="expandChart('village', this)" onmouseleave="collapseChart(this)"
+                onclick="toggleChartMobile('village', this)">
                 <h3 class="bento-title serif-title">行政里數 <i data-lucide="chevron-down" class="expand-icon"></i></h3>
                 <div class="bento-stack">
                     <div class="bento-stat">
@@ -176,7 +185,9 @@
                 </div>
             </div>
 
-            <div class="bento-card bento-small glass-card bento-span-2 expandable-card" data-aos="fade-up" data-aos-delay="500" onmouseenter="expandChart('future', this)" onmouseleave="collapseChart(this)" onclick="toggleChartMobile('future', this)">
+            <div class="bento-card bento-small glass-card bento-span-2 expandable-card" data-aos="fade-up"
+                data-aos-delay="500" onmouseenter="expandChart('future', this)" onmouseleave="collapseChart(this)"
+                onclick="toggleChartMobile('future', this)">
                 <h3 class="bento-title serif-title">未來發展雙引擎 <i data-lucide="chevron-down" class="expand-icon"></i></h3>
                 <div class="bento-split" style="margin: auto 0;">
                     <div class="bento-side beitun-side">
